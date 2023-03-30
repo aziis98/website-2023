@@ -1,0 +1,62 @@
+---
+import "@fontsource/eb-garamond/latin.css";
+import "@fontsource/open-sans/latin.css";
+import "@fontsource/libre-baskerville/latin.css";
+import "../styles/main.scss";
+
+const { frontmatter } = Astro.props;
+---
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content="{Astro.generator}" />
+		<title>Astro</title>
+	</head>
+	<main>
+		<article>
+			<slot />
+		</article>
+		<aside>
+			<div class="article-card">
+				<div class="title">{frontmatter.title}</div>
+				<div class="description">{frontmatter.description}</div>
+				<div class="tags">
+					<div class="tag">tag-1</div>
+					<div class="tag">tag-2</div>
+					<div class="tag">tag-3</div>
+				</div>
+			</div>
+			<div class="label">Articoli correlati</div>
+			<div class="article-card">
+				<div class="title">{frontmatter.title}</div>
+				<div class="description">{frontmatter.description}</div>
+				<div class="tags">
+					<div class="tag">tag-1</div>
+					<div class="tag">tag-2</div>
+					<div class="tag">tag-3</div>
+				</div>
+			</div>
+			<div class="article-card">
+				<div class="title">{frontmatter.title}</div>
+				<div class="description">{frontmatter.description}</div>
+				<div class="tags">
+					<div class="tag">tag-1</div>
+					<div class="tag">tag-2</div>
+					<div class="tag">tag-3</div>
+				</div>
+			</div>
+			<div class="article-card">
+				<div class="title">{frontmatter.title}</div>
+				<div class="description">{frontmatter.description}</div>
+				<div class="tags">
+					<div class="tag">tag-1</div>
+					<div class="tag">tag-2</div>
+					<div class="tag">tag-3</div>
+				</div>
+			</div>
+		</aside>
+	</main>
+</html>
