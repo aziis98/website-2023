@@ -1,3 +1,8 @@
+
+$article-width: 46rem;
+$aside-width: 20rem;
+
+
 *,
 *::before,
 *::after {
@@ -151,6 +156,8 @@ pre {
 pre,
 code {
     font-family: "Source Code Pro", monospace;
+
+    tab-size: 4;
 }
 
 //
@@ -175,7 +182,7 @@ a:visited {
 
 main {
     display: grid;
-    grid-template-columns: 46rem 17rem;
+    grid-template-columns: $article-width $aside-width;
 
     align-items: start;
     justify-content: center;
@@ -185,8 +192,6 @@ main {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-
-        padding: 1rem;
 
         .label {
             padding-left: 4px;
@@ -253,7 +258,7 @@ article {
 }
 
 // Mobile
-@media screen and (max-width: 66rem) {
+@media screen and (max-width: $article-width + $aside-width + 3rem) {
     main {
         width: 100%;
 
@@ -267,6 +272,8 @@ article {
             width: 100%;
             max-width: 35rem;
             align-items: center;
+
+            padding: 1rem;
         }
     }
 
@@ -274,14 +281,14 @@ article {
         padding: 1rem 0.5rem 1rem;
 
         width: 100%;
-        max-width: 46rem;
+        max-width: $article-width;
 
         box-shadow: 0 0 6px 0 #00000040, 0 0 32px 0 #00000018;
     }
 }
 
 // Desktop
-@media screen and (min-width: 46rem) {
+@media screen and (min-width: $article-width) {
     article {
         padding: 2rem 4rem 4rem;
 
@@ -296,7 +303,7 @@ article {
 
 // Temporary
 
-@media screen and (min-width: 46rem) {
+@media screen and (min-width: $article-width) {
     body {
         padding: 3rem 0 6rem;
     }

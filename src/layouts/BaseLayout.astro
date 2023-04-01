@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content="{Astro.generator}" />
-		<title>Astro</title>
+		<title>{frontmatter.title}</title>
 	</head>
 	<main>
 		<article>
@@ -23,6 +23,13 @@ const { frontmatter } = Astro.props;
 			<div class="article-card">
 				<div class="title">{frontmatter.title}</div>
 				<div class="description">{frontmatter.description}</div>
+				<div class="description">
+					<p>Questo articolo è parte di una serie:</p>
+					<ul>
+						<li><a href="/next">Prossimo</a></li>
+						<li><a href="/next">Precedente</a></li>
+					</ul>
+				</div>
 				<div class="tags">
 					<div class="tag">tag-1</div>
 					<div class="tag">tag-2</div>
@@ -59,4 +66,6 @@ const { frontmatter } = Astro.props;
 			</div>
 		</aside>
 	</main>
+
+
 </html>
