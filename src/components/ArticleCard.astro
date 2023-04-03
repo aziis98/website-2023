@@ -1,0 +1,14 @@
+---
+const { url, title, description, date, tags } = Astro.props;
+---
+
+<div class="article-card">
+	<div class="title">
+		<a href={url ?? "#"}>{title}</a>
+	</div>
+	{date && <div class="date">{date}</div>}
+	<div class="description">{description}</div>
+	<div class="tags">
+		{tags.map((t) => <div class="tag">{t}</div>)}
+	</div>
+</div>

@@ -1,0 +1,26 @@
+---
+import ArticleCard from "../components/ArticleCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const articles = await Astro.glob("/src/pages/articoli/*.md");
+---
+
+<BaseLayout title="aziis98.com">
+    <div class="page">
+        <h1>About</h1>
+        <h2>Bio</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus molestias beatae, praesentium at officiis dolorum accusantium, minus reprehenderit maiores illum quidem repellat itaque? Earum magnam dignissimos unde veniam ipsam saepe!</p>
+        <p>Harum aliquid, quasi blanditiis, exercitationem, dignissimos atque voluptatem reprehenderit esse hic inventore quo. Temporibus ipsa non qui pariatur ab odit. Ducimus magni rem, maxime nisi, amet doloribus asperiores officiis voluptas.</p>
+        <h2>Interessi</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto sequi ipsam, fugiat sapiente. Excepturi deserunt distinctio consectetur odit aspernatur ad esse sunt maxime? In, non, eaque. Dolores voluptatibus atque ipsum illum, aliquid recusandae quo perspiciatis explicabo. Laborum natus architecto tempora laboriosam sunt repellat incidunt dolorem molestias similique minus tempore voluptatum esse ullam placeat, perspiciatis. Vero obcaecati, corporis sunt ab dicta!</p>
+        <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. Ut, non.</li>
+            <li>Totam earum quisquam atque labore inventore enim, expedita voluptas voluptatum!</li>
+            <li>Eius, nostrum hic a cum porro quis voluptatem! Repellendus, consectetur.</li>
+            <li>Distinctio quia nam repudiandae ut odio alias aperiam culpa esse?</li>
+            <li>Assumenda tempore quam pariatur est provident ratione maiores adipisci quasi!</li>
+            <li>Deleniti, quidem obcaecati? Eaque facere reprehenderit suscipit mollitia tempora accusamus?</li>
+            <li>Nam, deserunt temporibus illum accusantium commodi suscipit? Vitae, voluptate debitis.</li>
+        </ul>
+    </div>
+</BaseLayout>

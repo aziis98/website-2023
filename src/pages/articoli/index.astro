@@ -1,0 +1,24 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const articles = await Astro.glob("/src/pages/articoli/*.md");
+---
+
+<BaseLayout title="Articoli | aziis98.com">
+	<div class="page">
+		<h1>Articoli</h1>
+		<div class="article-list">
+			{
+				articles.map(
+					({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
+						<ArticleCard {url} {title} {description} {date} {tags} />
+					)
+				)
+			}
+			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
+			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
+			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
+		</div>
+	</div>
+</BaseLayout>

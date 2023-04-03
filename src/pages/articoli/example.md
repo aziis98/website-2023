@@ -1,11 +1,13 @@
 ---
-layout: ../../layouts/BaseLayout.astro
-title: Lorem ipsum
+layout: ../../layouts/ArticleLayout.astro
+title: Introduzione alle Generics in Go
 description: Lorem ipsum dolor sit amet consectetur adipisicing, elit. Itaque placeat quis, non et. Autem molestias nemo, distinctio, consectetur suscipit vero.
 draft: true
+tags: ["lorem-ipsum", "example"]
+publish_date: 2023/04/03 12:00
 ---
 
-# The Title
+# Introduzione alle Generics in Go
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nam, fuga alias itaque. Neque itaque earum error ex impedit laborum **illum sapiente molestiae**, fugit facilis quae hic eius suscipit laboriosam quos eos iste quis reprehenderit modi. Officiis, voluptates labore in.
 
@@ -50,7 +52,19 @@ Lorem ipsum dolor sit amet, consectetur, adipisicing elit. Quam odio voluptatum 
 
 ### The Subsubtitle
 
-Veritatis molestiae quaerat rerum tempora ut excepturi nisi enim perferendis dolorum necessitatibus ab deleniti quas harum laudantium at et itaque earum, blanditiis reprehenderit iure! Fugiat distinctio quae suscipit hic facere aspernatur cupiditate, ea unde dolor asperiores ipsum sit maiores veniam adipisci officia quo quisquam placeat necessitatibus magni. Quisquam officiis velit ad illum, dignissimos eaque, tempora voluptatibus. Fugiat architecto aut animi.
+Veritatis molestiae quaerat rerum tempora ut excepturi nisi enim perferendis dolorum necessitatibus ab deleniti quas harum laudantium at et itaque earum, blanditiis reprehenderit iure! Fugiat distinctio quae suscipit hic facere aspernatur cupiditate, ea unde dolor asperiores ipsum sit maiores veniam adipisci officia quo quisquam placeat necessitatibus magni. Quisquam $1 + 2 + ... + 9 + 10 = \sum_{i=1}^{10} i = 55$ officiis velit ad illum, dignissimos eaque, tempora voluptatibus. Fugiat architecto aut animi.
+
+$$
+\sum \frac{1}{n^2} = \frac{\pi^2}{6}
+$$
+
+Veritatis molestiae quaerat rerum tempora ut excepturi nisi enim perferendis dolorum necessitatibus ab deleniti quas harum laudantium at et itaque earum, blanditiis reprehenderit iure
+
+$$
+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1
+$$
+
+Fugiat distinctio quae suscipit hic facere aspernatur cupiditate, ea unde dolor asperiores ipsum sit maiores veniam adipisci officia quo quisquam placeat necessitatibus magni. Quisquam officiis velit ad illum, dignissimos eaque, tempora voluptatibus. Fugiat architecto aut animi.
 
 ## The Subtitle
 
