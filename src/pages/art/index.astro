@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const artwork = await Astro.glob('/public/data/art/*')
+console.log(artwork);
+---
+
+<BaseLayout title="Art | aziis98.com">
+    <div class="page">
+        <div class="principal">
+            <div class="content">
+                <h1>Art</h1>
+                <p class="center">
+                    Cose artistiche a caso che faccio in alcuni momenti in cui voglio spasticare. La maggior parte sono di <a href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</a>, alcune realizzate interamente con programmi di grafica, altre invece sono parzialmente realizzate da programmi che ho scritto che generavano un'immagine che poi ritoccavo un po'. Le più recenti sono esperimenti a caso con i modelli di ML usciti di recente, in particolare <strong>tutte quelle fatte con AI sono indicate</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="art-list">
+            <div class="art-item">
+                <a href="/art/sky-4-2-1.png">
+                    <img
+                        src="/data/art/sky-4-2-1.png"
+                        alt="liquid, vortices, sky, purple, stars"
+                    />
+                </a>
+                <div class="caption">
+                    <div class="date">2020/??</div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tenetur repellendus quae, aliquam sint quos neque
+                    blanditiis, natus necessitatibus porro magnam omnis
+                    similique soluta. Ea placeat ullam praesentium rerum iure
+                    similique.
+                </div>
+            </div>
+            <div class="art-item">
+                <img
+                    src="https://placehold.co/1024x1024"
+                    alt="liquid, vortices, sky, purple, stars"
+                />
+                <div class="caption">
+                    <div class="date">2020/??</div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tenetur repellendus quae, aliquam sint quos neque
+                    blanditiis, natus necessitatibus porro magnam omnis
+                    similique soluta. Ea placeat ullam praesentium rerum iure
+                    similique.
+                </div>
+            </div>
+            <div class="art-item">
+                <img
+                    src="https://placehold.co/300x400"
+                    alt="liquid, vortices, sky, purple, stars"
+                />
+                <div class="caption">
+                    <div class="date">2020/??</div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tenetur repellendus quae, aliquam sint quos neque
+                    blanditiis, natus necessitatibus porro magnam omnis
+                    similique soluta. Ea placeat ullam praesentium rerum iure
+                    similique.
+                </div>
+            </div>
+            <div class="art-item">
+                <img
+                    src="https://placehold.co/600x400"
+                    alt="liquid, vortices, sky, purple, stars"
+                />
+                <div class="caption">
+                    <div class="date">2020/??</div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tenetur repellendus quae, aliquam sint quos neque
+                    blanditiis, natus necessitatibus porro magnam omnis
+                    similique soluta. Ea placeat ullam praesentium rerum iure
+                    similique.
+                </div>
+            </div>
+            <div class="art-item">
+                <img
+                    src="https://placehold.co/600x400"
+                    alt="liquid, vortices, sky, purple, stars"
+                />
+                <div class="caption">
+                    <div class="date">2020/??</div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Tenetur repellendus quae, aliquam sint quos neque
+                    blanditiis, natus necessitatibus porro magnam omnis
+                    similique soluta. Ea placeat ullam praesentium rerum iure
+                    similique.
+                </div>
+            </div>
+        </div>
+    </div>
+</BaseLayout>

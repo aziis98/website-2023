@@ -1,4 +1,6 @@
 ---
+import Tag from "./Tag.astro";
+
 const { url, title, description, date, tags } = Astro.props;
 ---
 
@@ -9,6 +11,6 @@ const { url, title, description, date, tags } = Astro.props;
 	{date && <div class="date">{date}</div>}
 	<div class="description">{description}</div>
 	<div class="tags">
-		{tags.map((t) => <div class="tag">{t}</div>)}
+		{tags.map((name) => <Tag {name} />)}
 	</div>
 </div>

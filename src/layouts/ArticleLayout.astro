@@ -6,31 +6,45 @@ import "../styles/main.scss";
 import BaseLayout from "./BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 
+import { getRandomRelatedArticles } from "../utils.js";
+import Tag from "../components/Tag.astro";
+
 const { frontmatter } = Astro.props;
+
+const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const someRelatedArticles = await getRandomRelatedArticles(articles, frontmatter);
 ---
 
-<BaseLayout title={frontmatter.title + ' | aziis98.com'}>
+<BaseLayout title={frontmatter.title + " | aziis98.com"}>
 	<article>
 		<slot />
 	</article>
 	<aside>
 		<div class="article-card">
-			<div class="description">
+			<!-- 			<div class="description">
 				<p>Questo articolo è parte di una serie</p>
 				<ul>
 					<li>Prossimo: <a href="?page=next">Lorem ipsum N</a></li>
 					<li>Precedente: <a href="?page=prev">Lorem ipsum M</a></li>
 				</ul>
 			</div>
+ -->
+			<div class="description">{frontmatter.description}</div>
 			<div class="tags">
-				<div class="tag">tag-1</div>
-				<div class="tag">tag-2</div>
-				<div class="tag">tag-3</div>
+				{frontmatter.tags.map((name) => <Tag {name} />)}
 			</div>
 		</div>
+
 		<div class="label">Articoli correlati</div>
-		<ArticleCard {...frontmatter} tags={['tag-1', 'tag-2', 'tag-3']}/>
-		<ArticleCard {...frontmatter} tags={['tag-1', 'tag-2', 'tag-3']}/>
-		<ArticleCard {...frontmatter} tags={['tag-1', 'tag-2', 'tag-3']}/>
+		{
+			someRelatedArticles.map((a) => (
+				<ArticleCard
+					{...a.frontmatter}
+					url={a.url}
+					date={a.frontmatter.publish_date}
+					tags={a.frontmatter.tags}
+				/>
+			))
+		}
 	</aside>
 </BaseLayout>

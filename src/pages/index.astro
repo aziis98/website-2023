@@ -2,25 +2,43 @@
 import ArticleCard from "../components/ArticleCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const articles = await Astro.glob("/src/pages/articoli/*.md");
+import _ from "lodash";
+
+const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const sortedArticles = _.orderBy(
+    articles,
+    ["frontmatter.publish_date"],
+    ["desc"]
+);
 ---
 
 <BaseLayout title="aziis98.com">
     <div class="page">
-        <h1>aziis98.com</h1>
-        <div class="label">
-            Articoli recenti
+        <div class="principal">
+            <img
+                class="profile"
+                src="/profile.png"
+                alt="current profile picture"
+            />
+            <div class="content">
+                <h1 class="left">Antonio De Lucreziis</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, magni non nobis enim molestias at, rem maiores dolores id eligendi?</p>
+                <p>Deserunt non, nulla accusantium pariatur quas perspiciatis, unde! Accusamus ullam, maxime sit explicabo consectetur facilis, asperiores est laudantium fugit nemo!</p>
+            </div>
         </div>
+        <div class="label">Articoli recenti</div>
         <div class="article-list">
             {
-                articles.map(
+                sortedArticles.map(
                     ({
+                        // @ts-ignore
                         frontmatter: {
                             title,
                             description,
                             tags,
                             publish_date: date,
                         },
+                        // @ts-ignore
                         url,
                     }) => (
                         <ArticleCard
@@ -33,24 +51,58 @@ const articles = await Astro.glob("/src/pages/articoli/*.md");
                     )
                 )
             }
-            <ArticleCard
-                title="Lorem ipsum"
-                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!"
-                date="2023/01/02 12:34"
-                tags={["tag-1", "tag-2", "tag-3"]}
-            />
-            <ArticleCard
-                title="Lorem ipsum"
-                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!"
-                date="2023/01/02 12:34"
-                tags={["tag-1", "tag-2", "tag-3"]}
-            />
-            <ArticleCard
-                title="Lorem ipsum"
-                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!"
-                date="2023/01/02 12:34"
-                tags={["tag-1", "tag-2", "tag-3"]}
-            />
+        </div>
+        <div class="label">Progetti recenti</div>
+        <div class="article-list">
+            {
+                sortedArticles.map(
+                    ({
+                        // @ts-ignore
+                        frontmatter: {
+                            title,
+                            description,
+                            tags,
+                            publish_date: date,
+                        },
+                        // @ts-ignore
+                        url,
+                    }) => (
+                        <ArticleCard
+                            {url}
+                            {title}
+                            {description}
+                            {date}
+                            {tags}
+                        />
+                    )
+                )
+            }
+        </div>
+        <div class="label">Cose artistiche recenti</div>
+        <div class="article-list">
+            {
+                sortedArticles.map(
+                    ({
+                        // @ts-ignore
+                        frontmatter: {
+                            title,
+                            description,
+                            tags,
+                            publish_date: date,
+                        },
+                        // @ts-ignore
+                        url,
+                    }) => (
+                        <ArticleCard
+                            {url}
+                            {title}
+                            {description}
+                            {date}
+                            {tags}
+                        />
+                    )
+                )
+            }
         </div>
     </div>
 </BaseLayout>

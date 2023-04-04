@@ -1,8 +1,11 @@
 ---
+import _ from "lodash"
+
 import ArticleCard from "../../components/ArticleCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const articles = await Astro.glob("/src/pages/articoli/*.md");
+const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const sortedArticles = _.orderBy(articles, ['frontmatter.publish_date'], ['desc'])
 ---
 
 <BaseLayout title="Articoli | aziis98.com">
@@ -10,15 +13,13 @@ const articles = await Astro.glob("/src/pages/articoli/*.md");
 		<h1>Articoli</h1>
 		<div class="article-list">
 			{
-				articles.map(
+				sortedArticles.map(
+					// @ts-ignore
 					({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
 						<ArticleCard {url} {title} {description} {date} {tags} />
 					)
 				)
 			}
-			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
-			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
-			<ArticleCard title="Lorem ipsum" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, minima!" tags={['tag-1', 'tag-2', 'tag-3']}/>
 		</div>
 	</div>
 </BaseLayout>

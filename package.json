@@ -10,13 +10,21 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.18.2",
+    "@astrojs/preact": "^2.1.0",
     "@fontsource/eb-garamond": "^4.5.11",
     "@fontsource/libre-baskerville": "^4.5.10",
     "@fontsource/open-sans": "^4.5.14",
     "@fontsource/source-sans-pro": "^4.5.11",
-    "astro": "^2.1.8"
+    "@types/katex": "^0.16.0",
+    "astro": "^2.1.8",
+    "katex": "^0.16.4",
+    "lodash": "^4.17.21",
+    "preact": "^10.6.5",
+    "remark-math": "^5.1.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.192",
     "sass": "^1.60.0"
   }
 }
