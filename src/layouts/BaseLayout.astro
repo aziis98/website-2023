@@ -13,14 +13,14 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content="{Astro.generator}" />
+		<meta name="generator" content={Astro.generator} />
 
 		<meta property="og:title" content={title ?? "aziis98.com"}>
 		<meta property="og:description" content="Sito di Antonio De Lucreziis, principalmente con articoli di programmazione e robe che facciamo al PHC. C'è anche una sezione artistica con tutte i lavori che ho fatto nel corso del tempo">
-		<meta property="og:image" content="icon.png">
+		<meta property="og:image" content="/icon.png">
 
 		<title>{title}</title>
-		<link rel="icon" type="image/png" sizes="192x192" href="icon.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="/icon.png">
 
 		<script>
 			import katex from "katex"
