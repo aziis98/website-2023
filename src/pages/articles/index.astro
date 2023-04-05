@@ -1,0 +1,32 @@
+---
+import _ from "lodash"
+
+import ArticleCard from "../../components/ArticleCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
+const sortedArticles = _.orderBy(articles, ['frontmatter.publish_date'], ['desc'])
+---
+
+<BaseLayout title="Articoli | aziis98.com">
+	<div class="page">
+        <div class="principal">
+            <div class="content">
+                <h1>Articoli</h1>
+                <p class="center">
+                    Raccolta di post e articoli scritti nel corso del tempo, l'argomento principalmente è programmazione e progetti recenti fatti al PHC. 
+                </p>
+            </div>
+        </div>
+		<div class="article-list">
+			{
+				sortedArticles.map(
+					// @ts-ignore
+					({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
+						<ArticleCard {url} {title} {description} {date} {tags} />
+					)
+				)
+			}
+		</div>
+	</div>
+</BaseLayout>

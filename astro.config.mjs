@@ -6,13 +6,16 @@ import remarkMath from "remark-math";
 
 // https://astro.build/config
 export default defineConfig({
-  outDir: 'out/',
+  outDir: "out/",
   markdown: {
     shikiConfig: {
-      theme: "github-light"
-    }
+      theme: "github-light",
+    },
   },
-  integrations: [preact(), mdx({ 
-    remarkPlugins: [remarkMath]
-  })]
+  integrations: [
+    preact(),
+    mdx({
+      remarkPlugins: [remarkMath],
+    }),
+  ],
 });

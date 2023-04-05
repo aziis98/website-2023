@@ -4,105 +4,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 import _ from "lodash";
 
-const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const sortedArticles = _.orderBy(
-    articles,
-    ["frontmatter.publish_date"],
-    ["desc"]
+articles,
+["frontmatter.publish_date"],
+["desc"]
 );
 ---
 
 <BaseLayout title="aziis98.com">
     <div class="page">
         <div class="principal">
-            <img
-                class="profile"
-                src="/profile.png"
-                alt="current profile picture"
-            />
+            <img class="profile" src="/profile.png" alt="current profile picture" />
             <div class="content">
                 <h1 class="left">Antonio De Lucreziis</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, magni non nobis enim molestias at, rem maiores dolores id eligendi?</p>
-                <p>Deserunt non, nulla accusantium pariatur quas perspiciatis, unde! Accusamus ullam, maxime sit explicabo consectetur facilis, asperiores est laudantium fugit nemo!</p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, magni non nobis enim molestias at, rem maiores dolores id
+                    eligendi?
+                </p>
+                <p>
+                    Deserunt non, nulla accusantium pariatur quas perspiciatis, unde! Accusamus ullam, maxime sit explicabo consectetur facilis,
+                    asperiores est laudantium fugit nemo!
+                </p>
             </div>
         </div>
         <div class="label">Articoli recenti</div>
         <div class="article-list">
-            {
-                sortedArticles.map(
-                    ({
-                        // @ts-ignore
-                        frontmatter: {
-                            title,
-                            description,
-                            tags,
-                            publish_date: date,
-                        },
-                        // @ts-ignore
-                        url,
-                    }) => (
-                        <ArticleCard
-                            {url}
-                            {title}
-                            {description}
-                            {date}
-                            {tags}
-                        />
-                    )
-                )
-            }
-        </div>
-        <div class="label">Progetti recenti</div>
-        <div class="article-list">
-            {
-                sortedArticles.map(
-                    ({
-                        // @ts-ignore
-                        frontmatter: {
-                            title,
-                            description,
-                            tags,
-                            publish_date: date,
-                        },
-                        // @ts-ignore
-                        url,
-                    }) => (
-                        <ArticleCard
-                            {url}
-                            {title}
-                            {description}
-                            {date}
-                            {tags}
-                        />
-                    )
-                )
-            }
+            { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
+                <ArticleCard {url} {title} {description} {date} {tags} />
+            ) ) }
         </div>
         <div class="label">Cose artistiche recenti</div>
         <div class="article-list">
-            {
-                sortedArticles.map(
-                    ({
-                        // @ts-ignore
-                        frontmatter: {
-                            title,
-                            description,
-                            tags,
-                            publish_date: date,
-                        },
-                        // @ts-ignore
-                        url,
-                    }) => (
-                        <ArticleCard
-                            {url}
-                            {title}
-                            {description}
-                            {date}
-                            {tags}
-                        />
-                    )
-                )
-            }
+            { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
+                <ArticleCard {url} {title} {description} {date} {tags} />
+            ) ) }
         </div>
     </div>
 </BaseLayout>

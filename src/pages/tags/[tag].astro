@@ -4,45 +4,26 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-	const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+	const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 	return _.union(...articles.map((a) => a.frontmatter.tags)).map((t) => ({
 		params: { tag: t },
 	}));
 }
 
-const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
+const articlesForTag = articles.filter((a) => a.frontmatter.tags.includes(tag));
 
 const { tag } = Astro.params;
 ---
 
-<BaseLayout title={`#${tag} | aziis98.com`}>
+<BaseLayout title="{`#${tag}" | aziis98.com`}>
 	<div class="page">
 		<h1>#{tag}</h1>
 		<div class="label">Articoli con questo tag</div>
 		<div class="article-list">
-			{
-				articles
-					.filter((a) => a.frontmatter.tags.includes(tag))
-					.map(
-						({
-							frontmatter: {
-								title,
-								description,
-								tags,
-								publish_date: date,
-							},
-							url,
-						}) => (
-							<ArticleCard
-								{url}
-								{title}
-								{description}
-								{date}
-								{tags}
-							/>
-						)
-					)
-			}
+			{ articlesForTag.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
+				<ArticleCard {url} {title} {description} {date} {tags} />
+			) ) }
 		</div>
 	</div>
 </BaseLayout>

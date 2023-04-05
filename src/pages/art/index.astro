@@ -1,8 +1,30 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const artwork = await Astro.glob('/public/data/art/*')
-console.log(artwork);
+/*
+/art/2017_swirl___starry_night_by_aziis98_dbvmiz3.png
+
+/art/2017_12_25532199_1826088840737173_4625823723493194494_o.jpg
+/art/2017_06_19023362_1595405443805515_7071141008920235287_o.jpg
+/art/2017_06_18953585_1595404363805623_575983658414092612_o.jpg
+/art/2017_06_18920842_1595403217139071_2974095035904180043_o.jpg
+/art/2017_06_18920817_1595402877139105_1236591318658833443_o.png
+/art/2017_06_18920778_1595405490472177_1064182555682224400_o.jpg
+/art/2017_06_18891905_1595404367138956_477466071450367466_o.jpg
+/art/2017_06_18891548_1595402873805772_4589696692351611922_o.png
+/art/2017_06_18880037_1595402880472438_6637623871066816859_o.png
+/art/2017_06_18814932_1595404407138952_1138042958443432150_o.jpg
+/art/2017_02_17097454_1479287822083945_8887292174062825297_o.png
+/art/2017_02_17097411_1479286185417442_730408095286384504_o.png
+/art/2017_02_17039108_1479286188750775_3220061156803528074_o.png
+/art/2017_02_17015677_1479286165417444_1242330749293284197_o.png
+/art/2017_02_16804172_1479286168750777_9014371641843459780_o.png
+/art/2014_wallpaper2.png
+/art/2014_wallpaper2-2.png
+/art/2014_wallpaper2-2-1.png
+/art/2014_wallpaper2-1.png
+/art/2014_wallpaper1.png
+*/
 ---
 
 <BaseLayout title="Art | aziis98.com">
@@ -10,85 +32,192 @@ console.log(artwork);
         <div class="principal">
             <div class="content">
                 <h1>Art</h1>
-                <p class="center">
-                    Cose artistiche a caso che faccio in alcuni momenti in cui voglio spasticare. La maggior parte sono di <a href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</a>, alcune realizzate interamente con programmi di grafica, altre invece sono parzialmente realizzate da programmi che ho scritto che generavano un'immagine che poi ritoccavo un po'. Le più recenti sono esperimenti a caso con i modelli di ML usciti di recente, in particolare <strong>tutte quelle fatte con AI sono indicate</strong>.
+                <p class="center serif">
+                    Cose artistiche che faccio in alcuni momenti in cui voglio spasticare. La maggior parte sono di
+                    <a href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</a>: alcune realizzate con programmi di grafica, altre
+                    parzialmente realizzate da programmi scritti a mano che generavano un'immagine che poi viene ritoccata.
                 </p>
+                <!-- <p class="center serif">
+                    Le più recenti sono esperimenti a caso con i modelli di ML usciti di recente, in particolare
+                    <strong>tutte quelle fatte con AI sono indicate</strong>. Anche per evitare si pensi che anche i miei lavori vecchi siano stati
+                    fatti da AI, quelli sono arte generativa &ldquo;vecchio stile&rdquo; (mai avrei pensato di dire questa cosa)
+                </p> -->
             </div>
         </div>
-
         <div class="art-list">
             <div class="art-item">
-                <a href="/art/sky-4-2-1.png">
+                <a href="/art/2020_sky-4-2-1.png">
+                    <img src="/data/art/2020_sky-4-2-1.png" alt="fluid, vortices, sky, stars, purple" />
+                </a>
+                <div class="caption">
+                    <div class="date">2020</div>
+                    <p>
+                        In questo avevo provato oltre ad aggiungere la turbolenza anche a mettere un po' di rumore prima ed alla fine ha aggiunto
+                        questo effetto molto simile a delle stelle.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2019_purple_swirl_by_aziis98_ddc9h69.png">
+                    <img src="/data/art/2019_purple_swirl_by_aziis98_ddc9h69.png" alt="purple, swirl, pygame, 90-degree turns" />
+                </a>
+                <div class="caption">
+                    <div class="date">2019</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo invece è viola ed il punto di partenza è una sola linea orizzontale
+                        da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_triangles_ii___purple_by_aziis98_dbvmheu.jpg">
+                    <img src="/data/art/2017_triangles_ii___purple_by_aziis98_dbvmheu.jpg" alt="triangles, purple, blender" />
+                </a>
+                <div class="caption">
+                    <div class="date">2017</div>
+                    <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_triangles_i___red_by_aziis98_dbvmhen.jpg">
+                    <img src="/data/art/2017_triangles_i___red_by_aziis98_dbvmhen.jpg" alt="triangles, red, blender" />
+                </a>
+                <div class="caption">
+                    <div class="date">2017</div>
+                    <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_swirl_ii___magenta_by_aziis98_dbvmj96.png">
+                    <img src="/data/art/2017_swirl_ii___magenta_by_aziis98_dbvmj96.png" alt="purple, swirl, magenta, pygame, 90-degree turns" />
+                </a>
+                <div class="caption">
+                    <div class="date">2017</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è rossiccio ed ha come linea di partenza una spezzata
+                        tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_swirl_i___blue_by_aziis98_dbvmirm.png">
+                    <img src="/data/art/2017_swirl_i___blue_by_aziis98_dbvmirm.png" alt="blue, swirl, magenta, pygame, 90-degree turns" />
+                </a>
+                <div class="caption">
+                    <div class="date">2017</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata tendenzialmente
+                        orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_red_yellow_fluid_horizontal_by_aziis98_dbvmhei.jpg">
+                    <img src="/data/art/2017_red_yellow_fluid_horizontal_by_aziis98_dbvmhei.jpg" alt="liquid, red, yellow, vortices, turbulence" />
+                </a>
+                <div class="caption">
+                    <div class="date">Pre-2017</div>
+                    <p>
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
+                        plugin.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_light_blue_fluid_central_by_aziis98_dbvmhea.jpg">
+                    <img src="/data/art/2017_light_blue_fluid_central_by_aziis98_dbvmhea.jpg" alt="liquid, blue, vortices, turbulence" />
+                </a>
+                <div class="caption">
+                    <div class="date">Pre-2017</div>
+                    <p>
+                        In questo invece ho tentato di partire da una base quadratosa ma senza troppo successo, però boh alla fine non è male
+                        l'effetto.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_first_horizontal_fluid_by_aziis98_dbvmgel.png">
+                    <img src="/data/art/2017_first_horizontal_fluid_by_aziis98_dbvmgel.png" alt="liquid, blue, vortices, turbulence, all colors" />
+                </a>
+                <div class="caption">
+                    <div class="date">Pre-2017</div>
+                    <p>
+                        Questo è uno dei primissimi lavori che ho fatto ed anche uno dei miei preferiti. La base è sempre la stessa, turbonenza su una
+                        base di linee colorate.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <a href="/art/2017_14481925_1302677446411651_7576248703440911551_o_by_aziis98_dbvmhfc.jpg">
                     <img
-                        src="/data/art/sky-4-2-1.png"
-                        alt="liquid, vortices, sky, purple, stars"
+                        src="/data/art/2017_14481925_1302677446411651_7576248703440911551_o_by_aziis98_dbvmhfc.jpg"
+                        alt="liquid, vortices, turbulence, red, yellow"
                     />
                 </a>
                 <div class="caption">
-                    <div class="date">2020/??</div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur repellendus quae, aliquam sint quos neque
-                    blanditiis, natus necessitatibus porro magnam omnis
-                    similique soluta. Ea placeat ullam praesentium rerum iure
-                    similique.
+                    <div class="date">Pre-2017</div>
+                    <p>
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
+                        plugin.
+                    </p>
                 </div>
             </div>
             <div class="art-item">
-                <img
-                    src="https://placehold.co/1024x1024"
-                    alt="liquid, vortices, sky, purple, stars"
-                />
+                <a href="/art/2017_13047706_1181908405155223_3613682581493605148_o_by_aziis98_dbvmhe6.jpg">
+                    <img
+                        src="/data/art/2017_13047706_1181908405155223_3613682581493605148_o_by_aziis98_dbvmhe6.jpg"
+                        alt="liquid, vortices, turbulence, red, yellow"
+                    />
+                </a>
                 <div class="caption">
-                    <div class="date">2020/??</div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur repellendus quae, aliquam sint quos neque
-                    blanditiis, natus necessitatibus porro magnam omnis
-                    similique soluta. Ea placeat ullam praesentium rerum iure
-                    similique.
+                    <div class="date">Pre-2017</div>
+                    <p>
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
+                        plugin.
+                    </p>
                 </div>
             </div>
             <div class="art-item">
-                <img
-                    src="https://placehold.co/300x400"
-                    alt="liquid, vortices, sky, purple, stars"
-                />
+                <a href="/art/2017_12_25532199_1826088840737173_4625823723493194494_o.jpg">
+                    <img src="/data/art/2017_12_25532199_1826088840737173_4625823723493194494_o.jpg" alt="???" />
+                </a>
                 <div class="caption">
-                    <div class="date">2020/??</div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur repellendus quae, aliquam sint quos neque
-                    blanditiis, natus necessitatibus porro magnam omnis
-                    similique soluta. Ea placeat ullam praesentium rerum iure
-                    similique.
+                    <div class="date">2017/12</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata tendenzialmente
+                        orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                    </p>
                 </div>
             </div>
             <div class="art-item">
-                <img
-                    src="https://placehold.co/600x400"
-                    alt="liquid, vortices, sky, purple, stars"
-                />
+                <a href="/art/2017_06_18891671_1595404813805578_1704942473049780657_o.jpg">
+                    <img src="/data/art/2017_06_18891671_1595404813805578_1704942473049780657_o.jpg" alt="???" />
+                </a>
                 <div class="caption">
-                    <div class="date">2020/??</div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur repellendus quae, aliquam sint quos neque
-                    blanditiis, natus necessitatibus porro magnam omnis
-                    similique soluta. Ea placeat ullam praesentium rerum iure
-                    similique.
+                    <div class="date">2017/06</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blu/viola e basato su delle linee generate casualmente che vengono
+                        man mano sovrapposte alle precedenti.
+                    </p>
                 </div>
             </div>
-            <div class="art-item">
-                <img
-                    src="https://placehold.co/600x400"
-                    alt="liquid, vortices, sky, purple, stars"
-                />
+            <p class="serif">
+                TODO: Altre vecchie devo ancora aggiungerle
+            </p>
+            <!-- <div class="art-item">
+                <a href="">
+                    <img
+                        src="/data"
+                        alt="???"
+                    />
+                </a>
                 <div class="caption">
-                    <div class="date">2020/??</div>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur repellendus quae, aliquam sint quos neque
-                    blanditiis, natus necessitatibus porro magnam omnis
-                    similique soluta. Ea placeat ullam praesentium rerum iure
-                    similique.
+                    <div class="date">????</div>
+                    <p>
+                        ???
+                    </p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </BaseLayout>

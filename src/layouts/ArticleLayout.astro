@@ -11,7 +11,7 @@ import Tag from "../components/Tag.astro";
 
 const { frontmatter } = Astro.props;
 
-const articles = await Astro.glob("/src/pages/articoli/*.{md,mdx}");
+const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const someRelatedArticles = await getRandomRelatedArticles(articles, frontmatter);
 ---
 

@@ -83,7 +83,7 @@ $heading-scale-mobile: 1.25;
             margin-top: 0.75rem * $factor;
         }
 
-        &+p {
+        & + p {
             margin-top: 0.25rem * $factor;
         }
     }
@@ -108,21 +108,12 @@ p {
     line-height: 1.75;
 }
 
-p+p {
+p + p {
     margin-top: 0.5rem;
 }
 
 p.card {
     margin: 1rem 0;
-}
-
-p.center {
-    margin: 0 auto;
-    text-align: center;
-}
-
-p.short {
-    max-width: 80ch;
 }
 
 pre {
@@ -137,6 +128,10 @@ pre {
     background: #f8f8f8 !important;
 }
 
+p > code {
+    font-size: 80%;
+}
+
 pre,
 code {
     font-family: "Source Code Pro", monospace;
@@ -145,12 +140,12 @@ code {
 }
 
 // inline
-span:not(.katex-display)>span.katex {
+span:not(.katex-display) > span.katex {
     font-size: 125%;
 }
 
 // display
-span>span.katex-display {
+span > span.katex-display {
     font-size: 110%;
     max-width: 100%;
     overflow-x: auto;
@@ -165,65 +160,9 @@ ol {
     padding-inline-start: 1.5rem;
 
     li {
-        margin: 0.25rem 0;
+        margin: 0.75rem 0;
     }
 }
-
-// a,
-// a:visited {
-//     color: #6635ca;
-//     font-weight: 500;
-//     text-decoration: none;
-
-//     position: relative;
-//     z-index: 0;
-
-//     --bg: transparent;
-//     --border-size: 4px;
-
-//     &::before {
-//         content: "";
-//         position: absolute;
-
-//         top: 0;
-//         left: calc(var(--border-size) * -1);
-//         width: var(--border-size);
-//         height: 100%;
-
-//         background: var(--bg);
-
-//         z-index: -1;
-
-//         border-top-left-radius: var(--border-size);
-//         border-bottom-left-radius: var(--border-size);
-//     }
-
-//     &::after {
-//         content: "";
-//         position: absolute;
-
-//         top: 0;
-//         right: calc(var(--border-size) * -1);
-//         width: var(--border-size);
-//         height: 100%;
-
-//         background: var(--bg);
-
-//         z-index: -1;
-
-//         border-top-right-radius: var(--border-size);
-//         border-bottom-right-radius: var(--border-size);
-//     }
-
-//     &:hover {
-//         // text-decoration: underline solid 3px #a081de;
-//         background: var(--bg);
-//         color: #fff;
-
-
-//         --bg: #a081de;
-//     }
-// }
 
 a,
 a:visited {
@@ -232,7 +171,6 @@ a:visited {
 }
 
 p {
-
     a,
     a:visited {
         font-weight: 600;
@@ -243,6 +181,32 @@ p {
     }
 }
 
+//
+// Modifiers
+//
+
+p.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+p.short {
+    max-width: 80ch;
+}
+
+.serif {
+    font-family: "EB Garamond", serif;
+    font-size: 20px;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
 
 //
 // Components
@@ -267,7 +231,7 @@ p {
 
         flex-direction: row;
 
-        &:nth-child(2n+1) {
+        &:nth-child(2n + 1) {
             flex-direction: row-reverse;
         }
 
@@ -294,7 +258,6 @@ p {
                 transform: scale(1.025);
             }
 
-
             @media screen and (max-width: $device-large) {
                 max-height: unset;
                 width: 100%;
@@ -303,13 +266,14 @@ p {
 
         .caption {
             color: #111;
-            font-family: 'EB Garamond', serif;
+            font-family: "EB Garamond", serif;
             font-size: 20px;
 
             .date {
                 color: #666;
 
-                font-size: 24px;
+                font-size: 28px;
+                font-weight: 500;
             }
         }
     }
@@ -344,14 +308,6 @@ p {
     .content {
         width: 100%;
         max-width: 80ch;
-        
-        .left {
-            text-align: left;
-        }
-
-        .right {
-            text-align: right;
-        }
 
         h1 {
             font-size: 3.5rem;
@@ -462,7 +418,7 @@ p {
 
         flex-grow: 1;
 
-        &+.description {
+        & + .description {
             padding-top: 0.5rem;
 
             border-top: 1px solid #ddd;
@@ -514,7 +470,7 @@ body {
         .nav-item {
             padding: 0.75rem 0;
 
-            &>a {
+            & > a {
                 padding: 0.25rem 0.5rem;
                 font-weight: 500;
                 font-size: 110%;
@@ -644,8 +600,7 @@ body {
                     height: 1px;
                 }
 
-                box-shadow: 0 0 6px 0 #00000040,
-                0 0 32px 0 #00000018;
+                box-shadow: 0 0 6px 0 #00000040, 0 0 32px 0 #00000018;
 
                 .sidebar-close {
                     display: grid;
