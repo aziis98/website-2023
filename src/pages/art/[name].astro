@@ -4,14 +4,15 @@ import _ from "lodash";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-	const artworks = await Astro.glob("/public/data/art/*");
+	// const artworks = await Astro.glob("/public/data/art/*");
 
-	return artworks.map(({ default: url }) => {
-		const name = url.substring(url.lastIndexOf("/") + 1);
-		console.log(url, name);
+	// return artworks.map(({ default: url }) => {
+	// 	const name = url.substring(url.lastIndexOf("/") + 1);
+	// 	console.log(url, name);
 
-		return { params: { name }, props: { url } };
-	});
+	// 	return { params: { name }, props: { url } };
+	// });
+	return []
 }
 
 const { name } = Astro.params;
