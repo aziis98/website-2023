@@ -11,9 +11,9 @@ export async function getStaticPaths() {
 }
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-const articlesForTag = articles.filter((a) => a.frontmatter.tags.includes(tag));
 
 const { tag } = Astro.params;
+const articlesForTag = articles.filter((a) => a.frontmatter.tags.includes(tag));
 ---
 
 <BaseLayout title="{`#${tag}" | aziis98.com`}>
