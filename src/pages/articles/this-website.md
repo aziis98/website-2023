@@ -2,7 +2,7 @@
 layout: ../../layouts/ArticleLayout.astro
 title: Nuovo sito
 description: In questo articolo annuncio finalmente il mio nuovo sito realizzato con Astro e spiego un po' come funziona
-tags: ["lorem-ipsum", "astro", "webdev"]
+tags: ["website", "astro", "webdev"]
 publish_date: 2023/04/03 17:00
 ---
 
@@ -16,8 +16,10 @@ $$
 
 ## Build & Deploy
 
-Il codice è tutto su GitHub e viene renderizzato direttamente da Netlify [...]
+Il codice è tutto in [una repo su GitHub](https://github.com/aziis98/website-2023) e viene renderizzato da [Netlify](https://netlify.com/) (servizio a caso che hosta siti gratis su uno loro sotto-dominio) in automatico quando pusho. La cosa simpatica di Netlify è che non serve alcuna configurazione in più nella propria repo e fa anche tutta la build da solo.
 
 ## Conclusione
 
-Spero finalmente di iniziare ad usare questo sito in modo continuativo perché non mi dispiacerebbe per niente iniziare a scrivere un po' di articoli sia in cui racconto delle cose che facciamo al [PHC (WIP)](https://phc.dm.unipi.it) o di miei progettini a caso in generale.
+Spero finalmente di iniziare ad usare questo sito in modo continuativo perché non mi dispiacerebbe per niente iniziare a scrivere un po' di articoli sia in cui racconto delle cose che facciamo al [PHC](https://poisson.phc.dm.unipi.it) o di miei progettini a caso in generale.
+
+Probabilmente uno dei primi articoli sarà una trascrizione del [talk sulle generics in Go](https://github.com/aziis98/talk-intro-go-generics) fatto alla DevFest il 1 Aprile 2023.

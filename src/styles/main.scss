@@ -80,11 +80,11 @@ $heading-scale-mobile: 1.25;
         position: relative;
 
         &:not(:first-child) {
-            margin-top: 0.75rem * $factor;
+            margin-top: 1rem * $factor;
         }
 
         & + p {
-            margin-top: 0.25rem * $factor;
+            margin-top: 0.4rem * $factor;
         }
     }
 }
@@ -211,6 +211,30 @@ p.short {
 //
 // Components
 //
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    a.tag {
+        background: #ddd;
+        color: #555;
+        // font-size: 15px;
+
+        padding: 0.125rem 0.5rem;
+
+        transform: none;
+
+        user-select: none;
+
+        border-radius: 4px;
+
+        &:hover {
+            background: #ccc;
+        }
+    }
+}
 
 .art-list {
     display: flex;

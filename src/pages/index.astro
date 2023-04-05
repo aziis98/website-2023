@@ -19,22 +19,14 @@ articles.filter(a => !a.frontmatter.draft),
             <div class="content">
                 <h1 class="left">Antonio De Lucreziis</h1>
                 <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, magni non nobis enim molestias at, rem maiores dolores id
-                    eligendi?
+                    Sono uno studente di Matematica all'Università di Pisa anche se sono sempre stato appassionato di informatica (a tutti i livelli). Ormai già da qualche anno sono un <em>macchinista</em> del PHC, tra le varie cose gestiamo il server con le pagine degli studenti chiamato <a href="https://poisson.phc.dm.unipi.it">Poisson</a>.
                 </p>
                 <p>
-                    Deserunt non, nulla accusantium pariatur quas perspiciatis, unde! Accusamus ullam, maxime sit explicabo consectetur facilis,
-                    asperiores est laudantium fugit nemo!
+                    In questo sito caricherò principalmente <a href="/articles">articoli</a> su quello che faccio o altre cose a caso come ad esempio le robe di <em>arte generativa</em> che si trovano nella sezione <a href="/art">artistica</a>.
                 </p>
             </div>
         </div>
         <div class="label">Articoli recenti</div>
-        <div class="article-list">
-            { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
-                <ArticleCard {url} {title} {description} {date} {tags} />
-            ) ) }
-        </div>
-        <div class="label">Cose artistiche recenti</div>
         <div class="article-list">
             { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
                 <ArticleCard {url} {title} {description} {date} {tags} />

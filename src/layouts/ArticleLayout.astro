@@ -35,7 +35,7 @@ const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => 
 			</div>
 		</div>
 
-		<div class="label">Articoli correlati</div>
+		{someRelatedArticles.length > 0 && <div class="label">Articoli correlati</div>}
 		{
 			someRelatedArticles.map((a) => (
 				<ArticleCard

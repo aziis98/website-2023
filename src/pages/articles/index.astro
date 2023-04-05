@@ -5,7 +5,10 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-const sortedArticles = _.orderBy(articles.filter(a => !a.frontmatter.draft), ['frontmatter.publish_date'], ['desc'])
+const publishedArticles = articles.filter(a => !a.frontmatter.draft);
+
+const tags = _.union(...publishedArticles.map((a) => a.frontmatter.tags));
+const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date'], ['desc'])
 ---
 
 <BaseLayout title="Articoli | aziis98.com">
@@ -18,6 +21,13 @@ const sortedArticles = _.orderBy(articles.filter(a => !a.frontmatter.draft), ['f
                 </p>
             </div>
         </div>
+        <div class="label">Tags</div>
+        <div class="tags-list">
+        	{tags.map((name, i) => (
+        		<a class="tag" href={`/tags/${name}`}>{name}</a>
+        	))}
+        </div>
+        <div class="label">Archivio</div>
 		<div class="article-list">
 			{
 				sortedArticles.map(
