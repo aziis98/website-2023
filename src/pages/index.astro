@@ -6,7 +6,7 @@ import _ from "lodash";
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const sortedArticles = _.orderBy(
-articles,
+articles.filter(a => !a.frontmatter.draft),
 ["frontmatter.publish_date"],
 ["desc"]
 );

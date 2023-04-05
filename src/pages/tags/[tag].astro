@@ -5,7 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
 	const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-	return _.union(...articles.map((a) => a.frontmatter.tags)).map((t) => ({
+	return _.union(...articles.filter(a => !a.frontmatter.draft).map((a) => a.frontmatter.tags)).map((t) => ({
 		params: { tag: t },
 	}));
 }
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 
 const { tag } = Astro.params;
-const articlesForTag = articles.filter((a) => a.frontmatter.tags.includes(tag));
+const articlesForTag = articles.filter(a => !a.frontmatter.draft && a.frontmatter.tags.includes(tag));
 ---
 
 <BaseLayout title="{`#${tag}" | aziis98.com`}>

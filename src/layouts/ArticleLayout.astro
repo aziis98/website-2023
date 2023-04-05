@@ -12,7 +12,7 @@ import Tag from "../components/Tag.astro";
 const { frontmatter } = Astro.props;
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-const someRelatedArticles = await getRandomRelatedArticles(articles, frontmatter);
+const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => !a.frontmatter.draft), frontmatter);
 ---
 
 <BaseLayout title={frontmatter.title + " | aziis98.com"}>

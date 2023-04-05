@@ -5,7 +5,7 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-const sortedArticles = _.orderBy(articles, ['frontmatter.publish_date'], ['desc'])
+const sortedArticles = _.orderBy(articles.filter(a => !a.frontmatter.draft), ['frontmatter.publish_date'], ['desc'])
 ---
 
 <BaseLayout title="Articoli | aziis98.com">
