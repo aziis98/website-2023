@@ -29,6 +29,8 @@ const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => 
 				</ul>
 			</div>
  -->
+ 			<div class="title mobile-only">{frontmatter.title}</div>
+ 			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
 			<div class="description">{frontmatter.description}</div>
 			<div class="tags">
 				{frontmatter.tags.map((name) => <Tag {name} />)}
