@@ -112,19 +112,6 @@ p + p {
     margin-top: 0.5rem;
 }
 
-h1 + p::first-letter {
-    // -webkit-initial-letter: 2;
-    // initial-letter: 2;
-    margin-right: 0.35rem;
-    float: left;
-    font-size: 42px;
-    line-height: 44px;
-    padding: 0 0.25rem 6px;
-    border: 3px solid currentColor;
-
-    border-radius: 2px;
-}
-
 p.card {
     margin: 1rem 0;
 }
@@ -585,6 +572,17 @@ body {
 
             border-radius: 8px;
             box-shadow: 0 0 6px 0 #00000040, 0 0 32px 0 #00000018;
+
+            h1 + p::first-letter {
+                margin-right: 0.35rem;
+                float: left;
+                font-size: 42px;
+                line-height: 44px;
+                padding: 0 0.25rem 6px;
+                border: 3px solid currentColor;
+
+                border-radius: 2px;
+            }
         }
 
         aside {
