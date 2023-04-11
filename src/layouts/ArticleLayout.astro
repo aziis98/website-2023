@@ -16,27 +16,26 @@ const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => 
 ---
 
 <BaseLayout title={frontmatter.title + " | aziis98.com"}>
+	<div class="article-card device-mobile">
+		<div class="title mobile-only">{frontmatter.title}</div>
+			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
+		<div class="description">{frontmatter.description}</div>
+		<div class="tags">
+			{frontmatter.tags.map((name) => <Tag {name} />)}
+		</div>
+	</div>
 	<article>
 		<slot />
 	</article>
 	<aside>
-		<div class="article-card">
-			<!-- 			<div class="description">
-				<p>Questo articolo è parte di una serie</p>
-				<ul>
-					<li>Prossimo: <a href="?page=next">Lorem ipsum N</a></li>
-					<li>Precedente: <a href="?page=prev">Lorem ipsum M</a></li>
-				</ul>
-			</div>
- -->
- 			<div class="title mobile-only">{frontmatter.title}</div>
+		<div class="article-card device-desktop">
+ 			<!-- <div class="title ">{frontmatter.title}</div> -->
  			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
 			<div class="description">{frontmatter.description}</div>
 			<div class="tags">
 				{frontmatter.tags.map((name) => <Tag {name} />)}
 			</div>
 		</div>
-
 		{someRelatedArticles.length > 0 && <div class="label">Articoli correlati</div>}
 		{
 			someRelatedArticles.map((a) => (

@@ -1,7 +1,7 @@
 $article-width: 46rem;
 $aside-width: 20rem;
 
-$device-large: $article-width + $aside-width + 6rem;
+$device-large: $article-width + $aside-width + 14rem;
 
 *,
 *::before,
@@ -112,6 +112,19 @@ p + p {
     margin-top: 0.5rem;
 }
 
+h1 + p::first-letter {
+    // -webkit-initial-letter: 2;
+    // initial-letter: 2;
+    margin-right: 0.35rem;
+    float: left;
+    font-size: 42px;
+    line-height: 44px;
+    padding: 0 0.25rem 6px;
+    border: 3px solid currentColor;
+
+    border-radius: 2px;
+}
+
 p.card {
     margin: 1rem 0;
 }
@@ -187,6 +200,18 @@ p {
 
 .mobile-only {
     display: none;
+}
+
+@media screen and (max-width: $device-large) {
+    .device-desktop {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: $device-large) {
+    .device-mobile {
+        display: none !important;
+    }
 }
 
 p.center {
@@ -602,7 +627,7 @@ body {
 
             box-shadow: 0 0 6px 0 #00000050, 0 0 16px 0 #00000018;
 
-            z-index: 1;
+            z-index: 10;
 
             &:not(.sidebar-open) .nav-group {
                 left: -125%;
@@ -657,13 +682,28 @@ body {
             width: 100%;
 
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             align-items: center;
 
-            gap: 0;
+            & > .article-card {
+                z-index: 1;
 
-            background: #fff;
-            box-shadow: 0 0 6px 0 #00000050, 0 0 16px 0 #00000018;
+                border-radius: 0;
+
+                box-shadow: none;
+
+                .title {
+                    padding-top: 0.5rem;
+                    font-size: 3rem;
+                }
+
+                :last-child {
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+
+            gap: 0;
 
             .page {
                 padding: 1rem;
@@ -675,7 +715,8 @@ body {
                 width: 100%;
                 max-width: $article-width;
 
-                box-shadow: none;
+                background: #fff;
+                box-shadow: 0 0 6px 0 #00000050, 0 0 16px 0 #00000018;
 
                 border-radius: 0;
 
@@ -691,22 +732,9 @@ body {
             aside {
                 width: 100%;
                 max-width: 35rem;
+                gap: 1rem;
 
-                padding: 0;
-
-                .article-card {
-                    box-shadow: none;
-
-                    .title {
-                        padding-top: 1rem;
-                        font-size: 3rem;
-                    }
-
-                    :last-child {
-                        padding-bottom: 1rem;
-                        border-bottom: 1px solid #ddd;
-                    }
-                }
+                padding: 1rem 1rem 0;
             }
         }
     }
