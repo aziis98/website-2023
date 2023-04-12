@@ -139,7 +139,7 @@ em {
 }
 
 p {
-    line-height: 1.75;
+    line-height: 2;
 }
 
 p + p {
@@ -203,7 +203,9 @@ ol {
 a,
 a:visited {
     color: #6635ca;
-    text-decoration: none;
+    text-decoration: underline solid 3px transparent;
+
+    transition: text-decoration 150ms ease-in-out;
 }
 
 p {
@@ -212,7 +214,7 @@ p {
         font-weight: 600;
 
         &:hover {
-            text-decoration: underline solid 4px #a081de;
+            text-decoration-color: #a081de;
         }
     }
 }
@@ -349,6 +351,7 @@ p.short {
         .caption {
             color: #444;
             font-size: 18px;
+            line-height: 1.5;
 
             .date {
                 font-family: "EB Garamond", serif;
@@ -764,8 +767,8 @@ body {
                 margin-right: 0.35rem;
                 float: left;
                 font-size: 42px;
-                line-height: 44px;
-                padding: 0 0.25rem 6px;
+                line-height: 48px;
+                padding: 0 0.25rem 8px;
                 border: 3px solid currentColor;
 
                 border-radius: 2px;
