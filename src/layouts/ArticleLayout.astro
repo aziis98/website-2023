@@ -16,8 +16,8 @@ const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => 
 ---
 
 <BaseLayout title={frontmatter.title + " | aziis98.com"}>
-	<div class="article-card device-mobile">
-		<div class="title mobile-only">{frontmatter.title}</div>
+	<div class="article-card self">
+		<div class="title">{frontmatter.title}</div>
 			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
 		<div class="description">{frontmatter.description}</div>
 		<div class="tags">
@@ -28,7 +28,7 @@ const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => 
 		<slot />
 	</article>
 	<aside>
-		<div class="article-card device-desktop">
+		<div class="article-card self">
  			<!-- <div class="title ">{frontmatter.title}</div> -->
  			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
 			<div class="description">{frontmatter.description}</div>

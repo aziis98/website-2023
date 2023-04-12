@@ -12,7 +12,7 @@ const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date']
 ---
 
 <BaseLayout title="Articoli | aziis98.com">
-	<div class="page">
+    <section>
         <div class="principal">
             <div class="content">
                 <h1>Articoli</h1>
@@ -21,22 +21,24 @@ const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date']
                 </p>
             </div>
         </div>
-        <div class="label">Tags</div>
-        <div class="tags-list">
-        	{tags.map((name, i) => (
-        		<a class="tag" href={`/tags/${name}`}>{name}</a>
-        	))}
-        </div>
-        <div class="label">Archivio</div>
-		<div class="article-list">
-			{
-				sortedArticles.map(
-					// @ts-ignore
-					({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
-						<ArticleCard {url} {title} {description} {date} {tags} />
-					)
-				)
-			}
-		</div>
-	</div>
+        <section>
+            <div class="label">Tags</div>
+            <div class="tags-list">
+                {tags.map((name, i) => (
+                    <a class="tag" href={`/tags/${name}`}>{name}</a>
+                ))}
+            </div>
+            <div class="label">Archivio</div>
+            <div class="article-list">
+                {
+                    sortedArticles.map(
+                        // @ts-ignore
+                        ({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
+                            <ArticleCard {url} {title} {description} {date} {tags} />
+                        )
+                    )
+                }
+            </div>
+        </section>
+    </section>
 </BaseLayout>

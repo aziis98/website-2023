@@ -13,7 +13,7 @@ articles.filter(a => !a.frontmatter.draft),
 ---
 
 <BaseLayout title="aziis98.com">
-    <div class="page">
+    <section>
         <div class="principal">
             <img class="profile" src="/profile.png" alt="current profile picture" />
             <div class="content">
@@ -32,5 +32,5 @@ articles.filter(a => !a.frontmatter.draft),
                 <ArticleCard {url} {title} {description} {date} {tags} />
             ) ) }
         </div>
-    </div>
+    </section>
 </BaseLayout>
