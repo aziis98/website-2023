@@ -1,8 +1,4 @@
 ---
-import "@fontsource/eb-garamond/latin.css";
-import "@fontsource/open-sans/latin.css";
-import "@fontsource/libre-baskerville/latin.css";
-import "../styles/main.scss";
 import BaseLayout from "./BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 
@@ -10,42 +6,50 @@ import { getRandomRelatedArticles } from "../utils.js";
 import Tag from "../components/Tag.astro";
 
 const { frontmatter } = Astro.props;
+const { title, description, publish_date, tags } = frontmatter;
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-const someRelatedArticles = await getRandomRelatedArticles(articles.filter(a => !a.frontmatter.draft), frontmatter);
+const someRelatedArticles = await getRandomRelatedArticles(
+    articles.filter((a) => !a.frontmatter.draft),
+    frontmatter
+);
 ---
 
-<BaseLayout title={frontmatter.title + " | aziis98.com"}>
-	<div class="article-card self">
-		<div class="title">{frontmatter.title}</div>
-			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
-		<div class="description">{frontmatter.description}</div>
-		<div class="tags">
-			{frontmatter.tags.map((name) => <Tag {name} />)}
-		</div>
-	</div>
-	<article>
-		<slot />
-	</article>
-	<aside>
-		<div class="article-card self">
- 			<!-- <div class="title ">{frontmatter.title}</div> -->
- 			{frontmatter.publish_date && <div class="date">{frontmatter.publish_date}</div>}
-			<div class="description">{frontmatter.description}</div>
-			<div class="tags">
-				{frontmatter.tags.map((name) => <Tag {name} />)}
-			</div>
-		</div>
-		{someRelatedArticles.length > 0 && <div class="label">Articoli correlati</div>}
-		{
-			someRelatedArticles.map((a) => (
-				<ArticleCard
-					{...a.frontmatter}
-					url={a.url}
-					date={a.frontmatter.publish_date}
-					tags={a.frontmatter.tags}
-				/>
-			))
-		}
-	</aside>
+<BaseLayout title={title + " | aziis98.com"} description={description}>
+    <div class="article-card self">
+        <div class="title">{title}</div>
+        {publish_date && <div class="date">{publish_date}</div>}
+        <div class="description">{description}</div>
+        <div class="tags">
+            {tags.map((name) => <Tag {name} />)}
+        </div>
+    </div>
+    <article>
+        <slot />
+    </article>
+    <aside>
+        <div class="article-card self">
+            <!-- <div class="title ">{title}</div> -->
+            {publish_date && <div class="date">{publish_date}</div>}
+            <div class="description">{description}</div>
+            <div class="tags">
+                {tags.map((name) => <Tag {name} />)}
+            </div>
+        </div>
+        {
+            someRelatedArticles.length > 0 && (
+                <div class="label">Articoli correlati</div>
+            )
+        }
+        {
+            someRelatedArticles.map((a) => (
+                <ArticleCard
+                    {...a.frontmatter}
+                    url={a.url}
+                    date={a.publish_date}
+                    tags={a.tags}
+                />
+            ))
+        }
+    </aside>
 </BaseLayout>
