@@ -1,27 +1,25 @@
 ---
+import { prependBaseUrl, websiteName } from "../../utils";
+
+import Link from "../../components/Link.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Art | aziis98.com" description="Galleria con la maggior parte dei lavori di arte generativa che ho fatto nella vita">
+<BaseLayout title={"Art | " + websiteName()} description="Galleria con la maggior parte dei lavori di arte generativa che ho fatto nella vita">
     <section>
         <div class="principal">
             <div class="content">
                 <h1>Art</h1>
                 <p class="center">
                     Cose artistiche che faccio in alcuni momenti in cui voglio spasticare. La maggior parte sono di
-                    <a href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</a>: alcuni realizzati solo con programmi di grafica, altri
+                    <Link href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</Link>: alcuni realizzati solo con programmi di grafica, altri
                     parzialmente realizzati da programmi scritti a mano che generavano un'immagine che poi veniva ritoccata.
                 </p>
-                <!-- <p class="center serif">
-                    Le più recenti sono esperimenti a caso con i modelli di ML usciti di recente, in particolare
-                    <strong>tutte quelle fatte con AI sono indicate</strong>. Anche per evitare si pensi che anche i miei lavori vecchi siano stati
-                    fatti da AI, quelli sono arte generativa &ldquo;vecchio stile&rdquo; (mai avrei pensato di dire questa cosa)
-                </p> -->
             </div>
         </div>
         <div class="art-list">
             <div class="art-item">
-                <img src="/data/art/webp/2020_sky-4-2-1@w1920.webp" alt="fluid, vortices, sky, stars, purple" />
+                <img src={prependBaseUrl("/data/art/webp/2020_sky-4-2-1@w1920.webp")} alt="fluid, vortices, sky, stars, purple" />
                 <div class="caption">
                     <div class="date">2020</div>
                     <p>
@@ -31,7 +29,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2019_purple_swirl@w1920.webp" alt="purple, swirl, pygame, 90-degree turns" />
+                <img src={prependBaseUrl("/data/art/webp/2019_purple_swirl@w1920.webp")} alt="purple, swirl, pygame, 90-degree turns" />
                 <div class="caption">
                     <div class="date">2019</div>
                     <p>
@@ -41,21 +39,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_triangles_ii___purple@w1920.webp" alt="triangles, purple, blender" />
+                <img src={prependBaseUrl("/data/art/webp/2017_triangles_ii___purple@w1920.webp")} alt="triangles, purple, blender" />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_triangles_i___red@w1920.webp" alt="triangles, red, blender" />
+                <img src={prependBaseUrl("/data/art/webp/2017_triangles_i___red@w1920.webp")} alt="triangles, red, blender" />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_swirl_ii___magenta@w1920.webp" alt="purple, swirl, magenta, pygame, 90-degree turns" />
+                <img src={prependBaseUrl("/data/art/webp/2017_swirl_ii___magenta@w1920.webp")} alt="purple, swirl, magenta, pygame, 90-degree turns" />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>
@@ -65,7 +63,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_swirl_i___blue@w1920.webp" alt="blue, swirl, magenta, pygame, 90-degree turns" />
+                <img src={prependBaseUrl("/data/art/webp/2017_swirl_i___blue@w1920.webp")} alt="blue, swirl, magenta, pygame, 90-degree turns" />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>
@@ -75,7 +73,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_12_25532199@w1920.webp" alt="???" />
+                <img src={prependBaseUrl("/data/art/webp/2017_12_25532199@w1920.webp")} alt="???" />
                 <div class="caption">
                     <div class="date">2017/12</div>
                     <p>
@@ -85,7 +83,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_06_18891671@w1920.webp" alt="???" />
+                <img src={prependBaseUrl("/data/art/webp/2017_06_18891671@w1920.webp")} alt="???" />
                 <div class="caption">
                     <div class="date">2017/06</div>
                     <p>
@@ -95,7 +93,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_red_yellow_fluid_horizontal@w1920.webp" alt="liquid, red, yellow, vortices, turbulence" />
+                <img src={prependBaseUrl("/data/art/webp/2017_red_yellow_fluid_horizontal@w1920.webp")} alt="liquid, red, yellow, vortices, turbulence" />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
@@ -105,7 +103,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_light_blue_fluid_central@w1920.webp" alt="liquid, blue, vortices, turbulence" />
+                <img src={prependBaseUrl("/data/art/webp/2017_light_blue_fluid_central@w1920.webp")} alt="liquid, blue, vortices, turbulence" />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
@@ -115,7 +113,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_first_horizontal_fluid@w1920.webp" alt="liquid, blue, vortices, turbulence, all colors" />
+                <img src={prependBaseUrl("/data/art/webp/2017_first_horizontal_fluid@w1920.webp")} alt="liquid, blue, vortices, turbulence, all colors" />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
@@ -125,7 +123,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_14481925@w1920.webp" alt="liquid, vortices, turbulence, red, yellow" />
+                <img src={prependBaseUrl("/data/art/webp/2017_14481925@w1920.webp")} alt="liquid, vortices, turbulence, red, yellow" />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
@@ -135,7 +133,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </div>
             </div>
             <div class="art-item">
-                <img src="/data/art/webp/2017_13047706@w1920.webp" alt="liquid, vortices, turbulence, red, yellow" />
+                <img src={prependBaseUrl("/data/art/webp/2017_13047706@w1920.webp")} alt="liquid, vortices, turbulence, red, yellow" />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
@@ -147,20 +145,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <p class="serif">
                 TODO: Altri vecchi lavori devo ancora aggiungerli
             </p>
-            <!-- <div class="art-item">
-                <a href="">
-                    <img
-                        src="/data"
-                        alt="???"
-                    />
-                </a>
-                <div class="caption">
-                    <div class="date">????</div>
-                    <p>
-                        ???
-                    </p>
-                </div>
-            </div> -->
         </div>
     </section>
 </BaseLayout>

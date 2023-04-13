@@ -1,10 +1,11 @@
 ---
+import { websiteName } from "../utils";
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter: {title, description} } = Astro.props;
 ---
 
-<BaseLayout title={title + " | aziis98.com"} {description}>
+<BaseLayout title={title + " | " + websiteName()} {description}>
 	<section>
         <div class="principal">
             <div class="content">

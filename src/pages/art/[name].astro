@@ -2,6 +2,7 @@
 import _ from "lodash";
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { websiteName } from "../../utils";
 
 export async function getStaticPaths() {
 	// const artworks = await Astro.glob("/public/data/art/*");
@@ -19,7 +20,7 @@ const { name } = Astro.params;
 const { url } = Astro.props;
 ---
 
-<BaseLayout title={`"${name}" | Art | aziis98.com`}>
+<BaseLayout title={`"${name}" | Art | ${websiteName()}`}>
 	<div class="page">
 		<h1>{name}</h1>
 		<p>

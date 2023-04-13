@@ -1,0 +1,7 @@
+---
+import { prependBaseUrl } from "../utils.js";
+
+const { href, ...rest } = Astro.props;
+---
+
+<a href={prependBaseUrl(href)} {...rest}><slot /></a>

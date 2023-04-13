@@ -2,7 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 
-import { getRandomRelatedArticles } from "../utils.js";
+import { getRandomRelatedArticles, websiteName } from "../utils.js";
 import Tag from "../components/Tag.astro";
 
 const { frontmatter } = Astro.props;
@@ -15,7 +15,7 @@ const someRelatedArticles = await getRandomRelatedArticles(
 );
 ---
 
-<BaseLayout title={title + " | aziis98.com"} description={description}>
+<BaseLayout title={title + " | " + websiteName()} description={description}>
     <div class="article-card self">
         <div class="title">{title}</div>
         {publish_date && <div class="date">{publish_date}</div>}

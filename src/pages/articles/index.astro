@@ -2,7 +2,9 @@
 import _ from "lodash"
 
 import ArticleCard from "../../components/ArticleCard.astro";
+import Link from "../../components/Link.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { websiteName } from "../../utils";
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const publishedArticles = articles.filter(a => !a.frontmatter.draft);
@@ -11,7 +13,7 @@ const tags = _.union(...publishedArticles.map((a) => a.frontmatter.tags));
 const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date'], ['desc'])
 ---
 
-<BaseLayout title="Articoli | aziis98.com">
+<BaseLayout title={"Articoli | " + websiteName()}>
     <section>
         <div class="principal">
             <div class="content">
@@ -25,7 +27,7 @@ const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date']
             <div class="label">Tags</div>
             <div class="tags-list">
                 {tags.map((name, i) => (
-                    <a class="tag" href={`/tags/${name}`}>{name}</a>
+                    <Link class="tag" href={`/tags/${name}`}>{name}</Link>
                 ))}
             </div>
             <div class="label">Archivio</div>

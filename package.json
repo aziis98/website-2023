@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:poisson": "astro build --site 'https://poisson.phc.dm.unipi.it/~delucreziis' --base '/~delucreziis'",
     "preview": "astro preview",
     "astro": "astro"
   },

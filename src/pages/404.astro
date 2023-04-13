@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { websiteName } from "../utils";
 ---
 
-<BaseLayout title="404 | aziis98.com" description="Pagina non trovata">
+<BaseLayout title={"404 | " + websiteName()} description="Pagina non trovata">
     <div class="page">
         <h1>Pagina non trovata!</h1>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum magnam soluta beatae praesentium facere dolorem quidem animi. Officiis libero, quo reprehenderit voluptatem consequatur sed, culpa itaque aspernatur saepe, dolores esse?</p>

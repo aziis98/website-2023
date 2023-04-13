@@ -1,5 +1,7 @@
 ---
+import Link from "./Link.astro";
+
 const { name } = Astro.props;
 ---
 
-<a class="tag" href={`/tags/${name}`}>{name}</a>
+<Link class="tag" href={`/tags/${name}`}>{name}</Link>
