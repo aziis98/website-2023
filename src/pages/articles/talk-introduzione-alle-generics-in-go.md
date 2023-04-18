@@ -70,7 +70,7 @@ Alternativamente un'altra soluzione pre-generics sarebbe quella di far prendere 
 
 Inoltre se una funzione prende input di tipo `any` perdiamo tutta la _type-safety_ a _compile-time_ ed appesantiamo il lavoro dal fare a _runtime_ (senza parlare che ora dobbiamo passare in giro dei puntatori).
 
-Un'altro modo è di usare go generate con alcuni tool che generano tutte le varianti di una funzione. Questa tecnica è già più ragionevole ma complica il modo di build-are il proprio progetto.
+Un altro modo è di usare go generate con alcuni tool che generano tutte le varianti di una funzione. Questa tecnica è già più ragionevole ma complica il modo di build-are il proprio progetto.
 
 ## Soluzione: Le Generics
 
@@ -101,7 +101,7 @@ var a, b float32 = 3.14, 2.71
 Min[float32](a, b)
 ```
 
-oppure in molti casi possiamo sottointenderlo e scrivere direttamente
+oppure in molti casi possiamo sottintenderlo e scrivere direttamente
 
 ```go
 var a, b int = 0, 1
@@ -113,9 +113,9 @@ Min(a, b)
 
 ### Type Sets
 
-Più precisamente la notazione per introdurre una generics è della forma `[T Vincolo1, R interface{ Method(), ... }, ...]`, possiamo introdurre tutti i tipi parametrici che vogliamo scrivendo prima il nome della _type parameter_ e poi il vincolo sottoforma di alias o per esteso scrivendo `interface{ <vincoli...> }`.
+Più precisamente la notazione per introdurre una generics è della forma `[T Vincolo1, R interface{ Method(), ... }, ...]`, possiamo introdurre tutti i tipi parametrici che vogliamo scrivendo prima il nome della _type parameter_ e poi il vincolo sotto forma di alias o per esteso scrivendo `interface{ <vincoli...> }`.
 
-In particolare tutti i vincoli sono delle interfacce del Go. In realtà è stata estesa la sintassi delle interfacce del Go per poter ammettere dei cosidetti _type sets_.
+In particolare tutti i vincoli sono delle interfacce del Go. In realtà è stata estesa la sintassi delle interfacce del Go per poter ammettere dei cosi detti _type sets_.
 
 Un modo per pensare le interfacce in Go è attraverso il concetto di _method set_, un tipo soddisfa un'interfaccia se il suo _method set_ contiene il _method set_ definito dall'interfaccia.
 
@@ -145,13 +145,13 @@ func Somma[T float32|float64](x, y T) T {
 }
 ```
 
-In qualche sitazione potremmo avere ad esempio un tipo sinonimo di `float64` come
+In qualche situazione potremmo avere ad esempio un tipo sinonimo di `float64` come
 
 ```go
 type Liter float64
 ```
 
-di base con questo tipo "sinonimo" non possiamo usare la fuzione di sopra perché il tipo `Liter` e `float64` sono effettivamente tipi diversi.
+di base con questo tipo "sinonimo" non possiamo usare la funzione di sopra perché il tipo `Liter` e `float64` sono effettivamente tipi diversi.
 
 ```go
 var a, b int = 1, 2
@@ -284,7 +284,7 @@ Per ora ci tocca definire sempre a mano la variabile `var zero T` se vogliamo ut
 
 ### Tipi generici nativi
 
-Fin dal principio il Go ha avuto i seguenti tipi generici _backed-in_ ovvero
+Fin dal principio il Go ha avuto i seguenti tipi generici _baked-in_ ovvero
 
 -   `[n]T`
 
@@ -303,7 +303,7 @@ Fin dal principio il Go ha avuto i seguenti tipi generici _backed-in_ ovvero
 
 Però c'è sempre stato il problema che non era possibile definire funzioni generiche per questi tipi, anzi era idiomatico in Go ripetere sempre l'implementazione imperativa di certe operazioni molto comuni come trovare un elemento in uno slice.
 
-Ora finalmente possiamo definirle in modo genrico ed in realtà è già stato creato il pacchetto `golang.org/x/exp/slices` che contiene una manciata di queste funzioni utili
+Ora finalmente possiamo definirle in modo generico ed in realtà è già stato creato il pacchetto `golang.org/x/exp/slices` che contiene una manciata di queste funzioni utili
 
 -   `func Index[E comparable](s []E, v E) int`
 -   `func Equal[E comparable](s1, s2 []E) bool`
@@ -386,7 +386,7 @@ if err != nil {
 }
 ```
 
-In realtà in questo caso non serve veramente introdurre un _type parameter_, potevamo scrivere già questa utility senza genrics passando una variabile di tipo _any_
+In realtà in questo caso non serve veramente introdurre un _type parameter_, potevamo scrivere già questa utility senza generics passando una variabile di tipo _any_
 
 ```go
 func DecodeAndValidateJSON(r *http.Request, target Validator) error {
@@ -441,7 +441,7 @@ d := &bytes.Buffer{}
 WriteOneByte[*bytes.Buffer](d, 42)
 ```
 
-A primo impatto potremmo pensare che la prima sia più lenta perché stiamo passando una variabile di tipo `*bytes.Buffer` ad una funzione che prende un'interfaccia `io.Writer` qundi già in qualche modo ci dovrebbe essere un primo passaggio di conversione. Inoltre quando dentro la funzione chiamiamo `.Write(...)` in qualche modo il Go dovrà passare dalla vtable per capire che funzione chiamare.
+A primo impatto potremmo pensare che la prima sia più lenta perché stiamo passando una variabile di tipo `*bytes.Buffer` ad una funzione che prende un'interfaccia `io.Writer` quindi già in qualche modo ci dovrebbe essere un primo passaggio di conversione. Inoltre quando dentro la funzione chiamiamo `.Write(...)` in qualche modo il Go dovrà passare dalla _vtable_ per capire che funzione chiamare.
 
 In realtà se facciamo un piccolo _benchmark_ vediamo che
 
@@ -477,7 +477,7 @@ BenchmarkGeneric
 BenchmarkGeneric-4              50947912            22.26 ns/op
 ```
 
-Cioè che sta succendendo dipende dal fatto che il compilatore del Go in realtà è molto bravo a trattare le interfacce ed in questo caso semplicemente utilizzando la strategia dell'_inlining_ riesce a ottimizzare parecchio la funzione e saltare molti passaggi inutili.
+Cioè che sta succedendo dipende dal fatto che il compilatore del Go in realtà è molto bravo a trattare le interfacce ed in questo caso semplicemente utilizzando la strategia dell'_inlining_ riesce a ottimizzare parecchio la funzione e saltare molti passaggi inutili.
 
 ```go
 d := &bytes.Buffer{} /* (*bytes.Buffer) */
@@ -514,7 +514,7 @@ Vediamo meglio come funziona l'implementazione delle generics nel Go.
 
 -   _To avoid creating a different function instantiation for each generic call with distinct type arguments (which would be pure stenciling), we **pass a dictionary along with every call**_.
 
-    Raggruppare insieme alcuni tipi nella stessa specializzazione introduce il problema che poi a _runtime_ in certi casi serve sapere con che tipo stiamo lavorando (ad esempio quanod facciamo il cast da o verso un'interfaccia). Quindi sono stati introdotti anche questi dizionari che vengono passati assieme ad ogni chiamata e contengono tutte le informazioni sui tipi della chiamata generica.
+    Raggruppare insieme alcuni tipi nella stessa specializzazione introduce il problema che poi a _runtime_ in certi casi serve sapere con che tipo stiamo lavorando (ad esempio quando facciamo il cast da o verso un'interfaccia). Quindi sono stati introdotti anche questi dizionari che vengono passati assieme ad ogni chiamata e contengono tutte le informazioni sui tipi della chiamata generica.
 
 ## Pattern: Type-safe Database API
 
@@ -580,7 +580,7 @@ type Table[T WithPK] struct {
 }
 ```
 
-A questo punto definiamo le funzione per eseguire le nostre operazioni [CRUD](#todo) come segue
+A questo punto definiamo le funzione per eseguire le nostre operazioni [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) come segue
 
 ```go
 package database
@@ -657,7 +657,7 @@ In conclusione possiamo anche utilizzare le **generics** per rendere **type-safe
 
 ## Pattern: Channels
 
-Vediamo qualche _utility_ per lavorare meglio con i _channel_. Intanto definiamo la seguente _utility_ che ci permette di inviare un valore ad un channel se in quel momento era libero di accettare valori.
+Vediamo qualche _utility_ per lavorare meglio con i _channel_. Intanto definiamo la seguente _utility_ che ci permette di inviare un valore ad un _channel_ se in quel momento era libero di accettare valori.
 
 ```go
 func trySend[T any](c chan<- T, v T) bool {
@@ -670,7 +670,7 @@ func trySend[T any](c chan<- T, v T) bool {
 }
 ```
 
-E possiamo utilizzarla per definire ad esempio questa funzione per fare una "gara" tra vari channel e vedere chi ritorna per primo un risultato.
+E possiamo utilizzarla per definire ad esempio questa funzione per fare una "gara" tra vari _channel_ e vedere chi ritorna per primo un risultato.
 
 ```go
 func raceSame[T any](cs ...<-chan T) T {
@@ -687,7 +687,7 @@ func raceSame[T any](cs ...<-chan T) T {
 }
 ```
 
-E se volessimo una funzione `race` per channel tutti di tipi diversi? Possiamo risolvere questo problema ad esempio introducendo un'interfaccia `Awaiter` ed un tipo `awaiterChan` che ci permette di metterci in attesa su channel per tipi qualsiasi
+E se volessimo una funzione `race` per _channel_ tutti di tipi diversi? Possiamo risolvere questo problema ad esempio introducendo un'interfaccia `Awaiter` ed un tipo `awaiterChan` che ci permette di metterci in attesa su _channel_ per tipi qualsiasi
 
 ```go
 type Awaiter interface {
@@ -699,7 +699,7 @@ type awaiterChan[T any] <-chan T
 func (ac awaiterChan[T]) Await() { <-ac }
 ```
 
-Spesso però ci interessa anche il risultato ricevuto dal channel quindi introduciamo anche il seguente tipo che salva il risultato dentro un puntatore fornito dall'esterno
+Spesso però ci interessa anche il risultato ricevuto dal _channel_ quindi introduciamo anche il seguente tipo che salva il risultato dentro un puntatore fornito dall'esterno
 
 ```go
 type targetChan[T any] struct {
@@ -743,7 +743,7 @@ raceAny(
 fmt.Println(result2, result3)
 ```
 
-ed in realtà facendo un po' di pulizzia ed introducendo un paio di funzioni potremmo ottenere un'API molto simpatica come
+ed in realtà facendo un po' di pulizia ed introducendo un paio di funzioni potremmo ottenere un'API molto simpatica come
 
 ```go
 var result2 int
@@ -760,7 +760,7 @@ fmt.Println(result2, result3)
 
 ## 1 + 1 = 2
 
-Ora vediamo un esempio spastico solo per vedere la potenza che possono raggiunre le _generics_ in Go.
+Ora vediamo un esempio spastico solo per vedere la potenza che possono raggiungere le _generics_ in Go.
 
 In questi esempi ci interesserà giusto che il programma compili quindi spesso per evitare di definire il corpo di alcune funzioni useremo dei `panic`.
 
@@ -776,7 +776,7 @@ type Nat interface{ isNat() }
 type Nat2Nat interface{ isNat2Nat() }
 ```
 
-Inoltre introduciamo il seguente tipo `V` di _valutazione_ che essenzilamente è un trocco per poter codificare _higher-kinded types_ in Go (di base in Go non possiamo scrivere un viconlo del tipo
+Inoltre introduciamo il seguente tipo `V` di _valutazione_ che essenzialmente è un trucco per poter codificare _higher-kinded types_ in Go (di base in Go non possiamo scrivere un vincolo del tipo
 
 ```go
 MapContainerItems[F Functor[_], T, S any](items F[T], f func(T) S) F[S]
@@ -810,7 +810,7 @@ Ora definiamo un tipo per rappresentare l'uguaglianza tra due termini.
 type Eq[A, B any] Bool
 ```
 
-con rispettivi assiami di riflessività, simmetria e transitività per l'uguaglianza
+con rispettivi assiomi di riflessività, simmetria e transitività per l'uguaglianza
 
 ```go
 // Eq_Refl ovvero l'assioma
