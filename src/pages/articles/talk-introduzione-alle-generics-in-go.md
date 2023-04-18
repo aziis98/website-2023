@@ -2,7 +2,7 @@
 layout: ../../layouts/ArticleLayout.astro
 title: Introduzione alle Generics in Go
 description: Questo articolo è la versione in forma scritta del talk con lo stesso nome tenuto alla DevFest di Pisa il 2023/04/01
-tags: ["go", "generics"]
+tags: ["go", "generics", "devfest", "gdg"]
 publish_date: 2023/04/17
 ---
 
