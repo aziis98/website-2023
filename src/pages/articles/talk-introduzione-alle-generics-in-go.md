@@ -286,35 +286,34 @@ Per ora ci tocca definire sempre a mano la variabile `var zero T` se vogliamo ut
 
 Fin dal principio il Go ha avuto i seguenti tipi generici _baked-in_ ovvero
 
--   `[n]T`
+-   `[n]T` &ndash; array di `n` elementi per il tipo `T`
 
-    Array di `n` elementi per il tipo `T`
+-   `[]T` &ndash; slice per il tipo `T`
 
--   `[]T`
+-   `map[K]V` &ndash; mappe con chiavi `K` e valori `V`
 
-    Slice per il tipo `T`
-
--   `map[K]V`
-
-    Mappe con chiavi `K` e valori `V`
-
--   `chan T`
-    Canali per elementi di tipo `T`
+-   `chan T` &ndash; canali per elementi di tipo `T`
 
 Però c'è sempre stato il problema che non era possibile definire funzioni generiche per questi tipi, anzi era idiomatico in Go ripetere sempre l'implementazione imperativa di certe operazioni molto comuni come trovare un elemento in uno slice.
 
 Ora finalmente possiamo definirle in modo generico ed in realtà è già stato creato il pacchetto `golang.org/x/exp/slices` che contiene una manciata di queste funzioni utili
 
 -   `func Index[E comparable](s []E, v E) int`
+
 -   `func Equal[E comparable](s1, s2 []E) bool`
+
 -   `func Sort[E constraints.Ordered](x []E)`
+
 -   `func SortFunc[E any](x []E, less func(a, b E) bool)`
+
 -   e molte altre...
 
 ed invece `golang.org/x/exp/maps` per le mappe in Go
 
 -   `func Keys[M ~map[K]V, K comparable, V any](m M) []K`
+
 -   `func Values[M ~map[K]V, K comparable, V any](m M) []V`
+
 -   e molte altre...
 
 ### Strutture dati generiche
@@ -322,11 +321,17 @@ ed invece `golang.org/x/exp/maps` per le mappe in Go
 Stanno anche nascendo librerie con già molte strutture dati generiche come ad esempio <https://github.com/zyedidia/generic> (che ha già circa 1K stelle su su GitHub)
 
 -   `mapset.Set[T comparable]`, set basato su un dizionario.
+
 -   `multimap.MultiMap[K, V]`, dizionario con anche più di un valore per chiave.
+
 -   `stack.Stack[T]`, internamente è solo uno slice ha un'interfaccia più simpatica rispetto al modo idiomatico del Go prima delle generics.
+
 -   `cache.Cache[K comparable, V any]`, dizionario basato su `map[K]V` con una taglia massima e rimuove gli elementi usando la strategia LRU.
+
 -   `bimap.Bimap[K, V comparable]`, dizionario bi-direzionale.
+
 -   `hashmap.Map[K, V any]`, implementazione alternativa di `map[K]V` con supporto per _copy-on-write_.
+
 -   e molte altre...
 
 ## Alcuni Anti-Pattern
