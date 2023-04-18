@@ -45,9 +45,8 @@ const someRelatedArticles = await getRandomRelatedArticles(
             someRelatedArticles.map((a) => (
                 <ArticleCard
                     {...a.frontmatter}
+                    date={a.frontmatter.publish_date}
                     url={a.url}
-                    date={a.publish_date}
-                    tags={a.tags}
                 />
             ))
         }

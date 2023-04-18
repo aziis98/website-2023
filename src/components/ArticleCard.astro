@@ -12,6 +12,6 @@ const { url, title, description, date, tags } = Astro.props;
 	{date && <div class="date">{date}</div>}
 	<div class="description">{description}</div>
 	<div class="tags">
-		{tags.map((name) => <Tag {name} />)}
+		{(tags ?? []).map((name) => <Tag {name} />)}
 	</div>
 </div>
