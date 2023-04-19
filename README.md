@@ -12,7 +12,13 @@ Recentemente uso sempre <https://pnpm.io/it/>
 $ pnpm install
 ```
 
-## Usage
+## Deploy
+
+### aziis98.com
+
+Netlify è bello e fa tutto da solo.
+
+### Poisson
 
 Per costruire il sito per <https://poisson.phc.dm.unipi.it/~delucreziis/> si bisogna usare i seguenti comandi
 
@@ -20,3 +26,5 @@ Per costruire il sito per <https://poisson.phc.dm.unipi.it/~delucreziis/> si bis
 $ pnpm run build:poisson
 $ rsync -avzP out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
 ```
+
+Forse più avanti automatizzerò anche questo passaggio con delle _GitHub Actions_ ma sembra che sia più complicato del previsto fare un'_Action_ che usi rsync in modo sicuro (bla bla _known hosts_).
