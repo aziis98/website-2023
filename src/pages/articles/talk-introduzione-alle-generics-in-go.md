@@ -8,6 +8,10 @@ publish_date: 2023/04/17
 
 # Introduzione alle Generics in Go
 
+<a href="https://www.bing.com/images/create/line-pen-drawing2c-an-audience-viewing-a-tech-talk/64407a7d222942a08f56f035f86967de?id=TMp5AKm3GhY33W6pJHIAdw%3d%3d&view=detailv2&idpp=genimg">
+    <img src="/data/thumbnails/talk-go-intro-generics.jpeg" alt="line pen drawing conference blackboard">
+</a>
+
 Nella versione 1.18 del Go hanno introdotto le generics, questo è stato uno dei cambiamenti più grossi al linguaggio dal primo rilascio nel mondo open source.
 
 Giusto per info, le slide originali e tutto il codice derivato da questo talk si trovano nella pagina <https://github.com/aziis98/talk-intro-go-generics>.

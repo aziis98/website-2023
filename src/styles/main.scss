@@ -789,6 +789,13 @@ body {
                 margin-bottom: 2rem;
             }
 
+            h1 + img,
+            h1 + * img {
+                margin-left: auto;
+                margin-right: auto;
+                max-height: 40vh;
+            }
+
             img {
                 display: block;
                 max-width: 100%;
@@ -928,7 +935,7 @@ body {
 //
 
 // firefox
-body main article h1 + p::first-letter {
+body main article p:first-of-type:first-letter {
     margin: 0.625rem 0.75rem 0 0;
     font-size: 3.5rem;
     float: left;
@@ -937,7 +944,7 @@ body main article h1 + p::first-letter {
 
 // mobile
 @media screen and (pointer: coarse) {
-    body main article h1 + p::first-letter {
+    body main article p:first-of-type:first-letter {
         margin: 0.625rem 0.75rem 0 0;
         font-size: 3.5rem;
         line-height: 3rem;
@@ -949,7 +956,7 @@ body main article h1 + p::first-letter {
 @supports not (-moz-appearance: none) {
     // chrome desktop
     @media screen and (pointer: fine) {
-        body main article h1 + p::first-letter {
+        body main article p:first-of-type:first-letter {
             margin: 0.25rem 0.75rem 0 0;
             font-size: 3.5rem;
             line-height: 3rem;
