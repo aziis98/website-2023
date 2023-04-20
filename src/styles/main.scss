@@ -785,23 +785,6 @@ body {
             border-radius: 8px;
             box-shadow: 0 0 6px 0 #00000040, 0 0 32px 0 #00000018;
 
-            @supports not (-moz-appearance: none) {
-                h1 + p::first-letter {
-                    margin: 0 0.5rem 0 0;
-                    initial-letter: 2;
-                    font-family: "EB Garamond", serif;
-                }
-            }
-            @supports (-moz-appearance: none) {
-                h1 + p::first-letter {
-                    margin: 0.625rem 0.5rem 0 0;
-                    font-size: 4rem;
-                    line-height: 4rem;
-                    float: left;
-                    font-family: "EB Garamond", serif;
-                }
-            }
-
             h1:first-child {
                 margin-bottom: 2rem;
             }
@@ -937,5 +920,41 @@ body {
 
     button {
         padding: 0 0.5rem;
+    }
+}
+
+//
+// In attesa che "initial-letter: <number>" funzioni veramente ovunque
+//
+
+// firefox
+body main article h1 + p::first-letter {
+    margin: 0.625rem 0.75rem 0 0;
+    font-size: 3.5rem;
+    float: left;
+    font-family: "EB Garamond", serif;
+}
+
+// mobile
+@media screen and (pointer: coarse) {
+    body main article h1 + p::first-letter {
+        margin: 0.625rem 0.75rem 0 0;
+        font-size: 3.5rem;
+        line-height: 3rem;
+        float: left;
+        font-family: "EB Garamond", serif;
+    }
+}
+
+@supports not (-moz-appearance: none) {
+    // chrome desktop
+    @media screen and (pointer: fine) {
+        body main article h1 + p::first-letter {
+            margin: 0.25rem 0.75rem 0 0;
+            font-size: 3.5rem;
+            line-height: 3rem;
+            float: left;
+            font-family: "EB Garamond", serif;
+        }
     }
 }
