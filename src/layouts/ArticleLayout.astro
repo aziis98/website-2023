@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
+import BaseLayout from "./BaseLayout.astro";
 
-import { getRandomRelatedArticles, websiteName } from "../utils.js";
 import Tag from "../components/Tag.astro";
+import { getRandomRelatedArticles,websiteName } from "../utils.js";
 
 const { frontmatter } = Astro.props;
-const { title, description, publish_date, tags } = frontmatter;
+const { title, thumbnail, description, publish_date, tags } = frontmatter;
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const someRelatedArticles = await getRandomRelatedArticles(
@@ -15,7 +15,7 @@ const someRelatedArticles = await getRandomRelatedArticles(
 );
 ---
 
-<BaseLayout title={title + " | " + websiteName()} description={description}>
+<BaseLayout title={title + " | " + websiteName()} {description} {thumbnail}>
     <div class="article-card self">
         <div class="title">{title}</div>
         {publish_date && <div class="date">{publish_date}</div>}

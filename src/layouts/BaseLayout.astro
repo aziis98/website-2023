@@ -1,14 +1,14 @@
 ---
 import "@fontsource/eb-garamond/latin.css";
-import "@fontsource/open-sans/latin.css";
 import "@fontsource/libre-baskerville/latin.css";
+import "@fontsource/open-sans/latin.css";
 import "../styles/main.scss";
 
-import "katex/dist/katex.min.css"
+import "katex/dist/katex.min.css";
 import Link from "../components/Link.astro";
 import { websiteName } from "../utils";
 
-const { title, description } = Astro.props;
+const { title, description, thumbnail } = Astro.props;
 ---
 
 <html>
@@ -19,14 +19,14 @@ const { title, description } = Astro.props;
 
         <meta property="og:title" content={title ?? websiteName()}>
         <meta property="og:description" content={description ?? "Sono Antonio De Lucreziis, studio Matematica a Pisa e sono appassionato di informatica. C'è anche una sezione artistica con una galleria della maggior parte dei lavori"}>
-        <meta property="og:image" content="/icon.png">
+        <meta property="og:image" content={thumbnail ?? "/icon.png"}>
 
         <title>{title ?? websiteName()}</title>
         <link rel="icon" type="image/png" sizes="192x192" href="/icon.png">
 
         <script>
-            import katex from "katex"
-            import renderMathInElement from "katex/contrib/auto-render"
+            import katex from "katex";
+            import renderMathInElement from "katex/contrib/auto-render";
 
             document.addEventListener("DOMContentLoaded", function () {
                 // @ts-ignore
