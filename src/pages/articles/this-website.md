@@ -4,6 +4,7 @@ title: Nuovo sito
 description: In questo articolo annuncio finalmente il mio nuovo sito realizzato con Astro e spiego un po' come funziona
 tags: ["website", "astro", "webdev"]
 publish_date: 2023/04/03
+thumbnail: "/data/thumbnails/new-webiste.jpeg"
 ---
 
 # Nuovo sito
