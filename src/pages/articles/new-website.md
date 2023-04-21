@@ -10,7 +10,7 @@ thumbnail: "/data/thumbnails/new-webiste.jpeg"
 # Nuovo sito
 
 <a href="https://www.bing.com/images/create/line-pen-drawing2c-website2c-technology2c-sketchy/64407b59abf94b7fbdc17698e824e972?id=IlLdJwC21YIdf8CaKzGQGQ%3d%3d&view=detailv2&idpp=genimg">
-    <img src="/data/thumbnails/new-webiste.jpeg" alt="line pen drawing computer technology">
+    <img src="../../data/thumbnails/new-webiste.jpeg" alt="line pen drawing computer technology">
 </a>
 
 Questo è il mio nuovo sito realizzato con [Astro](https://astro.build/) ed hostato su [aziis98.com](https://aziis98.com) e su [Poisson](https://poisson.phc.dm.unipi.it/~delucreziis). Per ora non c'è ancora molto ma già ho aggiunto un po' di _feature_ interessanti come il supporto per il latex, ad esempio posso scrivere $1 + 1 = 2$, anche per blocchi _display_

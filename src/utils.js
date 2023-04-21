@@ -13,7 +13,10 @@ export function prependBaseUrl(url) {
 
 	const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-	// Qui sto aggiungendo un leading slash al pathname e (ipotesi forte, però dai nessuno a una pagina "/~foo/~foo" ad esempio) sto togliendo il base url dall'href se per sbaglio Astro ce lo mette (succede in qualche caso)
+	// Qui sto aggiungendo un leading slash al pathname e (ipotesi forte, però
+	// dai nessuno a una pagina "/~foo/~foo" ad esempio) sto togliendo il
+	// base url dall'href se per sbaglio Astro ce lo mette (succede in
+	// qualche caso)
 	let newPathname = url;
 	if (newPathname.startsWith(baseUrl)) newPathname = newPathname.substr(baseUrl.length);
 	if (!newPathname.startsWith("/")) newPathname = "/" + newPathname;

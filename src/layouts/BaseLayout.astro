@@ -6,7 +6,7 @@ import "../styles/main.scss";
 
 import "katex/dist/katex.min.css";
 import Link from "../components/Link.astro";
-import { websiteName } from "../utils";
+import { prependBaseUrl,websiteName } from "../utils";
 
 const { title, description, thumbnail } = Astro.props;
 ---
@@ -19,7 +19,7 @@ const { title, description, thumbnail } = Astro.props;
 
         <meta property="og:title" content={title ?? websiteName()}>
         <meta property="og:description" content={description ?? "Sono Antonio De Lucreziis, studio Matematica a Pisa e sono appassionato di informatica. C'è anche una sezione artistica con una galleria della maggior parte dei lavori"}>
-        <meta property="og:image" content={thumbnail ?? "/icon.png"}>
+        <meta property="og:image" content={prependBaseUrl(thumbnail ?? "/icon.png")}>
 
         <title>{title ?? websiteName()}</title>
         <link rel="icon" type="image/png" sizes="192x192" href="/icon.png">
@@ -84,6 +84,7 @@ const { title, description, thumbnail } = Astro.props;
                 <span class="material-symbols-outlined mobile-menu">menu</span>
             </div>
             <div class="nav-group sidebar">
+                {websiteName() === '~delucreziis' && <div class="nav-item"><Link href="/notes">Appunti</Link></div>}
                 <div class="nav-item"><Link href="/articles">Articoli</Link></div>
                 <div class="nav-item"><Link href="/art">Art</Link></div>
                 <div class="rule"></div>

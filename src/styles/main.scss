@@ -775,7 +775,7 @@ body {
 
             background: #fff;
 
-            max-width: 100%;
+            width: 100%;
 
             margin: 0 auto;
             // text-align: justify;
@@ -937,7 +937,7 @@ body {
 //
 
 // firefox
-body main article p:first-of-type:first-letter {
+body main article > p:first-of-type:first-letter {
     margin: 0.625rem 0.75rem 0 0;
     font-size: 3.5rem;
     float: left;
@@ -946,7 +946,7 @@ body main article p:first-of-type:first-letter {
 
 // mobile
 @media screen and (pointer: coarse) {
-    body main article p:first-of-type:first-letter {
+    body main article > p:first-of-type:first-letter {
         margin: 0.625rem 0.75rem 0 0;
         font-size: 3.5rem;
         line-height: 3rem;
@@ -958,7 +958,7 @@ body main article p:first-of-type:first-letter {
 @supports not (-moz-appearance: none) {
     // chrome desktop
     @media screen and (pointer: fine) {
-        body main article p:first-of-type:first-letter {
+        body main article > p:first-of-type:first-letter {
             margin: 0.25rem 0.75rem 0 0;
             font-size: 3.5rem;
             line-height: 3rem;
