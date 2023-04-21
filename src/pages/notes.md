@@ -25,22 +25,22 @@ Appunti presi in triennale
 
 Raccolta di appunti tratti dalle lezioni del corso dell'anno 2019/2020 del professor _Frigerio_.
 
--   [Scarica il PDF aggiornato](https://gitlab.com/aziis98/geometria-2/-/raw/master/main.pdf)
+-   [Scarica l'ultima versione come PDF](https://gitlab.com/aziis98/geometria-2/-/raw/master/main.pdf)
 
--   [Repository di Git hostato su GitHub](https://gitlab.com/aziis98/geometria-2)
+-   [Repository di Git hostato su GitLab](https://gitlab.com/aziis98/geometria-2)
 
 #### Logica
 
 Formulario per il corso del professor _Berarducci_ dell'anno 2020/2021.
 
--   [Scarica il PDF aggiornato](https://gitlab.com/aziis98-notes/formulari/logica/-/raw/main/main.pdf)
+-   [Scarica l'ultima versione come PDF](https://gitlab.com/aziis98-notes/formulari/logica/-/raw/main/main.pdf)
 
 -   [Repository Git hostato su GitLab](https://gitlab.com/aziis98-notes/formulari/logica)
 
 #### Analisi 3
 
-Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 scritte in collaborazione con <https://ar-lli.github.io/>.
+Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 scritte in collaborazione con [@ar-lli](https://ar-lli.github.io/).
 
--   [Scarica il PDF aggiornato](https://github.com/aziis98/appunti-analisi-3/raw/main/main.pdf)
+-   [Scarica l'ultima versione come PDF](https://github.com/aziis98/appunti-analisi-3/raw/main/main.pdf)
 
 -   [Repository di Git hostato su GitHub](https://github.com/aziis98/appunti-analisi-3)
