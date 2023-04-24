@@ -770,7 +770,7 @@ fmt.Println(result2, result3)
 
 ## 1 + 1 = 2
 
-Ora vediamo un esempio spastico solo per vedere la potenza che possono raggiungere le _generics_ in Go.
+Ora per concludere vediamo un esempio spastico giusto per vedere la potenza che possono raggiungere le _generics_ in Go.
 
 In questi esempi ci interesserà giusto che il programma compili quindi spesso per evitare di definire il corpo di alcune funzioni useremo dei `panic`.
 
@@ -786,17 +786,19 @@ type Nat interface{ isNat() }
 type Nat2Nat interface{ isNat2Nat() }
 ```
 
-Inoltre introduciamo il seguente tipo `V` di _valutazione_ che essenzialmente è un trucco per poter codificare _higher-kinded types_ in Go (di base in Go non possiamo scrivere un vincolo del tipo
+Inoltre introduciamo il seguente tipo `V` di _valutazione_ che essenzialmente è un trucco per poter codificare _higher-kinded types_ in Go (di base in Go non possiamo scrivere funzioni con vincoli come
 
 ```go
 MapContainerItems[F Functor[_], T, S any](items F[T], f func(T) S) F[S]
 ```
 
-che ci permetta di mappare contenitori arbitrari)
+che ci permettono di mappare contenitori arbitrari)
 
 ```go
 type V[ H Nat2Nat, T Nat ] Nat
 ```
+
+Moralmente questo tipo indica la valutazione di una "funzione" `H` per un valore `T`.
 
 ### Assiomi dei Naturali
 
@@ -823,24 +825,24 @@ type Eq[A, B any] Bool
 con rispettivi assiomi di riflessività, simmetria e transitività per l'uguaglianza
 
 ```go
-// Eq_Refl ovvero l'assioma
-//   forall x : x = x
 func Eq_Reflexive[T any]() Eq[T, T] {
     panic("axiom: comptime only")
 }
 
-// Eq_Symmetric ovvero l'assioma
-//   forall a, b: a = b => b = a
 func Eq_Symmetric[A, B any](_ Eq[A, B]) Eq[B, A] {
     panic("axiom: comptime only")
 }
 
-// Eq_Transitive ovvero l'assioma
-//   forall a, b, c: a = b e b = c => a = c
 func Eq_Transitive[A, B, C any](_ Eq[A, B], _ Eq[B, C]) Eq[A, C] {
     panic("axiom: comptime only")
 }
 ```
+
+ad esempio l'assioma di riflessività `Eq_Reflexive` ci dice che per ogni tipo $\mathtt T$ possiamo dire che $\mathtt T = \mathtt T$.
+
+Il secondo di simmetria invece ci dice che se sappiamo che $\mathtt A = \mathtt B$ allora possiamo anche dire $\mathtt B = \mathtt A$.
+
+L'ultimo invece ci dice che data una dimostrazione di $\mathtt A = \mathtt B$ e $\mathtt B = \mathtt C$ possiamo ottenere una dimostrazione $\mathtt A = \mathtt C$.
 
 ### Uguaglianza e Sostituzione
 
@@ -857,8 +859,6 @@ Eq[ A , B ] ------> Eq[ F[A] , F[B] ]
 e possiamo codificare questa cosa in Go come segue: data una funzione ed una dimostrazione che due cose sono uguali allora possiamo applicare la funzione ed ottenere altre cose uguali
 
 ```go
-// Function_Eq ovvero l'assioma
-//   forall f function, forall a, b nat: a = b  => f(a) = f(b)
 func Function_Eq[F Nat2Nat, A, B Nat](_ Eq[A, B]) Eq[V[F, A], V[F, B]] {
     panic("axiom: comptime only")
 }
@@ -866,23 +866,15 @@ func Function_Eq[F Nat2Nat, A, B Nat](_ Eq[A, B]) Eq[V[F, A], V[F, B]] {
 
 ### Assiomi dell'addizione
 
-Questi sono gli assiomi dell'addizione (giusto quelli che ci servono) secondo Peano
+Questi sono gli assiomi dell'addizione (giusto quelli che ci servono) secondo Peano, il primo ci dice giusto che $n + 0 = n$ mentre il secondo è l'assioma di ricorsione della somma $n + (m + 1) = (n + m) + 1$.
 
 ```go
 type Plus[L, R Nat] Nat
 
-// "n + 0 = n"
-
-// Plus_Zero ovvero l'assioma
-//   forall n, m: n + succ(m) = succ(n + m)
 func Plus_Zero[N Nat]() Eq[Plus[N, Zero], N] {
     panic("axiom: comptime only")
 }
 
-// "n + (m + 1) = (n + m) + 1"
-
-// Plus_Sum ovvero l'assioma
-//   forall n, m: n + succ(m) = succ(n + m)
 func Plus_Sum[N, M Nat]() Eq[
     Plus[N, V[Succ, M]],
     V[Succ, Plus[N, M]],
@@ -895,21 +887,24 @@ Ed ora possiamo concludere con la nostra dimostrazione di `1 + 1 = 2` al livello
 
 ```go
 func Theorem_OnePlusOneEqTwo() Eq[Plus[One, One], Two] {
-    // 1 + 0 = 1
+    // enunciamo che "1 + 0 = 1"
     // en1 :: Eq[ Plus[One, Zero], One ]
     en1 := Plus_Zero[One]()
 
-    // (1 + 0) + 1 = 2
+    // ora invece che "(1 + 0) + 1 = 2"
     // en2 :: Eq[ V[Succ, Plus[One, Zero]], Two ]
     en2 := Function_Eq[Succ](en1)
 
-    // 1 + 1 = (1 + 0) + 1
+    // infine che "1 + 1 = (1 + 0) + 1"
     // en3 :: Eq[ Plus[One, One], V[Succ, Plus[One, Zero]] ]
     en3 := Plus_Sum[One, Zero]()
 
+    // ed ora uniamo gli ultimi due fatti
     return Eq_Transitive(en3, en2)
 }
 ```
+
+e questo conclude la nostra dimostrazione.
 
 ## Conclusione
 
