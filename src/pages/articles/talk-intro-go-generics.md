@@ -4,18 +4,19 @@ title: Introduzione alle Generics in Go
 description: Questo articolo è la versione in forma scritta del talk con lo stesso nome tenuto alla DevFest di Pisa il 2023/04/01
 tags: ["go", "generics", "devfest", "gdg"]
 publish_date: 2023/04/17
-thumbnail: "/data/thumbnails/talk-go-intro-generics.jpeg"
+thumbnail: "/data/thumbnails/talk-go-intro-generics-2.jpeg"
 ---
 
 # Introduzione alle Generics in Go
 
-<a href="https://www.bing.com/images/create/line-pen-drawing2c-an-audience-viewing-a-tech-talk/64407a7d222942a08f56f035f86967de?id=TMp5AKm3GhY33W6pJHIAdw%3d%3d&view=detailv2&idpp=genimg">
-    <img src="../../data/thumbnails/talk-go-intro-generics.jpeg" alt="line pen drawing conference blackboard">
+<a href="https://www.bing.com/images/create/line-pen-drawing2c-conference2c-audience2c-guy-on-sta/64407c9b5d4a49738ea520dee5625893?id=yzt9HmaNZY3uiy8ZVdmdpA%3d%3d&view=detailv2&idpp=genimg&FORM=GCRIDP&mode=overlay">
+    <img src="../../data/thumbnails/talk-go-intro-generics-2.jpeg" alt="line pen drawing conference blackboard">
 </a>
 
-Nella versione 1.18 del Go hanno introdotto le generics, questo è stato uno dei cambiamenti più grossi al linguaggio dal primo rilascio nel mondo open source.
+Questo articolo è tratto da un talk tenuto alla DevFest di Pisa del 1 Aprile 2023 organizzata dal GDG. Le slide originali e tutto il codice derivato da questo talk si trovano [in questo repo su GitHub](https://github.com/aziis98/talk-intro-go-generics). Per info quasi tutta la prima parte (inclusi i diagrammini) è tratta dall'articolo <https://go.dev/blog/intro-generics>.
 
-Giusto per info, le slide originali e tutto il codice derivato da questo talk si trovano nella pagina <https://github.com/aziis98/talk-intro-go-generics>.
+Nella versione 1.18 del Go hanno finalmente introdotto le generics, questo è stato uno dei cambiamenti più grossi al linguaggio dal primo rilascio nel mondo open source.
+
 
 ## Il problema
 
@@ -73,9 +74,9 @@ return y
 
 Alternativamente un'altra soluzione pre-generics sarebbe quella di far prendere parametri di tipo `any` e mettere dentro la funzione degli `switch` sul tipo. In alcuni casi questo potrebbe essere ragionevole ma spesso non è molto pulito come nel caso della funzione minimo, specialmente se vogliamo scrivere codice generico per tipi primitivi.
 
-Inoltre se una funzione prende input di tipo `any` perdiamo tutta la _type-safety_ a _compile-time_ ed appesantiamo il lavoro dal fare a _runtime_ (senza parlare che ora dobbiamo passare in giro dei puntatori).
+Inoltre se una funzione prende input di tipo `any` perdiamo tutta la _type-safety_ a _compile-time_ ed appesantiamo il lavoro da fare a _runtime_ (senza parlare che ora dobbiamo passare in giro dei puntatori).
 
-Un altro modo è di usare go generate con alcuni tool che generano tutte le varianti di una funzione. Questa tecnica è già più ragionevole ma complica il modo di build-are il proprio progetto.
+Un altro modo è di usare `go generate` con alcuni tool che generano tutte le varianti di una funzione. Questa tecnica è già più ragionevole ma complica il modo di compilare il progetto.
 
 ## Soluzione: Le Generics
 
@@ -118,7 +119,7 @@ Min(a, b)
 
 ### Type Sets
 
-Più precisamente la notazione per introdurre una generics è della forma `[T Vincolo1, R interface{ Method(), ... }, ...]`, possiamo introdurre tutti i tipi parametrici che vogliamo scrivendo prima il nome della _type parameter_ e poi il vincolo sotto forma di alias o per esteso scrivendo `interface{ <vincoli...> }`.
+Più precisamente la notazione per introdurre una generics è della forma `[T Vincolo1, R interface{ Method(), ... }, ...]`, possiamo introdurre tutti i tipi parametrici che vogliamo scrivendo prima il nome del _type parameter_ e poi il vincolo sotto forma di alias o per esteso scrivendo `interface{ <vincoli...> }`.
 
 In particolare tutti i vincoli sono delle interfacce del Go. In realtà è stata estesa la sintassi delle interfacce del Go per poter ammettere dei cosi detti _type sets_.
 
@@ -126,7 +127,7 @@ Un modo per pensare le interfacce in Go è attraverso il concetto di _method set
 
 ![go method sets](https://go.dev/blog/intro-generics/method-sets.png)
 
-Un modo alternativo (duale) di vedere la cosa è di pensare al _type set_ generato da un'interfaccia, ovvero all'insieme di tutti i tipi (in astratto) che soddisfano quell'interfaccia. A quel punto dato un tipo per vedere se soddisfa o meno l'interfaccia basta vedere se è o meno nel _type set_ dell'interfaccia.
+Un modo alternativo o duale di vedere la cosa è di pensare al _type set_ generato da un'interfaccia, ovvero all'insieme di tutti i tipi (in astratto) che soddisfano quell'interfaccia. A quel punto dato un tipo per vedere se soddisfa o meno l'interfaccia basta vedere se è o meno nel _type set_ dell'interfaccia.
 
 ![go type sets 1](https://go.dev/blog/intro-generics/type-sets.png)
 
@@ -142,7 +143,7 @@ In particolare è anche stato aggiunto un po' di zucchero sintattico per quando 
 
 -   `[T interface{ int | float32 }]` si può direttamente scrivere come `[T int | float32]`
 
-Vediamo un ad esempio come scrivere una funzione generica sui tipi "floating"
+Vediamo un ad esempio come scrivere una funzione generica sui tipi numerici _floating point_.
 
 ```go
 func Somma[T float32|float64](x, y T) T {
@@ -150,13 +151,13 @@ func Somma[T float32|float64](x, y T) T {
 }
 ```
 
-In qualche situazione potremmo avere ad esempio un tipo sinonimo di `float64` come
+Però in qualche situazione potremmo avere ad esempio un tipo sinonimo di `float64` come
 
 ```go
 type Liter float64
 ```
 
-di base con questo tipo "sinonimo" non possiamo usare la funzione di sopra perché il tipo `Liter` e `float64` sono effettivamente tipi diversi.
+e di base non possiamo usare la funzione di sopra con questo tipo "sinonimo" perché il tipo `Liter` e `float64` sono effettivamente tipi diversi e quindi `Liter` non è compatibile con `float32|float64`.
 
 ```go
 var a, b int = 1, 2
@@ -240,7 +241,7 @@ Vediamo ora come creare dei tipi generici, ad esempio possiamo definire uno _sta
 type Stack[T any] []T
 ```
 
-Per scrivere i metodi possiamo fare come segue, reintroducendo il tipo generico nel _receiver_ del metodo.
+Per scrivere i metodi possiamo fare come segue, reintroducendo il tipo generico nel _receiver_ del metodo. In particolare quando definiamo un metodo su un tipo generico dobbiamo reintrodurre il tipo `T` e questo ci permette di utilizzarlo ovunque nello _scope_ della funzione.
 
 ```go
 func (s *Stack[T]) Push(value T) {
@@ -256,7 +257,9 @@ func (s Stack[T]) Len() int {
 }
 ```
 
-Vediamo ora il metodo _pop_ che è leggermente più interessante. Decidiamo che ritornerà `0, false` se lo stack era vuoto o altrimenti `<elemento in cima>, true`.
+Vediamo ora il metodo `(Stack[T]).Pop()` che è leggermente più interessante. 
+
+Decidiamo che vogliamo che ritorni `<elemento in cima>, true` se lo stack non era vuoto oppure `0, false` altrimenti .
 
 ```go
 func (s *Stack[T]) Pop() (T, bool) {
@@ -274,7 +277,9 @@ func (s *Stack[T]) Pop() (T, bool) {
 }
 ```
 
-Il primo "pattern" interessante che notiamo con le generics è quello della variabile `zero`, possiamo estrarre questo pattern direttamente in una funzione _utility_ come segue
+Il primo "pattern" interessante che notiamo con le generics è questo di `var zero T`, in Go quando definiamo una variabile in questo modo verrà automaticamente inizializzata a zero quindi possiamo usare questo _trick_ per ritornare il valore di default per un tipo generico che non possiamo direttamente inizializzare. 
+
+Possiamo estrarre questo pattern direttamente in una funzione _utility_ come segue
 
 ```go
 func Zero[T any]() T {
@@ -283,7 +288,7 @@ func Zero[T any]() T {
 }
 ```
 
-Per ora ci tocca definire sempre a mano la variabile `var zero T` se vogliamo utilizzare il valore "`0`" per un certo tipo però questo problema è già stato riscontrato da altre persone e già si sta [pensando a delle soluzioni](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#the-zero-value).
+Per ora ci tocca definire sempre a mano la variabile `var zero T` se vogliamo utilizzare il valore di default per un certo tipo però questo problema è già stato riscontrato da altre persone e già si sta [pensando a delle soluzioni](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#the-zero-value).
 
 ## Pattern: Tipi Contenitore
 
@@ -508,7 +513,11 @@ d := &bytes.Buffer{} /* (*bytes.Buffer) */
 (*bytes.Buffer).Write(d /* (*bytes.Buffer) */, []byte{ 42 })
 ```
 
-### Go 1.18 Implementation of Generics via Dictionaries and GCShape Stenciling
+Quello che sta succedendo qui è che inizialmente il Go fa l'inlining della funzione `WriteOneByte` sostituendone il contenuto _in place_ nel chiamante. Poi si accorge che non serve più fare il _wrapping_ e l'_unwrapping_ dell'interfaccia `io.Writer` quindi inserisce direttamente la chiamata al metodo statico `(*bytes.Buffer).Write(d, ...)`.
+
+Quindi essenzialmente spesso possiamo fidarci di usare le interfacce in Go senza preoccuparci troppo in problemi di performance.
+
+### Implementazione delle Generics con _Dictionaries_ e _GCShape Stenciling_
 
 Vediamo meglio come funziona l'implementazione delle generics nel Go.
 
@@ -528,7 +537,9 @@ Vediamo meglio come funziona l'implementazione delle generics nel Go.
 
 ## Pattern: Type-safe Database API
 
-Vediamo un analogo di `PhantomData<T>` dal Rust per rendere _type-safe_ l'interfaccia di una libreria. In molti linguaggi con le _generics_ ci sono casi in cui può essere utile definire un tipo generico senza però usare la generics all'interno della definizione (in Rust questo da proprio errore di base quindi è stato introdotto il tipo `PhantomData<T>` per questi casi).
+Vediamo un modo interessante per rendere _type-safe_ l'interfaccia di una libreria utilizzando le _generics_. 
+
+In molti linguaggi con le _generics_ ci sono casi in cui può essere utile definire un tipo generico senza però usare la generics all'interno della definizione (ad esempio in Rust non usare una _generics_ dà proprio errore però in certi casi è utile fare questa cosa quindi è stato introdotto il tipo [`PhantomData<T>`](https://doc.rust-lang.org/nomicon/phantom-data.html)).
 
 Spesso ad esempio quando lavoriamo con un database ci tocca passare in giro nella nostra applicazione _ID_ di righe nel database per varie entità (utenti, prodotti, ...). E se non stiamo attenti può succedere di sbagliarsi e passare l'ID di un utente come ID di un prodotto e viceversa.
 
@@ -552,15 +563,18 @@ var Products = database.Table[Product]{ ... }
 
 Poi ad esempio possiamo introdurre una lista di tabelle tipate come qui sopra in modo da poter anche verificare che anche le operazioni facciamo sul nostro database siano sulle entità giuste.
 
-E poi l'idea è che potremo interagire in questo modo con il database utilizzando alcune funzioni `Create`, `Read`, `Update`, `Delete` che controllano che il tipo della tabella che stiamo usando sia lo stesso della referenza che gli stiamo passando.
+E poi l'idea è che potremo interagire con il nostro database utilizzando alcune funzioni `Create`, `Read`, `Update`, `Delete` che controllano che il tipo della tabella che stiamo usando sia lo stesso della referenza che gli stiamo passando.
 
 ```go
+// userRef1 :: Ref[User]
 userRef1 := DatabaseRef[User]("j.smith@example.org")
-...
+```
 
+```go
 // Ok
 user1, err := database.Read(dbConn, tables.Users, userRef1)
-// Errore
+
+// Errore: "Ref[Product] != Ref[User]"
 user2, err := database.Read(dbConn, tables.Products, userRef1)
 ```
 
@@ -776,7 +790,7 @@ In questi esempi ci interesserà giusto che il programma compili quindi spesso p
 
 ### Premesse
 
-Definiamo i possibili "tipi" delle nostre espressioni
+Definiamo i possibili "tipi" delle nostre espressioni, le definiamo come interfacce con metodi privati giusto per forzare il compilatore a rigettare ad esempio `var b Bool; var n Nat = b` che sarà utile nel nostro caso in cui avremo molti tipi abbastanza complessi 
 
 ```go
 type Bool interface{ isBool() }
@@ -786,19 +800,19 @@ type Nat interface{ isNat() }
 type Nat2Nat interface{ isNat2Nat() }
 ```
 
-Inoltre introduciamo il seguente tipo `V` di _valutazione_ che essenzialmente è un trucco per poter codificare _higher-kinded types_ in Go (di base in Go non possiamo scrivere funzioni con vincoli come
-
-```go
-MapContainerItems[F Functor[_], T, S any](items F[T], f func(T) S) F[S]
-```
-
-che ci permettono di mappare contenitori arbitrari)
+Inoltre introduciamo il seguente tipo `V` di "valutazione" 
 
 ```go
 type V[ H Nat2Nat, T Nat ] Nat
 ```
 
-Moralmente questo tipo indica la valutazione di una "funzione" `H` per un valore `T`.
+questo essenzialmente è un trucco per poter codificare gli _higher-kinded types_ in Go (di base in Go non possiamo scrivere funzioni con vincoli come
+
+```go
+MapContainerItems[F Functor[_], T, S any](items F[T], f func(T) S) F[S]
+```
+
+in cui un vincolo è a sua volta generico in un parametro). Moralmente `V[H, T]` indica la valutazione di una _funzione_ `H` per un _valore_ `T`. In ogni caso sarà più chiaro il senso di questo tipo più avanti quando definiremo gli assiomi dell'uguaglianza.
 
 ### Assiomi dei Naturali
 
@@ -850,11 +864,13 @@ Un altro assioma dell'uguaglianza su cui spesso si sorvola è quello della sosti
 
 Più precisamente per ogni funzione `F`, ovvero tipo vincolato all'interfaccia `Nat2Nat` vorremmo dire che
 
-```
-               F
-Eq[ A , B ] ------> Eq[ F[A] , F[B] ]
-
-```
+$$
+\texttt{Eq[A, B]}
+\\;
+\xrightarrow{\texttt{F[}\\,\cdot\\,\texttt{]}}
+\\;
+\texttt{Eq[F[A], F[B]]}
+$$
 
 e possiamo codificare questa cosa in Go come segue: data una funzione ed una dimostrazione che due cose sono uguali allora possiamo applicare la funzione ed ottenere altre cose uguali
 
@@ -863,6 +879,8 @@ func Function_Eq[F Nat2Nat, A, B Nat](_ Eq[A, B]) Eq[V[F, A], V[F, B]] {
     panic("axiom: comptime only")
 }
 ```
+
+qui il tipo `V` ci permette di codificare la valutazione di una funzione al livello dei tipi. L'altra cosa da notare è che la nostra funzione sarà `Succ` che abbiamo definito come di tipo `Nat2Nat` (se avessimo avuto gli _higher-kinded types_ avremmo potuto definire direttamente `Succ` come `type Succ[N Nat] Nat` invece ora ci tocca rappresentarla come tipo non generico)
 
 ### Assiomi dell'addizione
 
