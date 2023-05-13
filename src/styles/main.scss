@@ -174,16 +174,16 @@ pre {
     padding: 0.625rem 0.5rem !important;
     margin: 1rem auto;
 
-    background: #f8f8f8 !important;
+    background: #f8f8f6 !important;
 
     border-radius: 0.5rem;
     // border: 2px solid #ddd;
 }
 
 code {
-    background: #f4f4f4;
-    padding: 2px;
-    border-radius: 4px;
+    background: #f2f2f2;
+    padding: 2px 4px;
+    border-radius: 6px;
 }
 
 pre code {
@@ -216,6 +216,8 @@ ol {
     display: block;
     list-style-type: disc;
     padding-inline-start: 1.5rem;
+
+    line-height: 2;
 
     li {
         margin: 0.75rem 0;

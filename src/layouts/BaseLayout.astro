@@ -18,7 +18,7 @@ const { title, description, thumbnail } = Astro.props;
         <meta name="generator" content={Astro.generator} />
 
         <meta property="og:title" content={title ?? websiteName()}>
-        <meta property="og:description" content={description ?? "Sono Antonio De Lucreziis, studio Matematica a Pisa e sono appassionato di informatica. C'è anche una sezione artistica con una galleria della maggior parte dei lavori"}>
+        <meta property="og:description" content={description ?? "I'm Antonio De Lucreziis, I study Maths in Pisa and I'm interested in computer science. There is also an art section with a gallery of most of my works"}>
         <meta property="og:image" content={prependBaseUrl(thumbnail ?? "/icon.png")}>
 
         <title>{title ?? websiteName()}</title>
@@ -85,7 +85,7 @@ const { title, description, thumbnail } = Astro.props;
             </div>
             <div class="nav-group sidebar">
                 {websiteName() === '~delucreziis' && <div class="nav-item"><Link href="/notes">Appunti</Link></div>}
-                <div class="nav-item"><Link href="/articles">Articoli</Link></div>
+                <div class="nav-item"><Link href="/articles">Articles</Link></div>
                 <div class="nav-item"><Link href="/art">Art</Link></div>
                 <div class="rule"></div>
                 <div class="nav-item"><Link href="/about">About</Link></div>
