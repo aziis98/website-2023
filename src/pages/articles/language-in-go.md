@@ -4,6 +4,7 @@ title: Creating a language in Go
 description: First post in a series about creating a new programming language from scratch in Go
 tags: ["go", "language", "parsers", "lang-en"]
 publish_date: 2023/05/13
+draft: true
 ---
 
 # Creating a language in Go

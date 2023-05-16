@@ -6,7 +6,7 @@ import Tag from "../components/Tag.astro";
 import { getRandomRelatedArticles,websiteName } from "../utils.js";
 
 const { frontmatter } = Astro.props;
-const { title, thumbnail, description, publish_date, tags } = frontmatter;
+const { title, thumbnail, description, publish_date, tags, includeModule } = frontmatter;
 
 const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
 const someRelatedArticles = await getRandomRelatedArticles(
@@ -51,4 +51,5 @@ const someRelatedArticles = await getRandomRelatedArticles(
             ))
         }
     </aside>
+    {includeModule && <script type="module" src={includeModule} />}
 </BaseLayout>
