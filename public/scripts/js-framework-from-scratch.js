@@ -63,13 +63,13 @@ mount("example-1", ($el) => {
         $todoItemText.textContent = text;
 
         const $todoItemEditField = document.createElement("input");
-        $todoItemEditField.classList.add('edit-field')
+        $todoItemEditField.classList.add("edit-field");
         $todoItemEditField.type = "text";
-        $todoItemEditField.value = text
+        $todoItemEditField.value = text;
 
         const $todoItemRemove = document.createElement("button");
         $todoItemRemove.textContent = "Delete";
-        $todoItemRemove.classList.add('hide-on-edit');
+        $todoItemRemove.classList.add("hide-on-edit");
         $todoItemRemove.addEventListener("click", () => {
             $todoItem.remove();
         });
@@ -77,13 +77,13 @@ mount("example-1", ($el) => {
         const $todoItemEditBtn = document.createElement("button");
         $todoItemEditBtn.textContent = "Edit";
         $todoItemEditBtn.addEventListener("click", () => {
-            if (!$todoItem.classList.contains('editing')) {
-                $todoItem.classList.add('editing')
-                $todoItemEditBtn.textContent = 'Done'
+            if (!$todoItem.classList.contains("editing")) {
+                $todoItem.classList.add("editing");
+                $todoItemEditBtn.textContent = "Done";
             } else {
-                $todoItemText.textContent = $todoItemEditField.value
-                $todoItem.classList.remove('editing')
-                $todoItemEditBtn.textContent = 'Edit'
+                $todoItemText.textContent = $todoItemEditField.value;
+                $todoItem.classList.remove("editing");
+                $todoItemEditBtn.textContent = "Edit";
             }
         });
 
@@ -107,8 +107,8 @@ mount("example-1", ($el) => {
         $newTodoField.value = "";
     }
 
-    $newTodoField.addEventListener("keydown", e => {
-        if (e.key === 'Enter') addTodo()
+    $newTodoField.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") addTodo();
     });
 
     $newTodoBtn.addEventListener("click", addTodo);
