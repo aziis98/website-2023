@@ -5,7 +5,6 @@ description: Questo articolo è la versione in forma scritta del talk con lo ste
 tags: ["go", "generics", "devfest", "gdg", "lang-it"]
 publish_date: 2023/04/17
 thumbnail: "/data/thumbnails/talk-go-intro-generics-2.jpeg"
-draft: true
 ---
 
 # Introduzione alle Generics in Go
