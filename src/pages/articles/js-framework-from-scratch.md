@@ -11,19 +11,21 @@ publish_date: 2023/05/16
 
 > **Warning:** This article is still unfinished and will keep changing for a while
 
-I want to get better at writing and explaining technical things so in this article I will try to describe how to build a small JS framework from scratch based on a small project I made.
+I want to get better at writing and explaining technical things so in this article I will try explain how to build a small JS framework from scratch based on a small project I made.
 
 ## The Problem
 
-Let's first see what's the problem and what we are trying to build. The browser gives us the [Document Object Model (DOM)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) that is a tree that represents the tree of elements we describe in plain HTML.
+Let's first see what's the problem and what we are trying to build. The browser gives us the [Document Object Model (DOM)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) that is a tree that represents the elements we describe when we write the of our page HTML.
 
-So if we want to interact with HTML from JS we have to use the DOM. Every HTML element get many methods to add, remove and update elements. 
+If we want to interact with HTML from JS we have to interact with the DOM. Every HTML element viewed from the DOM has many methods to change its state (adding, removing children and changeing its attributes). 
 
-For example to change the text content of an element we can use [`(Node).textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent). We may want to create new elements in JS, to do so we can create them using [`document.createElement(tagName)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) or if we want to set the HTML directly we can use [`(Element).innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) like <code>myDiv.innerHTML = `<p>Hello!</p>`</code>.
+For example to change the text content of an element we can use [`(Node).textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent). To create new elements we can use [`document.createElement(tagName)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) or we can set directly the HTML of a parent element using [`(Element).innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) like <code>myDiv.innerHTML = `<p>Hello!</p>`</code>.
 
 > **Postulate:** Interacting with the DOM is slow
 
-Given this postulate the main job of a UI framework should be to try and minimize the interactions with the DOM to **keep the state of our application in sync** with the state of the DOM while not wasting too much time doing this exact job.
+This should just be interpreted as DOM operations are not cheap so we should try to do as few operations as possible when updating the DOM.
+
+Given this the main job of a UI framework should be to try and minimize the interactions with the DOM to **keep the state of our application in sync** with the state of the DOM while not wasting too much time doing this exact job.
 
 ## Vanilla JS
 
@@ -211,11 +213,31 @@ There are mostly three ways people "solved" UIs in the last decades
 
     This is the is rarely done directly in JS (even though this is a very general pattern and can some time the view can use a JS framework on its own) but there are many libraries like GTK or Java Swing that use it.
 
-    In our case applying this pattern would mean extracting all state to a global* object and have all event listeners call functions separated in a "controllers" file. Then each controller takes the model and updates it accordingly. Then the view layer reads the model and updates the view accordingly often by using something called single or double-binding with the model. 
+    In our case applying this pattern would mean extracting all state to a global* object and have all event listeners call functions separated in a "controllers" file. Then each controller takes the model and updates it accordingly. Then the view layer reads the model and updates the view accordingly often by using something called single or double-binding with the model.
 
 - **Reactive Programming**
 
-    ...
+    First there are actually two kinds of reactive programming "paradigms". The reactive streams model and the dependency graph model.
+
+    Using the first technique we describe our application as streams of values. For example instead of registering events on a button we get an event stream of click events from a button and manipulate that with pure transformations to generate our final view.
+
+    ```js
+    // A counter application
+    const $incrementBtn = ...
+    const $decrementBtn = ...
+    const $decrementValue = ...
+
+    const increments = Observable.of($incrementBtn, 'click')
+    const decrements = Observable.of($decrementBtn, 'click')
+
+    // Observable Pseudocode
+    Observable
+        .merge(increments.map(() => +1), decrements.map(() => -1))
+        .reduce((acc, delta) => acc + delta)
+        .map(v => $decrementValue.textContent = v)
+    ``` 
+
+    [...]
 
 - **Immediate Rendering**
     
