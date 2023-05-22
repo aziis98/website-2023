@@ -5,6 +5,7 @@ title: "[WIP] Building a JS Framework from scratch"
 description: In this article we will build a small reactive js framework from scratch
 tags: ["js", "ui", "from-scratch", "lang-en"]
 publish_date: 2023/05/16
+draft: true
 ---
 
 # Building a JS Framework from Scratch

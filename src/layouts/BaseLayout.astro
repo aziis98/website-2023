@@ -99,6 +99,9 @@ const { title, description, thumbnail } = Astro.props;
         <main>
             <slot />
         </main>
+        <footer>
+            &copy; {new Date().getFullYear()} Antonio De Lucreziis
+        </footer>
         <script type="module">
             const $mobileMenuBtn = document.querySelector(".mobile-menu");
             const $sidebarCloseBtn = document.querySelector(".sidebar-close");
