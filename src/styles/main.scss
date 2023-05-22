@@ -73,6 +73,8 @@ html {
     color: #222;
 
     background: #f0f0f0;
+
+    height: 100%;
 }
 
 // Headings
@@ -116,7 +118,7 @@ $heading-scale-mobile: 1.25;
             margin-top: 1rem * $factor;
         }
 
-        &+p {
+        &+* {
             margin-top: 0.4rem * $factor;
         }
     }
@@ -722,8 +724,9 @@ body {
         grid-template-areas: "article aside";
 
         align-items: start;
-        justify-content: center;
         gap: 2rem;
+
+        flex-grow: 1;
 
         &>.article-card:first-child {
             display: none;
@@ -955,6 +958,8 @@ body {
 
         font-weight: 500;
         color: #666;
+
+        flex-shrink: 0;
     }
 }
 
