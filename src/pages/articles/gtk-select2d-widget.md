@@ -4,7 +4,6 @@ title: GTK Select2D Widget
 description: Article about a small GTK widget I recently made using ChatGPT. The widget lets the user select points on an image and after confirmation prints them on stdout.
 tags: ["python", "gtk", "lang-en"]
 publish_date: 2023/07/23
-draft: true
 ---
 
 # GTK Select 2D Widget
