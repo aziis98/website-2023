@@ -4,6 +4,7 @@ title: Introduzione allo Sviluppo Web
 description: In questo articolo introduco un po' lo sviluppo web moderno, prima parlando un po' di design di interfacce grafiche in generale e poi introducendo HTML, CSS ed infine JS.
 tags: ["webdev", "design", "html", "css", "lang-it"]
 publish_date: 2023/06/14
+draft: true
 thumbnail: "/data/thumbnails/new-webiste.jpeg"
 ---
 

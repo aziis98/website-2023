@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
 title: GTK Select2D Widget
-description: Article about a small gtk widget I recently made using ChatGPT. The widget lets the user select points on an image and after confirmation prints them on stdout.
+description: Article about a small GTK widget I recently made using ChatGPT. The widget lets the user select points on an image and after confirmation prints them on stdout.
 tags: ["python", "gtk", "lang-en"]
 publish_date: 2023/07/23
 draft: true
@@ -9,25 +9,29 @@ draft: true
 
 # GTK Select 2D Widget
 
-I've always been a fun of [GTK3](https://docs.gtk.org/gtk3/) but I was never able to build something more than a base application with one or two widgets.
+<img src="https://github.com/aziis98/gtk-select2d/blob/db333608d74c4c0077a06f9de4f19e0060f6cfbb/screenshot.png?raw=true" alt="screenshot of the widget">
 
-I tried using it with [C](https://docs.gtk.org/gtk3/) and [Python](https://python-gtk-3-tutorial.readthedocs.io/en/latest/) and maybe also [Golang](https://github.com/gotk3/gotk3) if I remember correctly, but it always felt too complicated to use. The main problem was the documentation, the Python binding have some nice examples but only for some widgets (for exmple `DrawingArea` seems missing from [the Python GTK+3 Read the Docs](https://python-gtk-3-tutorial.readthedocs.io/en/latest/))
+I've always been a fan of [GTK3](https://docs.gtk.org/gtk3/) but I was never able to build something more than a base application with one or two widgets. I tried using it with [C](https://docs.gtk.org/gtk3/), [Python](https://python-gtk-3-tutorial.readthedocs.io/en/latest/) and maybe also [Golang](https://github.com/gotk3/gotk3) if I remember correctly.
 
-## Select2D
+But it always felt too complicated to use. The main problem was the documentation, the Python binding have some nice examples but only for some widgets (for example `DrawingArea` seems missing from [the Python GTK+3 ReadTheDocs](https://python-gtk-3-tutorial.readthedocs.io/en/latest/))
 
-A long time ago I was searching for a Linux tool to crop PDFs from the terminal. I wanted something that could spawn a window with a preview of the PDF and let me select a region of it and then process the file and spit out the cropped PDF.
+## The problem
+
+A long time ago I was searching for a Linux tool to crop PDFs from the terminal. I didn't really needed a full fledged PDF editor but just something that could spawn a window with a preview of the PDF, let me select a region of it and then process the file and spit out the cropped PDF.
 
 Recently one of my friends was looking for a tool to delimit a quadrilateral region of an image, and since I had nothing to do I tried to make it in GTK using Python. 
 
-So, my first idea was to make a tool that could take as input an image and a series of options and prompt the user to select the desired region of the image, confirm and then the tool will print to standard out the coordinates of the selected regions.
+I'm a big fun of small composable programs so to make this a somewhat general tool my first idea was to take as input an image and a series of options ([issue about ideas about advanced options grammar](https://github.com/aziis98/gtk-select2d/issues/3)) and prompt the user to select the desired region of the image, confirm and then the tool will print to standard out the coordinates of the selected region points.
 
-I know I wanted to make this in GTK to keep it as simple as possible, but this time I tried using ChatGPT to get started with the project. 
+I know I wanted to make this in GTK to keep it as lightweight as possible, but this time I tried using ChatGPT to get started with the project. 
 
 ## Chatting with ChatGPT
 
-I tried some prompts and after a couple of tries I reached the following prompt
+By the way all the code for this project can be found at <https://github.com/aziis98/gtk-select2d>.
 
-> _Create a small GTK application in Python that gets called like "select2d <image>" and displays the image and shows four movable/draggable points to select a quadrilateral in the image. Under the displayed canvas there is an ok button to confirm the selection that closes the window and prints to stdout the point coordinates_
+I tried some prompts and after a couple of tries I reached the following prompt (all the prompts have been slightly edited for the purposes of this post but [the full real conversation can be found here](https://chat.openai.com/share/c1da6ddd-6ba4-4db2-962c-db35eb2b29a2))
+
+> _Create a small GTK application in Python that gets called like "`select2d <image>`", displays the image and shows four movable/draggable points to select a quadrilateral in the image. Under the displayed canvas there is an "ok" button to confirm the selection that closes the window and prints to stdout the point coordinates_
 
 And its answer contained the following snippet of code
 
@@ -141,11 +145,11 @@ if __name__ == "__main__":
     main()
 ```
 
-This was already a great start but the image was show in its real size and now centered so the next message was about fixing this problem
+This was already a great start but the image was show in its real size and not centered so the next message was about fixing this problem
 
 > _Rewrite only the `on_draw` function, make the image fit the drawing area by preserving its aspect ratio, make the points squares with crosses inside and draw the outline of the full quadrilateral, all with a black stroke_
 
-The response did exactly what I asked by doing the linear algebra needed to rescale and translate everything correctly.
+The response did exactly what I asked by doing the linear algebra needed to rescale and translate everything correctly, this looks good
 
 ```python
 def on_draw(self, area, cr):
@@ -197,9 +201,9 @@ def on_draw(self, area, cr):
         cr.restore()
 ```
 
-It also guessed right what I meant by rectangles with crosses inside, It's mind blowing how it can map such a description to the correct code.
+It also guessed right with what I meant by rectangles with crosses inside, It's mind blowing how it can map such a description to the correct code.
 
-At this point I know I would need to do that coordinate conversion in multiple places so I asked it to refactor that code into a separate function
+I already know I will later need to do that coordinate conversion in multiple places so I asked it to refactor that code into a separate function
 
 > _Write a new function to convert coordinates from component space to image space_
 
@@ -259,7 +263,7 @@ def image_to_component_space(self, image_x, image_y):
 
 And then I fixed the places where it was using the wrong coordinate system when dragging points around.
 
-Then I noticed I didn't like the technique it was using to move the points around. I decided it would be nicer it clicking on the canvas just moved the nearest point to the mouse position. So first I asked
+Then I noticed I didn't like the technique it was using to move the points around. I decided it would be nicer if clicking on the canvas just moved the nearest point to the mouse position. So first I asked
 
 > _The `get_closest_point` function should return the index of the closest point by distance and true or false based on if its distance is less than 25_
 
@@ -328,7 +332,7 @@ def get_closest_point(self, x, y):
         return None, False
 ```
 
-At this point I know more precisely what I wanted so by hand I changed it to
+At this point I knew more precisely what I wanted so I changed it by hand to
 
 ```python
 def get_closest_point(self, x, y):
@@ -345,7 +349,7 @@ def get_closest_point(self, x, y):
 
 ### Snapping
 
-At this point I chatted a bit and did some various manual edits but still wanted to see if it could correctly implement snapping for the points handles. So I told it the current version of the mouse related code and asked it to add snapping to other points with the same x or y coordinate
+At this point I chatted a bit and did some various manual edits but still wanted to see if it could correctly implement snapping for the points handles. This is such an handy feature I couldn't live without so I told it the current code for the mouse related code and asked it to add snapping to other points with the same x or y coordinate
 
 > Now its the following:
 > 
@@ -372,7 +376,9 @@ At this point I chatted a bit and did some various manual edits but still wanted
 > 
 > Please add snapping to points with the same x or y
 
-And its answer was just on point
+The answer was actually easier than what I expected but most times I tried implementing this feature I already had various kind of shapes that could snap to each other so it was far harder to implement and architecture. 
+
+In this case it can rightly be done in place when dragging a point
 
 ```python
 def on_motion_notify(self, widget, event):
@@ -445,11 +451,13 @@ def on_motion_notify(self, widget, event):
 
 ### Various UI Changes
 
-At this point the confirm button was still called "Ok" and there was no snapping checkbox. I tried asking ChatGPT to add this things and it did most of it but the UI wasn't too nice. So I also asked to change some paddings but it didn't get which ones so I ended up doing most of this by hand. But at this point I was comfortable enough with the GTK code that It was fairly easy to get to what I wanted.
+Then I removed the support for other than four points to make this specific for quadrilateral regions.
+
+At this point the confirm button was still called "Ok" and there was no snapping checkbox. I tried asking ChatGPT to do these things and it did most of it but the UI didn't look too nice. I also asked to change some paddings, but it didn't get which ones (there were many containers at this point) so I ended up doing most of this by hand. But at this point **I was comfortable enough** with the GTK code that It was fairly easy to make it look like what I wanted.
 
 ### CLI Options
 
-At this point the app was mostly working with all the basic features I needed. So I moved on with enhancing the command line interface. To this point the main was just
+At this point the app was mostly working with all the basic features I needed. So I moved on enhancing the command line interface. The main was still the same from the start
 
 ```python
 def main():
@@ -469,15 +477,15 @@ def main():
 
 I asked it in various passes to add
 
-- a `--title` option
+- A `--title` option to set the windows title
 
-- one to select the number of points
+- An option to select the number of points
 
-- one to show or hide the outline
+- One to show or hide the polyline drawn between points
 
-- and one to also tell that the path is also a "closed"
+- If drawing the polyline it can be closed with a `--closed` option.
 
-Its answer used `argparse`, I knew about this but never really used it so Its nice to see that ChatGPT can convert options provided in natural language to code.
+Its answer used `argparse`, I knew about this but never really used it. Its nice to see that ChatGPT can convert options provided in natural language to code. I also tried this various times with Bash and its very useful.
 
 This was the resulting code
 
@@ -504,8 +512,16 @@ if __name__ == '__main__':
     main()
 ```
 
+For now the program can only be used to select a quadrilateral as I removed the option to change the number of points. After all this I spent a bit of time trying to package this project for distribution without much success.
+
+## Packaging
+
+I wanted to write a [`PKGBUILD`](https://wiki.archlinux.org/title/PKGBUILD) because I have Arch and I would like for this to be properly installed on my system and make it easy to share with others (by putting it on the AUR maybe). But in the end I discovered that _first_ I have to package this as a Python package with something like `setuputils`? And only then I will be able to start messing with the `PKGBUILD`...
+
+But first I want to add the missing features I was talking about at the start of the post and refactor the code a bit before adding more features. It's just a couple of hundred lines of code but it already feels a bit _spaghetti_.
+
 ## Conclusion
 
-At this point in time this widget can only be used to select a quadrilateral as I removed the option to change the number of points. The next thing I want to do is to refactor this code a bit before adding more features. It's just a couple hundreds lines of code but its already feeling a bit spaghetti.
+The most important feature I want to add is zoom and panning but first, if I don't want to go mad with the coordinate system conversions, I will probably refactor everything to use `numpy` or something similar with proper matrix calculations.
 
-Yet again I confirmed that ChatGPT is most useful when starting a new project that uses a technology I'm not too familiar with or with poor documentation. 
+Yet again I confirmed that ChatGPT is most useful when starting a new project that uses a technology you're not too familiar with or with poor documentation.
