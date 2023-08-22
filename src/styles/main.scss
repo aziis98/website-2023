@@ -440,6 +440,8 @@ p.short {
         width: 100%;
         max-width: 80ch;
 
+        font-size: 18px;
+
         h1 {
             font-size: 3.5rem;
         }
@@ -520,7 +522,7 @@ section {
         a.tag {
             background: #ddd;
             color: #555;
-            font-size: 13px;
+            font-size: 14px;
 
             padding: 2px 0;
 
@@ -528,7 +530,7 @@ section {
 
             user-select: none;
 
-            padding: 0.125rem 0.25rem;
+            padding: 0.125rem 0.35rem;
 
             border-radius: 4px;
 
@@ -561,10 +563,11 @@ section {
     .date {
         font-size: 15px;
         color: #666;
+        letter-spacing: 0.5px;
     }
 
     .description {
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.625;
 
         flex-grow: 1;
@@ -920,7 +923,7 @@ body {
                     }
 
                     .description {
-                        font-size: 14px;
+                        font-size: 16px;
                     }
 
                     .tags {
