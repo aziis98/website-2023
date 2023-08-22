@@ -1,30 +1,31 @@
 ---
-import _ from "lodash";
-import ArticleCard from "../../components/ArticleCard.astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { websiteName } from "../../utils";
+import _ from 'lodash'
+import ArticleCard from '../../components/ArticleCard.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { websiteName } from '../../utils'
 
 export async function getStaticPaths() {
-    const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
-    return _.union(...articles.filter(a => !a.frontmatter.draft).map((a) => a.frontmatter.tags)).map((t) => ({
+    const articles = await Astro.glob('/src/pages/articles/*.{md,mdx}')
+    return _.union(...articles.filter(a => !a.frontmatter.draft).map(a => a.frontmatter.tags)).map(t => ({
         params: { tag: t },
-    }));
+    }))
 }
 
-const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
+const articles = await Astro.glob('/src/pages/articles/*.{md,mdx}')
 
-const { tag } = Astro.params;
-const articlesForTag = articles.filter(a => !a.frontmatter.draft && a.frontmatter.tags.includes(tag));
+const { tag } = Astro.params
+const articlesForTag = articles.filter(a => !a.frontmatter.draft && a.frontmatter.tags.includes(tag))
 ---
 
 <BaseLayout title={`#${tag} | ${websiteName()}`}>
     <section>
-        <h1>#{tag}</h1>
-        <div class="label">Articoli con questo tag</div>
+        <h1>Articoli taggati "{tag}"</h1>
         <div class="article-list">
-            { articlesForTag.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
-                <ArticleCard {url} {title} {description} {date} {tags} />
-            ) ) }
+            {
+                articlesForTag.map(({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
+                    <ArticleCard {url} {title} {description} {date} {tags} />
+                ))
+            }
         </div>
     </section>
 </BaseLayout>

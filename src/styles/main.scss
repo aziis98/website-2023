@@ -68,7 +68,7 @@ $device-small: $article-width + 4rem;
 
 body,
 html {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #222;
 
@@ -98,7 +98,7 @@ $heading-scale-mobile: 1.25;
 
 @for $i from 1 through 5 {
     h#{$i} {
-        font-family: "EB Garamond";
+        font-family: 'EB Garamond';
         color: #333;
 
         $factor: pow($heading-scale, 5 - $i);
@@ -118,7 +118,7 @@ $heading-scale-mobile: 1.25;
             margin-top: 1rem * $factor;
         }
 
-        &+* {
+        & + * {
             margin-top: 0.4rem * $factor;
         }
     }
@@ -145,7 +145,7 @@ p {
     line-height: 2;
 }
 
-p+p {
+p + p {
     margin-top: 0.5rem;
 }
 
@@ -190,7 +190,7 @@ pre {
     }
 }
 
-p>code {
+p > code {
     background: #f2f2f2;
     padding: 2px 4px;
     border-radius: 6px;
@@ -202,18 +202,18 @@ pre code {
 
 pre,
 code {
-    font-family: "Source Code Pro", monospace;
+    font-family: 'Source Code Pro', monospace;
 
     tab-size: 4;
 }
 
 // Inline Math
-span:not(.katex-display)>span.katex {
+span:not(.katex-display) > span.katex {
     font-size: 125%;
 }
 
 // Display Math
-span>span.katex-display {
+span > span.katex-display {
     font-size: 110%;
     max-width: 100%;
     overflow-x: auto;
@@ -239,13 +239,15 @@ a:visited {
     color: #6635ca;
     text-decoration: underline solid 3px transparent;
 
+    text-decoration-color: transparent;
+    -webkit-text-decoration-color: transparent;
+
     transition: text-decoration 150ms ease-in-out;
 
     word-wrap: break-word;
 }
 
 p {
-
     a,
     a:visited {
         font-weight: 600;
@@ -295,7 +297,7 @@ p.short {
 }
 
 .serif {
-    font-family: "EB Garamond", serif;
+    font-family: 'EB Garamond', serif;
     font-size: 20px;
 }
 
@@ -314,14 +316,18 @@ p.short {
 .tags-list {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+
     gap: 0.5rem;
 
     a.tag {
         background: #ddd;
         color: #555;
-        // font-size: 15px;
+        font-size: 18px;
 
-        padding: 0.125rem 0.5rem;
+        padding: 0.25rem 0.75rem;
 
         transform: none;
 
@@ -391,7 +397,7 @@ p.short {
             line-height: 1.5;
 
             .date {
-                font-family: "EB Garamond", serif;
+                font-family: 'EB Garamond', serif;
 
                 color: #555;
 
@@ -465,9 +471,16 @@ section {
 
     display: flex;
     flex-direction: column;
+
+    align-items: center;
+
     gap: 1rem;
 
     width: 100%;
+
+    & > .left {
+        align-self: start;
+    }
 }
 
 .article-list {
@@ -528,7 +541,7 @@ section {
     .title {
         font-weight: 600;
         font-size: 32px;
-        font-family: "EB Garamond", serif;
+        font-family: 'EB Garamond', serif;
         line-height: 1;
 
         a {
@@ -551,12 +564,12 @@ section {
     }
 
     .description {
-        font-size: 14px;
+        font-size: 15px;
         line-height: 1.625;
 
         flex-grow: 1;
 
-        &+.description {
+        & + .description {
             padding-top: 0.5rem;
 
             border-top: 1px solid #ddd;
@@ -609,8 +622,7 @@ body {
 
         border-bottom-right-radius: 8px;
         border-bottom-left-radius: 8px;
-        box-shadow: 0 0 6px 0 #00000040,
-        0 0 32px 0 #00000018;
+        box-shadow: 0 0 6px 0 #00000040, 0 0 32px 0 #00000018;
 
         padding-left: 1rem;
         padding-right: 0.75rem;
@@ -638,7 +650,7 @@ body {
         .nav-item {
             padding: 0.75rem 0;
 
-            &>a {
+            & > a {
                 padding: 0.25rem 0.5rem;
                 font-weight: 500;
                 font-size: 110%;
@@ -721,14 +733,14 @@ body {
     main {
         display: grid;
         grid-template-columns: $article-width $aside-width;
-        grid-template-areas: "article aside";
+        grid-template-areas: 'article aside';
 
         align-items: start;
         gap: 2rem;
 
         flex-grow: 1;
 
-        &>.article-card:first-child {
+        & > .article-card:first-child {
             display: none;
         }
 
@@ -740,7 +752,7 @@ body {
             width: 100%;
             max-width: $article-width;
 
-            &>.article-card:first-child {
+            & > .article-card:first-child {
                 display: inherit;
             }
         }
@@ -754,7 +766,7 @@ body {
 
             gap: 0;
 
-            &>.article-card {
+            & > .article-card {
                 z-index: 1;
                 border-radius: 0;
                 box-shadow: none;
@@ -770,14 +782,14 @@ body {
                 }
             }
 
-            &>.article-card:first-child {
+            & > .article-card:first-child {
                 display: inherit;
 
                 width: 100%;
                 max-width: unset;
             }
 
-            &>section {
+            & > section {
                 padding: 2rem 1rem 0;
             }
 
@@ -806,8 +818,8 @@ body {
             }
 
             // Thumbnail image
-            h1+img,
-            h1+* img {
+            h1 + img,
+            h1 + * img {
                 margin-left: auto;
                 margin-right: auto;
                 max-width: calc(100% - 2rem);
@@ -875,7 +887,7 @@ body {
                 ol {
                     padding-left: 2rem;
 
-                    &>li>p {
+                    & > li > p {
                         padding-left: 0;
                     }
                 }
@@ -897,12 +909,12 @@ body {
                 color: #555;
             }
 
-            &>.label:first-child {
+            & > .label:first-child {
                 display: none;
             }
 
             @include media-screen-desktop() {
-                &>.self {
+                & > .self {
                     .date {
                         font-size: 16px;
                     }
@@ -922,7 +934,7 @@ body {
             }
 
             @include media-screen-tablet() {
-                &>.self {
+                & > .self {
                     display: none;
                 }
             }
@@ -936,11 +948,11 @@ body {
 
                 padding: 1rem 1rem 0;
 
-                &>.label:first-child {
+                & > .label:first-child {
                     display: inherit;
                 }
 
-                &>.self {
+                & > .self {
                     display: none;
                 }
             }
@@ -985,34 +997,33 @@ body {
 //
 
 // firefox
-body main article>p:first-of-type:first-letter {
+body main article > p:first-of-type:first-letter {
     margin: 0.625rem 0.75rem 0 0;
     font-size: 3.5rem;
     float: left;
-    font-family: "EB Garamond", serif;
+    font-family: 'EB Garamond', serif;
 }
 
 // mobile
 @media screen and (pointer: coarse) {
-    body main article>p:first-of-type:first-letter {
+    body main article > p:first-of-type:first-letter {
         margin: 0.625rem 0.75rem 0 0;
         font-size: 3.5rem;
         line-height: 3rem;
         float: left;
-        font-family: "EB Garamond", serif;
+        font-family: 'EB Garamond', serif;
     }
 }
 
 @supports not (-moz-appearance: none) {
-
     // chrome desktop
     @media screen and (pointer: fine) {
-        body main article>p:first-of-type:first-letter {
+        body main article > p:first-of-type:first-letter {
             margin: 0.25rem 0.75rem 0 0;
             font-size: 3.5rem;
             line-height: 3rem;
             float: left;
-            font-family: "EB Garamond", serif;
+            font-family: 'EB Garamond', serif;
         }
     }
 }

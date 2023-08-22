@@ -30,7 +30,7 @@ const sortedArticles = _.orderBy(publishedArticles, ['frontmatter.publish_date']
                     <Link class="tag" href={`/tags/${name}`}>{name}</Link>
                 ))}
             </div>
-            <div class="label">Archivio</div>
+            <div class="label left">Archivio</div>
             <div class="article-list">
                 {
                     sortedArticles.map(

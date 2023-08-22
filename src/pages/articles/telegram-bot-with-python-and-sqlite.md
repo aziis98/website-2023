@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
 title: Telegram Bot with Python and SQLite
-description: Exposition about a small project about a Telegram Bot I did recently that uses Python and Sqlite as a database. I also used decorators and generators to simplify a bit the bot-user conversation code 
-tags: ["telegram", "bot", "python", "sql", "lang-en"]
+description: Recently I wrote a small Telegram Bot that uses Python and Sqlite as a database. I also used decorators and generators to simplify a bit the user-bot conversation code 
+tags: ["telegram", "bot", "python", "sql", "side-project", "lang-en"]
 publish_date: 2023/07/26
 ---
 

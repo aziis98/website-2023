@@ -28,7 +28,7 @@ const sortedArticles = _.orderBy(
                 </p>
             </div>
         </div>
-        <div class="label">Articoli recenti</div>
+        <div class="label left">Articoli recenti</div>
         <div class="article-list">
             { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
                 <ArticleCard {url} {title} {description} {date} {tags} />
