@@ -161,6 +161,16 @@ blockquote {
     margin: 1rem 0;
 }
 
+iframe {
+    display: block;
+}
+
+iframe.video {
+    margin: 1.5rem auto;    
+    border-radius: 0.5rem;
+    box-shadow: 0 0 16px #00000040;
+}
+
 hr {
     display: block;
     border: none;

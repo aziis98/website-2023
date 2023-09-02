@@ -1,0 +1,118 @@
+#!/bin/bash
+
+# Realizzato attraverso un collage di roba da questa discussione con ChatGPT
+# <https://chat.openai.com/share/c99c6d47-f0b6-4422-9a3d-f1a4e07dd07d>
+
+display_help() {
+    echo "usage: create-article [OPTIONS] [SLUG]"
+    echo "Create a new markdown article"
+    echo
+    echo "options:"
+    echo "  -h, --help               Display this help message"
+    echo "  -t, --title TITLE        Set the title of the post"
+    echo "  -d, --description DESC   Set the description of the post"
+    echo "  -T, --tags TAGS          Set the list of tags (space separated)"
+    echo "  -p, --publish-date DATE  Set the publish date in YYYY/MM/DD format"
+    echo
+    exit 0
+}
+
+generate_template() {
+    local file="$1"
+    local title="$2"
+    local description="$3"
+    local tags="$4"
+    local publish_date="$5"
+    
+    # Convert tags into JSON format
+    IFS=' ' read -ra tags_array <<< "$tags"
+    tags_json=$(printf ', "%s"' "${tags_array[@]}")
+    tags_json="[${tags_json#, }]"
+
+    cat <<EOF > "$file"
+        ---
+        layout: ../../layouts/ArticleLayout.astro
+        title: $title
+        description: $description
+        tags: $tags_json
+        publish_date: $publish_date
+        draft: true
+        ---
+
+        # $title
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+EOF
+
+    sed -i 's/^[ \t]*//' "$file"
+
+    echo
+    echo "Generated article from template"
+    echo "  $file"
+    echo
+}
+
+# Article Fields
+title=""
+description=""
+tags=""
+publish_date=$(date +%Y/%m/%d)
+slug=""
+
+# Parse command-line options
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            display_help
+            ;;
+        -t|--title)
+            title="$2"
+            shift 2
+            ;;
+        -d|--description)
+            description="$2"
+            shift 2
+            ;;
+        -T|--tags)
+            tags="$2"
+            shift 2
+            ;;
+        -p|--publish-date)
+            publish_date="$2"
+            shift 2
+            ;;
+        *)
+            slug="$1"
+            shift 1
+            ;;
+    esac
+done
+
+if [[ -z "$slug" || -z "$title" || -z "$description" || -z "$tags" ]]; then
+    echo
+    echo "Prompting for missing values:"
+fi
+
+# If no custom slug is provided, prompt for one
+if [[ -z "$slug" ]]; then
+    read -p "  Slug (article filename): " slug
+fi
+if [[ -z "$title" ]]; then
+    read -p "  Title: " title
+fi
+if [[ -z "$description" ]]; then
+    read -p "  Description: " description
+fi
+if [[ -z "$tags" ]]; then
+    read -p "  Tags (space separated): " tags
+fi
+
+# Check if the file already exists
+if [[ -e "src/pages/articles/$slug.md" ]]; then
+    echo "Error:"
+    echo "  File 'src/pages/articles/$slug.md' already exists."
+    exit 1
+fi
+
+# Create the Markdown template
+generate_template "src/pages/articles/$slug.md" "$title" "$description" "$tags" "$publish_date"
