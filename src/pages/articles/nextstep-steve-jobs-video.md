@@ -24,7 +24,7 @@ This thing he shows is just mind blowing, today I don't think there is any syste
 
 If there was something like that today, it would probably work by just watching for file changes (so not live and just "on save") or maybe with an internal bus for IPC. 
 
-Even though I think that's not how it was implemented in the NeXTStep systems as it was written in [Objective-C](https://en.wikipedia.org/wiki/Objective-C) and inherited many ideas from the SmallTalk systems from Xerox Park. So it probably had some way of referencing objects from one application to another.
+Even though I think that's not how it was implemented in the NeXTStep systems as it was written in [Objective-C](https://en.wikipedia.org/wiki/Objective-C) and inherited many ideas from SmallTalk systems from Xerox Park. So it probably had some way of directly referencing objects from one application to another.
 
 I would love to have these kind of features today but there isn't really much hope of bolting this at a system wide level. Maybe with a custom desktop environment or something (I keep a close watch on what [Arcan](https://arcan-fe.com/) is doing). 
 
@@ -32,7 +32,7 @@ But if we think smaller there aren't even that many programs today where you can
 
 ### Figma's Components
 
-The only program that really put some thought in this I know from today is [Figma](https://www.figma.com/) (a vector drawing tool). It has the concept of _components_ that can be instanced many times in the page, the great thing is that single instances can also be modified in-place without loosing linking. 
+The only program that really put some thought in this I know today is [Figma](https://www.figma.com/) (a vector drawing tool). It has the concept of _components_ that can be instanced many times in the page, the great thing is that single instances can also be modified in-place without loosing linking. 
 
 I think Figma does some (crazy) diffing to track changes between the parent component and the single instances as one can modify the original component and the single instances separately and changes gets merged very well (in their last update they also introduced a feature for comparing changes between the parent component and the single instances).
 
@@ -40,9 +40,12 @@ I think Figma does some (crazy) diffing to track changes between the parent comp
 
 The other cool thing that this object linking introduces is that I think it mostly solves the problem of keeping various files up to date. One of the problems I have come up against the most is having some templates and some source files and _having to write a custom build system from scratch_ just to render everything while keeping things simple and not having to mess with [Makefiles](https://en.wikipedia.org/wiki/Make_(software)#Makefiles) and alike.
 
-Actually I always end up writing Makefiles, another example is I had to put some SVG pictures made with [Inkscape](https://inkscape.org/) and some made with [Asymptote](https://asymptote.sourceforge.io/) inside some LaTeX files. I needed to convert SVGs into something that TeX could import (and this could be done with Inkscape from the CLI) while Asymptote figures are generated using its the `asymptote` command and everything is compiled to PDF using `pdflatex`.
+Actually I always end up writing Makefiles, for example one thing I had to do is put some SVG pictures made with [Inkscape](https://inkscape.org/) and some made with [Asymptote](https://asymptote.sourceforge.io/) inside some LaTeX files and render everything to PDF. 
 
-In an alternative world I would be writing "latex" in a WYSIWYG editor (something like [TeXMacs](https://www.texmacs.org/tmweb/home/welcome.en.html) that is awesome and I should use it more) and drag and drop pictures where I want them in the document. This would be straight forward for the Inkscape SVG pictures as in the end its all vector graphics. For the asymptote ones the system could provide a "transformed link" where picture is compiled as needed when the source code is updated.   
+I needed to convert SVGs into something that TeX could import (and this could be done with Inkscape from the CLI) while Asymptote figures are generated using the `asymptote` command and then everything is compiled to PDF using `pdflatex`.
+
+In an alternative world I would be writing "latex" in a WYSIWYG editor (e.g. something like [TeXMacs](https://www.texmacs.org/tmweb/home/welcome.en.html), it's an awesome project and I should use it far more) and drag and drop pictures where I want them in the document. 
+This would be straight forward for the Inkscape svg pictures as in the end its all vector graphics. For the asymptote ones the system could provide a "transformed link" where the picture is compiled as needed when the source code is updated.   
 
 ### Directed Acyclic Graphs
 
@@ -52,6 +55,6 @@ Makefiles are a decent way of declaratively expressing these structures but have
 
 ## Conclusion
 
-My point is that many problems we have today about keeping files up to date could be solved by something like _object linking_ not meaning that it would be easy to bolt onto something like a today's Linux system. 
+My point is that many problems we have today about keeping files up to date could be solved by something very intuitive like object linking. Here I don't mean that it would be easy to bolt onto something like a today's GNU/Linux system as I think something more drastic would be needed to easily implement these features.
 
 I only think that these ideas shouldn't be lost to time and it's fun to see some (radically different) solutions to problems we still face today.
