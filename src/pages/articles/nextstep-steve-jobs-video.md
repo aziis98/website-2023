@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
 title: NeXTStep Presentation from Steve Jobs
-description: I saw an awesome presentation of the NeXTStep system from Steve Jobs and some ideas about it
+description: I saw an awesome presentation of the NeXTStep system from Steve Jobs and have some ideas about it
 tags: ["os", "presentation", "nextstep", "interactivity"]
 publish_date: 2023/09/01
 ---
