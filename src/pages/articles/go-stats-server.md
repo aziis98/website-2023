@@ -34,6 +34,8 @@ Parallel internally uses ssh to connect to the machines and run the commands. Ho
 
 This way we can just let the tcp servers run on each node and have our custom dashboard make some requests.
 
+## Initial conversation with ChatGPT
+
 This idea is what sparked the conversation with ChatGPT that helped me make this small project. The first thing I asked was to remove the call to `parallel` from the commands to unquote them.
 
 > Me: Remove gnu parallel from the following commands
@@ -411,7 +413,7 @@ This Go project implements a simple TCP server that responds to custom commands 
 
 The rest is [in the conversation](https://chat.openai.com/share/40247aa0-76e9-4d9a-b0fa-356a5f51f208) if you are interested.
 
-## Manual bits
+## Manual Bits & Refactoring
 
 At this point I tried executing this on one of the nodes and it worked first try! I was amazed by how easy it was to make this small project with the help of ChatGPT. So I decided to enhance it a bit more.
 
@@ -493,6 +495,8 @@ to recap this does the following things
 
 -  Restart the service (restart is needed as the binary could be already running)
 
+### CLI interface
+
 In the end I added a nice cli interface with just a couple of commands
 
 ```go
@@ -544,7 +548,7 @@ func main() {
 
 ### TCP Server improvements
 
-I made the server host configurable with an environment variable and also added a nice log message when the server starts.
+The code for the TCP server remained mostly the same, but I made the server host configurable with an environment variable and also added a nice log message when the server starts.
 
 ```go
 func startTCPServer() error {
