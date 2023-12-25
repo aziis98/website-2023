@@ -2,7 +2,7 @@
 layout: ../../layouts/ArticleLayout.astro
 title: GTK Select2D Widget
 description: I made a GTK widget using ChatGPT. The widget lets the user select points on an image and after confirmation prints them on stdout.
-tags: ["python", "gtk", "side-project", "lang-en"]
+tags: ["python", "gtk", "side-project", "lang-en", "chatgpt"]
 publish_date: 2023/07/23
 ---
 
