@@ -170,7 +170,7 @@ iframe {
 }
 
 iframe.video {
-    margin: 1.5rem auto;    
+    margin: 1.5rem auto;
     border-radius: 0.5rem;
     box-shadow: 0 0 16px #00000040;
 
@@ -425,6 +425,46 @@ p.short {
                 font-weight: 600;
 
                 line-height: 1.5;
+            }
+        }
+    }
+}
+
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+
+    width: 100%;
+
+    gap: 1rem;
+
+    img {
+        max-width: 100%;
+        max-height: 30vh;
+
+        place-self: center;
+
+        box-shadow: 0 0 16px #00000040;
+
+        border-radius: 4px;
+        transition: transform 150ms ease-in-out;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+
+        @include media-screen-mobile() {
+            max-height: unset;
+            width: 100%;
+        }
+    }
+
+    @include media-screen-mobile() {
+        grid-template-columns: 1fr;
+
+        img {
+            &:hover {
+                transform: scale(1.025);
             }
         }
     }

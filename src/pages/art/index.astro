@@ -1,150 +1,238 @@
 ---
-import { prependBaseUrl, websiteName } from "../../utils";
+import { prependBaseUrl, websiteName } from '../../utils'
 
-import Link from "../../components/Link.astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import Link from '../../components/Link.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate/*.jpg')).map(({ default: p }) =>
+    p.slice('/public'.length)
+)
+
+console.log(procreateArtImages)
 ---
 
-<BaseLayout title={"Art | " + websiteName()} description="Galleria con la maggior parte dei lavori di arte generativa che ho fatto nella vita">
+<BaseLayout
+    title={'Art | ' + websiteName()}
+    description="Galleria con la maggior parte dei lavori di arte generativa che ho fatto nella vita"
+>
     <section>
         <div class="principal">
             <div class="content">
                 <h1>Art</h1>
+                <p class="center large">Cose artistiche che faccio in alcuni momenti in cui voglio spasticare.</p>
                 <p class="center large">
-                    Cose artistiche che faccio in alcuni momenti in cui voglio spasticare. La maggior parte sono di
-                    <Link href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</Link>: alcuni realizzati solo con programmi di grafica, altri
-                    parzialmente realizzati da programmi scritti a mano che generavano un'immagine che poi veniva ritoccata.
+                    La maggior parte sono di <Link href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</Link>:
+                    alcuni li ho realizzati solo con programmi di grafica (buon vecchio
+                    <Link href="https://www.getpaint.net/">Paint.NET</Link> e giusto alcuni con
+                    <Link href="https://www.gimp.org/">Gimp</Link>), altri parzialmente realizzati da programmi scritti a mano che
+                    producevano un'immagine che poi processavo in altri programmi.
+                </p>
+                <p class="center large">
+                    Recentemente invece ho iniziato ad usare <Link href="https://procreate.com/">Procreate</Link> per tutti i miei
+                    ultimi lavori più recenti.
+                </p>
+                <p class="center large">
+                    <strong>Nota.</strong> Sentitevi liberi di scaricare direttamente le immagini ed usarle come sfondi, basta fare
+                    tasto destro sull'immagine e scaricarla.
                 </p>
             </div>
         </div>
+        <h2>Procreate (Estate '23 &ndash; Oggi)</h2>
+        <div class="art-grid">
+            <img src="/data/art/procreate/Fire_Fluid@w1920.jpg" alt="Fire_Fluid, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_2@w1920.jpg" alt="Fluid_2, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Azure_Noise@w1920.jpg" alt="Fluid_Azure_Noise, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Black_And_White@w1920.jpg" alt="Fluid_Black_And_White, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Black_Blue@w1920.jpg" alt="Fluid_Black_Blue, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Blue@w1920.jpg" alt="Fluid_Blue, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Blue_Lines@w1920.jpg" alt="Fluid_Blue_Lines, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Fine_Streams_Purple@w1920.jpg" alt="Fluid_Fine_Streams_Purple, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Gray_Bloom@w1920.jpg" alt="Fluid_Gray_Bloom, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Gray_Smooth_2_2@w1920.jpg" alt="Fluid_Gray_Smooth_2_2, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Green@w1920.jpg" alt="Fluid_Green, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Light_Gray@w1920.jpg" alt="Fluid_Light_Gray, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Orange_Purple@w1920.jpg" alt="Fluid_Orange_Purple, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Purple@w1920.jpg" alt="Fluid_Purple, width 1920, jpg" />
+            <img src="/data/art/procreate/Fluid_Purple_Deep@w1920.jpg" alt="Fluid_Purple_Deep, width 1920, jpg" />
+            <img
+                src="/data/art/procreate/Fluid_Purple_Wave_Horizontal@w1920.jpg"
+                alt="Fluid_Purple_Wave_Horizontal, width 1920, jpg"
+            />
+            <img src="/data/art/procreate/Fluid_Rainbow_RGB@w1920.jpg" alt="Fluid_Rainbow_RGB, width 1920, jpg" />
+            <img src="/data/art/procreate/Green_Fluid@w1920.jpg" alt="Green_Fluid, width 1920, jpg" />
+            <img src="/data/art/procreate/Horizontal_Fluid_Azure@w1920.jpg" alt="Horizontal_Fluid_Azure, width 1920, jpg" />
+            <img src="/data/art/procreate/Horizontal_Fluid_Flow@w1920.jpg" alt="Horizontal_Fluid_Flow, width 1920, jpg" />
+            <img src="/data/art/procreate/Noise_Dark_Purple_Fluid@w1920.jpg" alt="Noise_Dark_Purple_Fluid, width 1920, jpg" />
+            <img src="/data/art/procreate/Noise_Purple_Fluid_2@w1920.jpg" alt="Noise_Purple_Fluid_2, width 1920, jpg" />
+            <img src="/data/art/procreate/Noise_Purple_Fluid_@w1920.jpg" alt="Noise_Purple_Fluid_, width 1920, jpg" />
+            <img src="/data/art/procreate/Purple_Fluid_Two_Colors@w1920.jpg" alt="Purple_Fluid_Two_Colors, width 1920, jpg" />
+            <img src="/data/art/procreate/Spikes@w1920.jpg" alt="Spikes, width 1920, jpg" />
+            <img
+                src="/data/art/procreate/Two_Color_Horizontal_Fluid@w1920.jpg"
+                alt="Two_Color_Horizontal_Fluid, width 1920, jpg"
+            />
+            <img src="/data/art/procreate/Untitled_Artwork@w1920.jpg" alt="Untitled_Artwork, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_2@w1920.jpg" alt="Untitled_Artwork_2, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_3@w1920.jpg" alt="Untitled_Artwork_3, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_4@w1920.jpg" alt="Untitled_Artwork_4, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_5@w1920.jpg" alt="Untitled_Artwork_5, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_6@w1920.jpg" alt="Untitled_Artwork_6, width 1920, jpg" />
+            <img src="/data/art/procreate/Untitled_Artwork_7@w1920.jpg" alt="Untitled_Artwork_7, width 1920, jpg" />
+        </div>
+        <h2>Vecchi Lavori</h2>
         <div class="art-list">
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2020_sky-4-2-1@w1920.webp")} alt="fluid, vortices, sky, stars, purple" />
+                <img src={prependBaseUrl('/data/art/webp/2020_sky-4-2-1@w1920.webp')} alt="fluid, vortices, sky, stars, purple" />
                 <div class="caption">
                     <div class="date">2020</div>
                     <p>
-                        In questo avevo provato oltre ad aggiungere la turbolenza anche a mettere un po' di rumore prima ed alla fine ha aggiunto
-                        questo effetto molto simile a delle stelle.
+                        In questo avevo provato oltre ad aggiungere la turbolenza anche a mettere un po' di rumore prima ed alla
+                        fine ha aggiunto questo effetto molto simile a delle stelle.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2019_purple_swirl@w1920.webp")} alt="purple, swirl, pygame, 90-degree turns" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2019_purple_swirl@w1920.webp')}
+                    alt="purple, swirl, pygame, 90-degree turns"
+                />
                 <div class="caption">
                     <div class="date">2019</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo invece è viola ed il punto di partenza è una sola linea orizzontale
-                        da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo invece è viola ed il punto di partenza è una
+                        sola linea orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_triangles_ii___purple@w1920.webp")} alt="triangles, purple, blender" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_triangles_ii___purple@w1920.webp')}
+                    alt="triangles, purple, blender"
+                />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_triangles_i___red@w1920.webp")} alt="triangles, red, blender" />
+                <img src={prependBaseUrl('/data/art/webp/2017_triangles_i___red@w1920.webp')} alt="triangles, red, blender" />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_swirl_ii___magenta@w1920.webp")} alt="purple, swirl, magenta, pygame, 90-degree turns" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_swirl_ii___magenta@w1920.webp')}
+                    alt="purple, swirl, magenta, pygame, 90-degree turns"
+                />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è rossiccio ed ha come linea di partenza una spezzata
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è rossiccio ed ha come linea di partenza una
+                        spezzata tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                    </p>
+                </div>
+            </div>
+            <div class="art-item">
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_swirl_i___blue@w1920.webp')}
+                    alt="blue, swirl, magenta, pygame, 90-degree turns"
+                />
+                <div class="caption">
+                    <div class="date">2017</div>
+                    <p>
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata
                         tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_swirl_i___blue@w1920.webp")} alt="blue, swirl, magenta, pygame, 90-degree turns" />
-                <div class="caption">
-                    <div class="date">2017</div>
-                    <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata tendenzialmente
-                        orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
-                    </p>
-                </div>
-            </div>
-            <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_12_25532199@w1920.webp")} alt="???" />
+                <img src={prependBaseUrl('/data/art/webp/2017_12_25532199@w1920.webp')} alt="???" />
                 <div class="caption">
                     <div class="date">2017/12</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata tendenzialmente
-                        orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata
+                        tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_06_18891671@w1920.webp")} alt="???" />
+                <img src={prependBaseUrl('/data/art/webp/2017_06_18891671@w1920.webp')} alt="???" />
                 <div class="caption">
                     <div class="date">2017/06</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blu/viola e basato su delle linee generate casualmente che vengono
-                        man mano sovrapposte alle precedenti.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blu/viola e basato su delle linee generate
+                        casualmente che vengono man mano sovrapposte alle precedenti.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_red_yellow_fluid_horizontal@w1920.webp")} alt="liquid, red, yellow, vortices, turbulence" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_red_yellow_fluid_horizontal@w1920.webp')}
+                    alt="liquid, red, yellow, vortices, turbulence"
+                />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
-                        plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
+                        Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_light_blue_fluid_central@w1920.webp")} alt="liquid, blue, vortices, turbulence" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_light_blue_fluid_central@w1920.webp')}
+                    alt="liquid, blue, vortices, turbulence"
+                />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        In questo invece ho tentato di partire da una base quadratosa ma senza troppo successo, però boh alla fine non è male
-                        l'effetto.
+                        In questo invece ho tentato di partire da una base quadratosa ma senza troppo successo, però boh alla fine
+                        non è male l'effetto.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_first_horizontal_fluid@w1920.webp")} alt="liquid, blue, vortices, turbulence, all colors" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_first_horizontal_fluid@w1920.webp')}
+                    alt="liquid, blue, vortices, turbulence, all colors"
+                />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo è uno dei primissimi lavori che ho fatto ed anche uno dei miei preferiti. La base è sempre la stessa, turbonenza su una
-                        base di linee colorate.
+                        Questo è uno dei primissimi lavori che ho fatto ed anche uno dei miei preferiti. La base è sempre la
+                        stessa, turbonenza su una base di linee colorate.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_14481925@w1920.webp")} alt="liquid, vortices, turbulence, red, yellow" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_14481925@w1920.webp')}
+                    alt="liquid, vortices, turbulence, red, yellow"
+                />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
-                        plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
+                        Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl("/data/art/webp/2017_13047706@w1920.webp")} alt="liquid, vortices, turbulence, red, yellow" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_13047706@w1920.webp')}
+                    alt="liquid, vortices, turbulence, red, yellow"
+                />
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con Paint.NET e qualche
-                        plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
+                        Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
-            <p class="serif">
-                TODO: Altri vecchi lavori devo ancora aggiungerli
-            </p>
+            <p class="serif">TODO: Altri vecchi lavori devo ancora aggiungerli</p>
         </div>
     </section>
 </BaseLayout>
