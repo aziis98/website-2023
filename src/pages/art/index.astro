@@ -4,9 +4,11 @@ import { prependBaseUrl, websiteName } from '../../utils'
 import Link from '../../components/Link.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate/*.jpg')).map(({ default: p }) =>
-    p.slice('/public'.length)
-)
+const stripPrefix = (s, prefix) => (s.startsWith(prefix) ? s.slice(prefix.length) : s)
+
+const basename = s => s.split('/').pop()
+
+const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate/*.jpg')).map(({ default: p }) => basename(p))
 
 console.log(procreateArtImages)
 ---
@@ -39,45 +41,102 @@ console.log(procreateArtImages)
         </div>
         <h2>Procreate (Estate '23 &ndash; Oggi)</h2>
         <div class="art-grid">
-            <img src="/data/art/procreate/Fire_Fluid@w1920.jpg" alt="Fire_Fluid, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_2@w1920.jpg" alt="Fluid_2, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Azure_Noise@w1920.jpg" alt="Fluid_Azure_Noise, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Black_And_White@w1920.jpg" alt="Fluid_Black_And_White, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Black_Blue@w1920.jpg" alt="Fluid_Black_Blue, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Blue@w1920.jpg" alt="Fluid_Blue, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Blue_Lines@w1920.jpg" alt="Fluid_Blue_Lines, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Fine_Streams_Purple@w1920.jpg" alt="Fluid_Fine_Streams_Purple, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Gray_Bloom@w1920.jpg" alt="Fluid_Gray_Bloom, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Gray_Smooth_2_2@w1920.jpg" alt="Fluid_Gray_Smooth_2_2, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Green@w1920.jpg" alt="Fluid_Green, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Light_Gray@w1920.jpg" alt="Fluid_Light_Gray, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Orange_Purple@w1920.jpg" alt="Fluid_Orange_Purple, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Purple@w1920.jpg" alt="Fluid_Purple, width 1920, jpg" />
-            <img src="/data/art/procreate/Fluid_Purple_Deep@w1920.jpg" alt="Fluid_Purple_Deep, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Fire_Fluid@w1920.jpg')} alt="Fire_Fluid, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_2@w1920.jpg')} alt="Fluid_2, width 1920, jpg" />
             <img
-                src="/data/art/procreate/Fluid_Purple_Wave_Horizontal@w1920.jpg"
+                src={prependBaseUrl('/data/art/procreate/Fluid_Azure_Noise@w1920.jpg')}
+                alt="Fluid_Azure_Noise, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Black_And_White@w1920.jpg')}
+                alt="Fluid_Black_And_White, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Black_Blue@w1920.jpg')} alt="Fluid_Black_Blue, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Blue@w1920.jpg')} alt="Fluid_Blue, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Blue_Lines@w1920.jpg')} alt="Fluid_Blue_Lines, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Fine_Streams_Purple@w1920.jpg')}
+                alt="Fluid_Fine_Streams_Purple, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Gray_Bloom@w1920.jpg')} alt="Fluid_Gray_Bloom, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Gray_Smooth_2_2@w1920.jpg')}
+                alt="Fluid_Gray_Smooth_2_2, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Green@w1920.jpg')} alt="Fluid_Green, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Light_Gray@w1920.jpg')} alt="Fluid_Light_Gray, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Orange_Purple@w1920.jpg')}
+                alt="Fluid_Orange_Purple, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Fluid_Purple@w1920.jpg')} alt="Fluid_Purple, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Purple_Deep@w1920.jpg')}
+                alt="Fluid_Purple_Deep, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Purple_Wave_Horizontal@w1920.jpg')}
                 alt="Fluid_Purple_Wave_Horizontal, width 1920, jpg"
             />
-            <img src="/data/art/procreate/Fluid_Rainbow_RGB@w1920.jpg" alt="Fluid_Rainbow_RGB, width 1920, jpg" />
-            <img src="/data/art/procreate/Green_Fluid@w1920.jpg" alt="Green_Fluid, width 1920, jpg" />
-            <img src="/data/art/procreate/Horizontal_Fluid_Azure@w1920.jpg" alt="Horizontal_Fluid_Azure, width 1920, jpg" />
-            <img src="/data/art/procreate/Horizontal_Fluid_Flow@w1920.jpg" alt="Horizontal_Fluid_Flow, width 1920, jpg" />
-            <img src="/data/art/procreate/Noise_Dark_Purple_Fluid@w1920.jpg" alt="Noise_Dark_Purple_Fluid, width 1920, jpg" />
-            <img src="/data/art/procreate/Noise_Purple_Fluid_2@w1920.jpg" alt="Noise_Purple_Fluid_2, width 1920, jpg" />
-            <img src="/data/art/procreate/Noise_Purple_Fluid_@w1920.jpg" alt="Noise_Purple_Fluid_, width 1920, jpg" />
-            <img src="/data/art/procreate/Purple_Fluid_Two_Colors@w1920.jpg" alt="Purple_Fluid_Two_Colors, width 1920, jpg" />
-            <img src="/data/art/procreate/Spikes@w1920.jpg" alt="Spikes, width 1920, jpg" />
             <img
-                src="/data/art/procreate/Two_Color_Horizontal_Fluid@w1920.jpg"
+                src={prependBaseUrl('/data/art/procreate/Fluid_Rainbow_RGB@w1920.jpg')}
+                alt="Fluid_Rainbow_RGB, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Green_Fluid@w1920.jpg')} alt="Green_Fluid, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Horizontal_Fluid_Azure@w1920.jpg')}
+                alt="Horizontal_Fluid_Azure, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Horizontal_Fluid_Flow@w1920.jpg')}
+                alt="Horizontal_Fluid_Flow, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Noise_Dark_Purple_Fluid@w1920.jpg')}
+                alt="Noise_Dark_Purple_Fluid, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Noise_Purple_Fluid_2@w1920.jpg')}
+                alt="Noise_Purple_Fluid_2, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Noise_Purple_Fluid_@w1920.jpg')}
+                alt="Noise_Purple_Fluid_, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Purple_Fluid_Two_Colors@w1920.jpg')}
+                alt="Purple_Fluid_Two_Colors, width 1920, jpg"
+            />
+            <img src={prependBaseUrl('/data/art/procreate/Spikes@w1920.jpg')} alt="Spikes, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Two_Color_Horizontal_Fluid@w1920.jpg')}
                 alt="Two_Color_Horizontal_Fluid, width 1920, jpg"
             />
-            <img src="/data/art/procreate/Untitled_Artwork@w1920.jpg" alt="Untitled_Artwork, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_2@w1920.jpg" alt="Untitled_Artwork_2, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_3@w1920.jpg" alt="Untitled_Artwork_3, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_4@w1920.jpg" alt="Untitled_Artwork_4, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_5@w1920.jpg" alt="Untitled_Artwork_5, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_6@w1920.jpg" alt="Untitled_Artwork_6, width 1920, jpg" />
-            <img src="/data/art/procreate/Untitled_Artwork_7@w1920.jpg" alt="Untitled_Artwork_7, width 1920, jpg" />
+            <img src={prependBaseUrl('/data/art/procreate/Untitled_Artwork@w1920.jpg')} alt="Untitled_Artwork, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_2@w1920.jpg')}
+                alt="Untitled_Artwork_2, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_3@w1920.jpg')}
+                alt="Untitled_Artwork_3, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_4@w1920.jpg')}
+                alt="Untitled_Artwork_4, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_5@w1920.jpg')}
+                alt="Untitled_Artwork_5, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_6@w1920.jpg')}
+                alt="Untitled_Artwork_6, width 1920, jpg"
+            />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_7@w1920.jpg')}
+                alt="Untitled_Artwork_7, width 1920, jpg"
+            />
         </div>
         <h2>Vecchi Lavori</h2>
         <div class="art-list">
