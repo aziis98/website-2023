@@ -51,9 +51,9 @@ Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 s
 
 Note alle dispense del corso di Meccanica Razionale dell'anno 2023/2024. Spesso ci sono molti conti e dimostrazioni con dettagli mancanti, queste sono le mie note (scritte a mano sul tablet) con la maggior parte delle dimostrazioni annotate e qualche disegnino dove possibile.
 
--   [Note di Meccanica Razionale](../../public/data/notes/meccanica-razionale-teoria.pdf)
+-   [Note di Meccanica Razionale](../data/notes/meccanica-razionale-teoria.pdf)
     
--   [PDF con tutti i capitoli concatenati](../../public/data/notes/MR-full.pdf) delle dispense del corso scritte dal professore (lo metto perché potrebbe non essere aggiornato con il corso attuale)
+-   [PDF con tutti i capitoli concatenati](../data/notes/MR-full.pdf) delle dispense del corso scritte dal professore (lo metto perché potrebbe non essere aggiornato con il corso attuale)
 
 Altri link utili, principalmente compiti vecchi con soluzioni:
 
