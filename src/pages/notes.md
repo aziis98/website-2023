@@ -51,9 +51,9 @@ Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 s
 
 Note alle dispense del corso di Meccanica Razionale dell'anno 2023/2024. Spesso ci sono molti conti e dimostrazioni con dettagli mancanti, queste sono le mie note (scritte a mano sul tablet) con la maggior parte delle dimostrazioni annotate e qualche disegnino dove possibile.
 
--   [Note di Meccanica Razionale](../data/notes/meccanica-razionale-teoria.pdf)
+-   [Note di Meccanica Razionale](https://static.aziis98.com/appunti/meccanica-razionale-teoria.pdf)
     
--   [PDF con tutti i capitoli concatenati](../data/notes/MR-full.pdf) delle dispense del corso scritte dal professore (lo metto perché potrebbe non essere aggiornato con il corso attuale)
+-   [PDF con tutti i capitoli concatenati](https://static.aziis98.com/appunti/MR-full.pdf) delle dispense del corso scritte dal professore (lo metto perché potrebbe non essere aggiornato con il corso attuale)
 
 Altri link utili, principalmente compiti vecchi con soluzioni:
 
@@ -68,3 +68,11 @@ Altri link utili, principalmente compiti vecchi con soluzioni:
 -   Qui c'è una spiegazione più dettagliata della [trottola di Lagrange](https://it.wikipedia.org/wiki/Trottola#Modello_fisico) con dei disegni dei tre tipi di moto:
 
     <http://www.mat.uniroma3.it/users/gentile/2018-2019/FM410/testo/volume2-193-214.pdf>
+
+#### Algorigmi e Strutture Dati
+
+Appunti scritti a mano sul tablet per le slide del corso di Algoritmi e Strutture Dati dell'anno 2023/2024.
+
+-   [Slide del corso concatenate](https://static.aziis98.com/appunti/asd-slides.pdf)
+
+-   [Appunti di Algoritmi e Strutture Dati](https://static.aziis98.com/appunti/asd-appunti.pdf)
