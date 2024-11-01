@@ -69,7 +69,7 @@ Altri link utili, principalmente compiti vecchi con soluzioni:
 
     <http://www.mat.uniroma3.it/users/gentile/2018-2019/FM410/testo/volume2-193-214.pdf>
 
-#### Algorigmi e Strutture Dati
+#### Algoritmi e Strutture Dati
 
 Appunti scritti a mano sul tablet per le slide del corso di Algoritmi e Strutture Dati dell'anno 2023/2024.
 
