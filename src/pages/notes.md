@@ -17,37 +17,21 @@ In questo pagina raccoglierò tutti gli appunti che ho scritto in _LaTeX_ o sul 
 
 In caso di errori o problemi, non esitate a contattarmi.
 
-## Università di Pisa &ndash; Matematica
+## Matematica &ndash; Università di Pisa
+
+Raccolta di appunti presi in Triennale e Magistrale all'Università di Pisa, in cima ci sono le cose più recenti.
 
 ### Triennale
 
-Appunti presi in triennale
+#### Algoritmi e Strutture Dati &ndash; 2023/2024
 
-#### Geometria 2
+Appunti scritti a mano sul tablet per le slide del corso di Algoritmi e Strutture Dati dell'anno 2023/2024.
 
-Raccolta di appunti tratti dalle lezioni del corso dell'anno 2019/2020 del professor _Frigerio_.
+-   [Slide del corso concatenate](https://static.aziis98.com/appunti/asd-slides.pdf)
 
--   [Dispense di Geometria 2](https://gitlab.com/aziis98/geometria-2/-/raw/master/main.pdf) (link sempre all'ultima versione)
+-   [Appunti di Algoritmi e Strutture Dati](https://static.aziis98.com/appunti/asd-appunti.pdf)
 
--   [Repo git delle dispense di G2](https://gitlab.com/aziis98/geometria-2)
-
-#### Logica
-
-Formulario per il corso del professor _Berarducci_ dell'anno 2020/2021.
-
--   [Formulario di Logica](https://gitlab.com/aziis98-notes/formulari/logica/-/raw/main/main.pdf) (link sempre all'ultima versione)
-
--   [Repo git del formulario di Logica](https://gitlab.com/aziis98-notes/formulari/logica)
-
-#### Analisi 3
-
-Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 scritte in collaborazione con [@ar-lli](https://ar-lli.github.io/).
-
--   [Dispense di Analisi 3](https://github.com/aziis98/appunti-analisi-3/raw/main/main.pdf) (link sempre all'ultima versione)
-
--   [Repo git delle dispense di Analisi 3](https://github.com/aziis98/appunti-analisi-3)
-
-#### Meccanica Razionale
+#### Meccanica Razionale &ndash; 2023/2024
 
 Note alle dispense del corso di Meccanica Razionale dell'anno 2023/2024. Spesso ci sono molti conti e dimostrazioni con dettagli mancanti, queste sono le mie note (scritte a mano sul tablet) con la maggior parte delle dimostrazioni annotate e qualche disegnino dove possibile.
 
@@ -69,10 +53,26 @@ Altri link utili, principalmente compiti vecchi con soluzioni:
 
     <http://www.mat.uniroma3.it/users/gentile/2018-2019/FM410/testo/volume2-193-214.pdf>
 
-#### Algoritmi e Strutture Dati
+#### Analisi 3 &ndash; 2021/2022
 
-Appunti scritti a mano sul tablet per le slide del corso di Algoritmi e Strutture Dati dell'anno 2023/2024.
+Dispense per il corso di Analisi 3 del professor _Alberti_ dell'anno 2021/2022 scritte in collaborazione con [@ar-lli](https://ar-lli.github.io/).
 
--   [Slide del corso concatenate](https://static.aziis98.com/appunti/asd-slides.pdf)
+-   [Dispense di Analisi 3](https://github.com/aziis98/appunti-analisi-3/raw/main/main.pdf) (link sempre all'ultima versione)
 
--   [Appunti di Algoritmi e Strutture Dati](https://static.aziis98.com/appunti/asd-appunti.pdf)
+-   [Repo git delle dispense di Analisi 3](https://github.com/aziis98/appunti-analisi-3)
+
+#### Logica &ndash; 2020/2021
+
+Formulario per il corso del professor _Berarducci_ dell'anno 2020/2021.
+
+-   [Formulario di Logica](https://gitlab.com/aziis98-notes/formulari/logica/-/raw/main/main.pdf) (link sempre all'ultima versione)
+
+-   [Repo git del formulario di Logica](https://gitlab.com/aziis98-notes/formulari/logica)
+
+#### Geometria 2 &ndash; 2019/2020
+
+Raccolta di appunti tratti dalle lezioni del corso dell'anno 2019/2020 del professor _Frigerio_.
+
+-   [Dispense di Geometria 2](https://gitlab.com/aziis98/geometria-2/-/raw/master/main.pdf) (link sempre all'ultima versione)
+
+-   [Repo git delle dispense di G2](https://gitlab.com/aziis98/geometria-2)

@@ -128,6 +128,12 @@ I think this is a nice way to compact the skipped lines and print them in a sing
 
 TODO: ...
 
+## Copy vs Clone
+
+Initially I didn't really know the difference between `Copy` and `Clone` in Rust. I thought that `Copy` was more efficient than `Clone` and so I should always use `Copy` when possible.
+
+This made me end up trying to write specializations for being `Copy` or `Clone`, but I later found out that `Copy: Clone`. Actually Rust is smart enough to know that if a type is `Copy` then it can be `Clone`d without any overhead. This means that to write a generic function that works with both `Copy` and `Clone` types one can simply use `T: Clone` as a bound.
+
 ## Edge type classification
 
 The next step was to classify the edge types (tree, forward, backward, cross) in the graph. To do this I found an implementation using node visit times.
@@ -227,6 +233,78 @@ def classify_iter(g):
 Here the continuation stack is a list of tuples (this will later become a nice enum in Rust). The `more` parameter is used to pass additional information between states.
 
 TODO: ...
+
+## Libraries
+
+### argh
+
+I initially tried to use `clap` for the CLI, but I found it a bit too complex for my use case as I initally wanted to have multiple sub-commands. Then I found `argh` from Google that has a really nice annotation-based API for defining CLI arguments.
+
+```rust
+#[derive(FromArgs, PartialEq, Debug)]
+/// Strumento CLI per il progetto di Algoritmi e Strutture Dati 2024
+struct CliTool {
+    #[argh(option, short = 'i')]
+    /// file to read
+    input: String,
+
+    #[argh(option, short = 'c', default = "1")]
+    /// number of paths to visit
+    path_count: usize,
+
+    #[argh(option, short = 'p', default = "\"ACGT\".to_string()")]
+    /// k-mer pattern to search
+    pattern: String,
+
+    #[argh(option, short = 'k', default = "4")]
+    /// k-mer length
+    kmer_size: usize,
+}
+```
+
+even for sub-commands it's quite simple, previously I had the following
+
+```rust
+#[derive(FromArgs, PartialEq, Debug)]
+struct CliTool {
+    #[argh(subcommand)]
+    nested: CliSubcommands,
+}
+
+#[derive(FromArgs, PartialEq, Debug)]
+#[argh(subcommand)]
+enum CliSubcommands {
+    Show(CommandShow),
+}
+
+#[derive(FromArgs, PartialEq, Debug)]
+/// Parse and show the content of a file
+#[argh(subcommand, name = "show")]
+struct CommandShow {
+    #[argh(option, short = 'i')]
+    /// file to read
+    input: String,
+    #[argh(option, short = 'c', default = "1")]
+    /// number of paths to visit
+    path_count: usize,
+    #[argh(option, short = 'p', default = "\"ACGT\".to_string()")]
+    /// k-mer pattern to search
+    pattern: String,
+    #[argh(option, short = 'k', default = "4")]
+    /// k-mer length
+    k: usize,
+}
+```
+
+that was very nice to use with match statements.
+
+### indicatif
+
+I knew Rust had a crate similar to `tqdm` in Python, so I searched for it and found `indicatif`. It's quite simple to use for iterators that have a known length as one can simply call `.iter().progress()` on any iterator using the provided extension trait.
+
+I don't know how much overhead this adds to the program, but I have multiple functions that take some minutes to run and this lets me know if the program is still running or if it's stuck without flooding the console with `println!` messages.
+
+The only problem I had was that I wanted to show a progress bar even for the parsing of the file, but I didn't know the length of the file before reading it. I solved this by simply doing a first scan of the file for `\n` followed by the actualy parsing. I'm not too sure but when I added this the second run seemed a bit faster then before maybe because the first scan brings the file into the filesystem cache.
 
 ## Conclusion
 

@@ -510,14 +510,14 @@ p.short {
     }
 
     .profile {
-        // border-radius: 100%;
+        border-radius: 100%;
 
         background: var(--card-bg);
-        border-radius: 2px;
+        // border-radius: 2px;
         border: var(--border);
         padding: 3px;
 
-        width: 10rem;
+        width: 12rem;
 
         box-shadow: 0 0 16px #00000040;
     }
@@ -745,7 +745,7 @@ body {
         }
 
         .nav-item {
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
 
             & > a {
                 padding: 0.25rem 0.5rem;
@@ -766,8 +766,8 @@ body {
         }
 
         .rule {
-            height: calc(100% - 1.5rem);
-            width: 2px;
+            height: calc(100% - 1.25rem);
+            width: 3px;
             background: var(--border-color);
 
             @include media-screen-mobile() {
