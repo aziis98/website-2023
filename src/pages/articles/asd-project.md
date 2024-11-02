@@ -176,22 +176,22 @@ I tried to naively translate this to Rust, but this function is recursive and en
 Let's first notice the following about the call stack of the recursive function:
 
 ```
-> dfs(g)
-    > dfs_visit(g, v_1)
+> call to dfs(g)
+    > call to dfs_visit(g, v_1)
     . for n in g.neighbors(v_1)
-        > n = n_1 (not visited)
-        > calling dfs_visit(g, n_1)
+        . n = n_1 (not visited)
+        > call to dfs_visit(g, n_1)
             ...
         
-        > n = n_2 (not visited)
-        > calling dfs_visit(g, n_2)
+        . n = n_2 (not visited)
+        > call to dfs_visit(g, n_2)
             ...
         
-        > n = n_3 (maybe this now is already visited)
+        . n = n_3 (maybe this now is already visited)
         > skipping the call to dfs_visit
             
-        > n = n_4 (not visited)
-        > calling dfs_visit(g, n_4)
+        . n = n_4 (not visited)
+        > call to dfs_visit(g, n_4)
             ...
 ```
 
