@@ -334,4 +334,31 @@ The only problem I had was that I wanted to show a progress bar even for the par
 
 ## Conclusion
 
+For me the main problem with Rust is that It's not for fast prototyping. I didn't have to fight too much with the borrow checker as I used `T: Clone` most of the time and relied mostly on moving values around. I think it's far harder to write generic code with lifetimes. For example I definied a _graph_ as
+
+```rust
+#[derive(Debug, Clone)]
+pub struct AdjacencyGraph<V>
+where
+    V: Clone,
+{
+    nodes: BTreeSet<V>,
+    adjacencies: BTreeMap<V, BTreeSet<V>>,
+} 
+```
+
+a possible alternative using lifetimes would be
+
+```rust
+pub struct AdjacencyGraph<'a, V>
+{
+    nodes: Vec<&'a V>,
+    adjacencies: BTreeMap<usize, BTreeSet<usize>>,
+}
+```
+
+I think this would improve a bit the performance by removing the need to always clone or copy the values, but it would make the code harder to read and write. 
+
+I think Rust is a great language for writing libraries and performance-critical code, but I don't think it's the best for making experiments. I hope that in the future we will have languages that are as fast as Rust but with better support for fast prototyping, maybe through gradual typing. 
+
 TODO: ...
