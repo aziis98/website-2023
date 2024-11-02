@@ -1,12 +1,12 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
-title: Pangenome Graphs in Rust
+title: (WIP) Pangenome Graphs in Rust
 description: Recently I've done a project in Rust for a course at my university called "Algorithms and Data Structures" about Pangenome Graphs.
 tags: ["rust", "pangenome", "graphs", "lang-en"]
 publish_date: 2024/11/02
 ---
 
-# Pangenome Graphs in Rust
+# (WIP) Pangenome Graphs in Rust
 
 I recently did a project for a course at my university called "Algorithms and Data Structures". It was about "Pangenome Graphs", we had to implement parsing for a specific format and then implement some algorithms on top of it.
 
@@ -102,7 +102,7 @@ pub fn parse_source<R: Read>(reader: R, line_count: u64) -> io::Result<Vec<Entry
 }
 ```
 
-#### Skipped line compaction
+#### Skipped Line Compaction
 
 I thing I really like about Web Browser's DevTools is the ability to automatically count repeated `console.log` messages, I wanted to do something similar for the parser. I wanted to see how many lines of each type were skipped without flooding the console with messages.
 
@@ -128,13 +128,13 @@ I think this is a nice way to compact the skipped lines and print them in a sing
 
 TODO: ...
 
-## Copy vs Clone
+## `Copy` vs `Clone`
 
 Initially I didn't really know the difference between `Copy` and `Clone` in Rust. I thought that `Copy` was more efficient than `Clone` and so I should always use `Copy` when possible.
 
 This made me end up trying to write specializations for being `Copy` or `Clone`, but I later found out that `Copy: Clone`. Actually Rust is smart enough to know that if a type is `Copy` then it can be `Clone`d without any overhead. This means that to write a generic function that works with both `Copy` and `Clone` types one can simply use `T: Clone` as a bound.
 
-## Edge type classification
+## Edge Type Classification
 
 The next step was to classify the edge types (tree, forward, backward, cross) in the graph. To do this I found an implementation using node visit times.
 
@@ -172,6 +172,32 @@ def dfs_visit(g, v, results, parent=None):
 ```
 
 I tried to naively translate this to Rust, but this function is recursive and ended up in stack overflow for the large test datasets. So I tried to rewrite it using an iterative approach.
+
+Let's first notice the following about the call stack of the recursive function:
+
+```
+> dfs(g)
+    > dfs_visit(g, v_1)
+    . for n in g.neighbors(v_1)
+        > n = n_1 (not visited)
+        > calling dfs_visit(g, n_1)
+            ...
+        
+        > n = n_2 (not visited)
+        > calling dfs_visit(g, n_2)
+            ...
+        
+        > n = n_3 (maybe this now is already visited)
+        > skipping the call to dfs_visit
+            
+        > n = n_4 (not visited)
+        > calling dfs_visit(g, n_4)
+            ...
+```
+
+As we can see when we call `dfs_visit` we are actually pausing the current function, doing the recursive call with new arguments and then resuming the current function from where we left off in the for loop. So to convert this to an iterative function we need to keep track of how to resume and _"continue"_ the previous function.
+
+The extreme of doing this is the style of ["continuation-passing style" (CPS)](https://en.wikipedia.org/wiki/Continuation-passing_style) where each statement is a function that takes a continuation function as an argument that the statement will call with the new state.
 
 The main idea is to convert the recursive function to an iterative one using a stack of continuations represented as a state machine. Firstly I converted the recursive Python function to an iterative (Rust is not a good language for fast prototyping):
 
