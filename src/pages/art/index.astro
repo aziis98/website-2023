@@ -9,8 +9,6 @@ const stripPrefix = (s, prefix) => (s.startsWith(prefix) ? s.slice(prefix.length
 const basename = s => s.split('/').pop()
 
 const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate/*.jpg')).map(({ default: p }) => basename(p))
-
-console.log(procreateArtImages)
 ---
 
 <BaseLayout
