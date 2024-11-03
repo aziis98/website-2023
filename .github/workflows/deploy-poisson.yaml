@@ -13,7 +13,7 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_ed25519_github
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519_github
-          ssh-keyscan -H poisson.phc.dm.unipi.it > ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" >> ~/.ssh/known_hosts
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
