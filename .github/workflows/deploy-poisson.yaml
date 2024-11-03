@@ -51,4 +51,4 @@ jobs:
         run: npm run build:poisson
 
       - name: Deploy
-        run: rsync -avz out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
+        run: rsync -e 'ssh -i ~/.ssh/id_ed25519_github' -avz out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
