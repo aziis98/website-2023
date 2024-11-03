@@ -1,0 +1,26 @@
+name: Deploy to Poisson
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@4
+      - name: Write SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_ed25519_github
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519_github
+          ssh-keyscan -H poisson.phc.dm.unipi.it > ~/.ssh/known_hosts
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '23'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build:poisson
+      - name: Deploy
+        run: rsync -avz out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
