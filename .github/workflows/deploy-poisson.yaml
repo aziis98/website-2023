@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
       - name: Write SSH keys
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_ed25519_github
