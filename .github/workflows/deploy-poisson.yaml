@@ -14,11 +14,8 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/known_hosts
           install -m 600 -D /dev/null ~/.ssh/id_ed25519_github
-          install -m 600 -D /dev/null ~/.ssh/id_ed25519_github.pub
-
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519_github
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_ed25519_github.pub
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
