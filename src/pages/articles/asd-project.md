@@ -104,7 +104,7 @@ pub fn parse_source<R: Read>(reader: R, line_count: u64) -> io::Result<Vec<Entry
 
 #### Skipped Line Compaction
 
-I thing I really like about Web Browser's DevTools is the ability to automatically count repeated `console.log` messages, I wanted to do something similar for the parser. I wanted to see how many lines of each type were skipped without flooding the console with messages.
+What I think I really like about Web Browser's DevTools is the ability to automatically count repeated `console.log` messages, I wanted to do something similar for the parser. I wanted to see how many lines of each type were skipped without flooding the console with messages.
 
 ```rust
 for (s, count) in skipped.iter().fold(Vec::new(), |mut acc, s| {
