@@ -66,6 +66,17 @@ $device-small: $article-width + 4rem;
 // Components
 //
 
+.content {
+    width: 100%;
+    max-width: 80ch;
+
+    font-size: 18px;
+
+    h1 {
+        font-size: 3.5rem;
+    }
+}
+
 .card {
     padding: 1rem;
 
@@ -75,6 +86,12 @@ $device-small: $article-width + 4rem;
     border-radius: 2px;
     border: var(--border);
     box-shadow: var(--card-shadow);
+    background: var(--card-bg);
+
+    &.content {
+        padding: 3rem;
+        max-width: 90ch;
+    }
 }
 
 //
@@ -522,17 +539,6 @@ p.short {
         box-shadow: 0 0 16px #00000040;
     }
 
-    .content {
-        width: 100%;
-        max-width: 80ch;
-
-        font-size: 18px;
-
-        h1 {
-            font-size: 3.5rem;
-        }
-    }
-
     .large {
         font-size: 18px;
         line-height: 1.75;
@@ -713,8 +719,7 @@ body {
 
         box-shadow: var(--card-shadow);
 
-        padding-left: 1rem;
-        padding-right: 0.75rem;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
 
         @include media-screen-tablet() {
             max-width: $article-width + 4rem;
@@ -745,8 +750,6 @@ body {
         }
 
         .nav-item {
-            padding: 0.5rem 0;
-
             & > a {
                 padding: 0.25rem 0.5rem;
                 font-weight: 500;
@@ -766,7 +769,7 @@ body {
         }
 
         .rule {
-            height: calc(100% - 1.25rem);
+            height: 100%;
             width: 3px;
             background: var(--border-color);
 

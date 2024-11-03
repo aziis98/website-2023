@@ -8,7 +8,7 @@ const { frontmatter: {title, description} } = Astro.props;
 <BaseLayout title={title + " | " + websiteName()} {description}>
 	<section>
         <div class="principal">
-            <div class="content">
+            <div class="card content">
                 <slot />
             </div>
         </div>
