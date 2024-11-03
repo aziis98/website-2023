@@ -13,9 +13,9 @@ jobs:
       - name: Write SSH keys
         run: |
           install -m 600 -D /dev/null ~/.ssh/known_hosts
-          install -m 600 -D /dev/null ~/.ssh/id_ed25519_github
+          install -m 600 -D /dev/null ~/.ssh/id_ed25519
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519_github
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -29,4 +29,4 @@ jobs:
         run: npm run build:poisson
 
       - name: Deploy
-        run: rsync -e 'ssh -i ~/.ssh/id_ed25519_github' -cavz out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
+        run: rsync -cavz out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
