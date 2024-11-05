@@ -6,7 +6,6 @@ $article-width: 55rem;
 $aside-width: 20rem;
 
 :root {
-    --body-bg: #f4f1fd;
     --card-bg: #fdfdff;
 
     --border-color: #bbc;
@@ -103,8 +102,6 @@ html {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #222;
-
-    background: var(--body-bg);
 
     height: 100%;
 }
@@ -682,10 +679,8 @@ section {
 body {
     display: flex;
     flex-direction: column;
-
     align-items: center;
-
-    row-gap: 2rem;
+    row-gap: 3rem;
 
     @include media-screen-tablet() {
         display: flex;
@@ -836,7 +831,7 @@ body {
         grid-template-areas: 'article aside';
 
         align-items: start;
-        gap: 2rem;
+        gap: 3rem;
 
         flex-grow: 1;
 

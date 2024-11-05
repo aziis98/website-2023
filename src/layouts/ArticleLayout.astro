@@ -52,4 +52,11 @@ const someRelatedArticles = await getRandomRelatedArticles(
         }
     </aside>
     {includeModule && <script type="module" src={includeModule} />}
+    <script>
+        import {  createGenerativeBackground} from "../lib/generative-background";
+
+        window.addEventListener("DOMContentLoaded", () => {
+            createGenerativeBackground('nav, article, .article-card');
+        });
+    </script>
 </BaseLayout>
