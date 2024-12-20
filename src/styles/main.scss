@@ -796,7 +796,8 @@ body {
                 display: flex;
                 flex-direction: column;
 
-                gap: 0;
+                padding: 1rem 0;
+                gap: 1rem;
 
                 background: #f0f0f0;
                 box-shadow: var(--card-shadow);
@@ -874,11 +875,6 @@ body {
                 .title {
                     padding-top: 0.5rem;
                     font-size: 3rem;
-                }
-
-                :last-child {
-                    padding-bottom: 1rem;
-                    border-bottom: 1px solid #ddd;
                 }
             }
 
@@ -958,7 +954,7 @@ body {
             }
 
             @include media-screen-mobile() {
-                padding: 0 0 1rem;
+                padding: 1rem 0;
 
                 width: 100%;
 
