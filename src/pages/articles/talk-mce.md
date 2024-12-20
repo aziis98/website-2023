@@ -11,9 +11,8 @@ publish_date: 2024/11/28
 # Meta-circle Evaluators & Infinite Towers of Interpreters
 
 This is the post form of a talk I gave for Lambda Knights on meta-circular evaluators and infinite
-towers of interpreters, mostly just to talk to people about Lisp.
-
-[Download original slides](https://static.aziis98.com/website/mce-slides.pdf)
+towers of interpreters, mostly just to talk to people about Lisp. You can also
+[download the original slides](https://static.aziis98.com/website/mce-slides.pdf).
 
 ## What are interpreters?
 
