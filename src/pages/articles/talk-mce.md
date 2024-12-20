@@ -4,7 +4,7 @@ title: Meta-circular Evaluators & Infinite Towers of Interpreters
 description:
     A talk for Lambda Knights on meta-circular evaluators and infinite towers of interpreters,
     mostly in the context of Lisp.
-tags: ['lisp', 'lang-en', 'talk']
+tags: ['lisp', 'mce', 'talk', 'lang-en']
 publish_date: 2024/11/28
 ---
 
@@ -12,6 +12,8 @@ publish_date: 2024/11/28
 
 This is the post form of a talk I gave for Lambda Knights on meta-circular evaluators and infinite
 towers of interpreters, mostly just to talk to people about Lisp.
+
+[Download original slides](https://static.aziis98.com/website/mce-slides.pdf)
 
 ## What are interpreters?
 
@@ -30,7 +32,7 @@ such as [V8](https://v8.dev/) (used by Chrome and NodeJS), [SpiderMonkey](https:
 Bun), etc.
 
 For example the following is also an
-[interpreter for the Brain\*\*\*\* language](https://rosettacode.org/wiki/Execute_Brain****/Python):
+[interpreter for the Brain\*\*\*\* language](https://rosettacode.org/wiki/Execute_Brain****/Python)
 
 ```python
 def brainfuck(source):
@@ -78,7 +80,7 @@ Some examples of meta-circular interpreters:
 
 -   [Lisp in Lisp](https://paulgraham.com/rootsoflisp.html) (this is us)
 
--   Any language with an `eval` function (gne gne gne)
+-   Any language with an `eval` function (like Python, Ruby, JavaScript, etc.)
 
 We are actually going to omit the last one, using the
 [**meta-circular evaluator** definition from C2](https://wiki.c2.com/?MetaCircularEvaluator)
@@ -95,7 +97,8 @@ they also say
 > compiler is written in the target language does not help at all; the same algorithms could be
 > translated into Pascal or Java or Ada or Cobol, and it would still be a perfectly good C compiler.
 
-as we will see, this is not the case for Lisp.
+as we will see, Lisp is a language that is particularly well-suited for writing meta-circular
+evaluators.
 
 ## Introduction to Lisp
 
@@ -119,11 +122,7 @@ Lisp has a few basic data structures:
 
 -   Cons cells
 
--   Cons cells
-
--   Cons cells
-
-yeah that's it, so let's talk about cons cells.
+well yeah that's it, so let's talk about cons cells.
 
 A **cons cell** is a pair of values, usually called `car` and `cdr` (that stand for "Contents of the
 Address Register" and "Contents of the Decrement Register", respectively due to some historical
@@ -232,7 +231,7 @@ that just simplifies the code a bit:
 
 To add support for variables we need some way to store and retrieve values from an "environment". We
 can represent and environment as a function that maps variable names to values. Let's define the two
-following helper functions:
+following helper functions
 
 ```scm
 (define empty-env
@@ -246,7 +245,7 @@ following helper functions:
 )
 ```
 
-then we can modify the `eval` function to take an environment as an argument:
+then we can modify the `eval` function to take an environment as an argument
 
 ```scm
 (define (eval expr env)
@@ -353,7 +352,7 @@ treat code as data we can manipulate (this is what `pmatch` does to add a new co
 language through macros). Another view is to treat data as code, that is, to interpret data as code
 by defining a specialized interpreter for giving it semantics.
 
-For example we could represent moves on a 2D grid as the following data structure:
+For example we could represent moves on a 2D grid as the following data structure
 
 ```scm
 (define moves-example
@@ -363,7 +362,7 @@ For example we could represent moves on a 2D grid as the following data structur
     (left 4)))
 ```
 
-and then interpret this data as code to move a point on a 2D grid:
+and then interpret this data as code to move a point on a 2D grid
 
 ```scm
 (define move (lambda (point moves)
@@ -376,7 +375,7 @@ and then interpret this data as code to move a point on a 2D grid:
             (_ (error "Unknown move"))))))))
 ```
 
-and then we can move a point on the grid using the `move` function:
+and then we can move a point on the grid using the `move` function
 
 ```scm
 (move '(0 0) moves-example) ; => (-2 -2)
@@ -388,14 +387,113 @@ why this is called reflection as the terminology is not consistent with the term
 
 ## Infinite Towers of Interpreters
 
-TODO
+This section is inspired by a talk I saw by Nada Amin called
+"[Programming Should Eat Itself](https://www.youtube.com/watch?v=SrKj4hYic5A)" where she talks about
+the concept of "collapsing towers of interpreters" and "reflective towers of interpreters".
+
+Interpreters can be composed with one another, for example if we have an interpreter of Javascript
+written in Python and an interpreter of Bash written in Javascript, we can compose them to have an
+interpreter of Bash that is run by Python.
+
+We just talked about how Lisp is a language that is particularly well-suited for writing
+meta-circular evaluators, so we can write an interpreter for Lisp in Lisp.
+
+Suppose now the follwing, we start with some Lisp code at level $0$: this code is interpreted by the
+Lisp interpreter written at level $1$. Nothing special here. But now suppose that the code at level
+$1$ is interpreted by another Lisp interpreter written at level $2$, and so on. We can keep going on
+and on, and we can have an infinite tower of interpreters. Can this even be run on a computer? In
+the '80s, [Brian C. Smith in his PhD thesis](https://dspace.mit.edu/handle/1721.1/15961) showed that
+this is possible, briefly, by lazily synthetizing new meta-levels on demand.
+
+### Black
+
+An implementation of this concept is the [Black](github.com/readevalprintlove/black) language. For
+example we can try it out on top of Chez Scheme as follows
+
+```bash shell
+$ git clone https://github.com/readevalprintlove/black
+$ cd black
+
+$ rlwrap -n chez
+
+# Load the Black interpreter on top of Chez Scheme
+> (load "init.scm")
+
+# The first number is the level, the second is prompt counter
+0-0: start
+0-1>
+```
+
+We can use this as a normal interpreter, for example
+
+```
+0-1> (+ 1 2)
+3
+0-2> ((lambda (x) x) 42)
+42
+0-3>
+```
+
+But we can also go up a level up using the `eval-at-metalevel` function (also aliased as `EM`)
+
+```
+0-1> (EM (+ 1 2))
+3
+```
+
+Here the expression `(+ 1 2)` is evaluated at the meta-level $1$. We can keep going up for example
+with `(EM (EM (+ 1 2)))`. At each level we have a reference to the interpreter that runs the code
+below called `base-eval`, this in turn calls various functions like `eval-var` that evaluates
+variables, ...
+
+Nothing limits us from changing this functions, for example the following _instruments_ variable
+evaluation to count how many times variables are resolved
+
+```scm
+(EM
+  (begin
+    (define counter 0)
+    (define old-eval-var eval-var)
+    (set! eval-var
+      (lambda (exp env cont)
+        (set! counter (+ counter 1))
+        (old-eval-var exp env cont)))))
+```
+
+This show how powerful this concept is, this let's us change the semantics of the language at any
+level.
+
+### Collapsing Towers
+
+In other papers Kenichi Asai and Nada Amin talk about the concept of _collapsing_ these towers of
+interpreters to a single optimized interpreter. I've not yet read how this is done precisely and if
+this uses more advanced techniques than inlining or partial evaluation.
+
+In [Collapsing Towers of Interpreters](https://dl.acm.org/doi/10.1145/3158140) they develop Pink and
+Purple, two languages that are designed to be able to collapse these towers of interpreters
+efficiently.
+
+What are the implications of this? This is actually a very powerful concept in the context of
+virtualization and sandboxing, for example citing the abstract of the paper
+
+> In the real world, a use case might be Python code executed by an x86 runtime, on a CPU emulated
+> in a JavaScript VM, running on an ARM CPU. Collapsing such a tower can not only exponentially
+> improve runtime performance, but also enable the use of base-language tools for interpreted
+> programs, e.g., for analysis and verification. In this paper, we lay the foundations in an
+> idealized but realistic setting.
+
+## Conclusion
+
+In this talk we have introduced the concept of meta-circular evaluators and infinite towers of
+interpreters. Maybe you are now convinced that Lisps have very profound and interesting properties,
+and that they are a very powerful tool for writing and studying programming languages.
 
 ## References
 
 -   [Compiling a reflective language using MetaOCaml](https://dl.acm.org/doi/10.1145/2658761.2658775)
     by Kenichi Asai
 
--   [Collapsing Towers of Interpreters](https://dl.acm.org/doi/10.1145/3158140) by Nada Amin
+-   [Collapsing Towers of Interpreters](https://dl.acm.org/doi/10.1145/3158140) by Nada Amin et al.
 
 -   [The most beautiful program ever written by William Byrd](https://www.youtube.com/watch?v=OyfBQmvr2Hc&t=3600s&pp=ugMICgJpdBABGAHKBRZtZXRhY2lyY3VsYXIgZXZhbHVhdG9y)
 
