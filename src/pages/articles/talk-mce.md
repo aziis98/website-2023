@@ -129,7 +129,7 @@ reasons this remains the name of the fields in the cons cell).
 
 A cons cell can be created using the `cons` function, and accessed using the `car` and `cdr`
 
-```scm
+```clj
 (define x (cons 1 2)) ; => (1 . 2)
 (car x) ; => 1
 (cdr x) ; => 2
@@ -138,7 +138,7 @@ A cons cell can be created using the `cons` function, and accessed using the `ca
 the syntax `(1 . 2)` is used to represent a cons cell. Often we don't use `cons` directly, but we
 create chains using the `list` function:
 
-```scm
+```clj
 (define x (list 1 2 3)) ; => (1 2 3)
 (car x) ; => 1
 (cdr x) ; => (2 3)
@@ -153,7 +153,7 @@ In Lisp, functions are first-class citizens, which means that they can be passed
 other functions, returned from functions, and assigned to variables. Functions are defined using the
 `lambda` keyword, which creates an anonymous function.
 
-```scm
+```clj
 (define add (lambda (x y) (+ x y)))
 (add 1 2) ; => 3
 ```
@@ -165,7 +165,7 @@ the current environment. The environment is a mapping from variable names to val
 the previous call `x` got bound to the value `1`. There is also a global environment that can be
 extended with `define` and updated with `set!`.
 
-```scm
+```clj
 (define x 1)
 (set! x 2)
 x ; => 2
@@ -176,7 +176,7 @@ x ; => 2
 In Lisp, the `quote` function or the `'` character can used to quote a form, which means that the
 form is not evaluated. For example:
 
-```scm
+```clj
 (+ 1 2) ; => 3
 (quote (+ 1 2)) ; => (+ 1 2)
 '(1 2 3) ; => (1 2 3)
@@ -184,7 +184,7 @@ form is not evaluated. For example:
 
 internally the second expression is represented as a list
 
-```scm
+```clj
 (+ . (1 . (2 . ())))
 ```
 
@@ -194,7 +194,7 @@ where `+` is the literal symbol `+` and `1`, `2` are the literal numbers `1`, `2
 
 Let's start with a simple calculator that can evaluate simple arithmetic expressions.
 
-```scm
+```clj
 (define (eval expr)
     (cond
         ((number? expr) expr)
@@ -215,7 +215,7 @@ that checks if a value is a number. (Functions like `caddr` are just shortcuts f
 [`pmatch` macro from @webyrd](https://raw.githubusercontent.com/webyrd/quines/refs/heads/master/pmatch.scm)
 that just simplifies the code a bit:
 
-```scm
+```clj
 (define (eval expr)
     (pmatch expr
         (,n (guard (number? n)) n)
@@ -232,7 +232,7 @@ To add support for variables we need some way to store and retrieve values from 
 can represent and environment as a function that maps variable names to values. Let's define the two
 following helper functions
 
-```scm
+```clj
 (define empty-env
     (lambda (var) (error "Unbound variable"))
 )
@@ -246,7 +246,7 @@ following helper functions
 
 then we can modify the `eval` function to take an environment as an argument
 
-```scm
+```clj
 (define (eval expr env)
     (pmatch expr
         (,v (guard (symbol? v)) (env v))
@@ -257,7 +257,7 @@ then we can modify the `eval` function to take an environment as an argument
 
 and call this for example as
 
-```scm
+```clj
 (eval '(+ x 2) (bind-env empty-env 'x 1)) ; => 3
 ```
 
@@ -266,7 +266,7 @@ and call this for example as
 We will use a trick to represent functions as native scheme functions, then application will just
 become a call to the function
 
-```scm
+```clj
 (define (eval expr env)
     (pmatch expr
         ; ... as before
@@ -280,7 +280,7 @@ become a call to the function
 
 and call this for example as
 
-```scm
+```clj
 (eval '((lambda (x) (+ x 1)) 2) empty-env) ; => 3
 ```
 
@@ -288,7 +288,7 @@ and call this for example as
 
 Actually that's it, we already have a meta-circular evaluator. Let's recap
 
-```scm
+```clj
 (define (eval expr env)
     (pmatch expr
         (,n (guard (number? n)) n)
@@ -315,7 +315,7 @@ Actually that's it, we already have a meta-circular evaluator. Let's recap
 If you don't believe me, let's try to compute the factorial using a variation of the Y-combinator
 for anonymous recursive functions:
 
-```scm
+```clj
 (define fact-5
   '(((lambda (!)
        (lambda (n)
@@ -332,7 +332,7 @@ for anonymous recursive functions:
 Now let's strip unnecessary things from our beautiful evaluator, things like numbers and arithmetic
 (one could still encode them as Church numerals, if and booleans can be encoded as well).
 
-```scm
+```clj
 (define (eval expr env)
     (pmatch expr
         (,v (guard (symbol? v)) (env v))
@@ -353,7 +353,7 @@ by defining a specialized interpreter for giving it semantics.
 
 For example we could represent moves on a 2D grid as the following data structure
 
-```scm
+```clj
 (define moves-example
   '((up 1)
     (right 2)
@@ -363,7 +363,7 @@ For example we could represent moves on a 2D grid as the following data structur
 
 and then interpret this data as code to move a point on a 2D grid
 
-```scm
+```clj
 (define move (lambda (point moves)
     (let ((x (car point)) (y (cadr point)))
         (pmatch moves
@@ -376,7 +376,7 @@ and then interpret this data as code to move a point on a 2D grid
 
 and then we can move a point on the grid using the `move` function
 
-```scm
+```clj
 (move '(0 0) moves-example) ; => (-2 -2)
 ```
 
@@ -448,7 +448,7 @@ variables, ...
 Nothing limits us from changing this functions, for example the following _instruments_ variable
 evaluation to count how many times variables are resolved
 
-```scm
+```clj
 (EM
   (begin
     (define counter 0)

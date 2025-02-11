@@ -185,10 +185,10 @@ p.card {
 }
 
 blockquote {
-    border-left: 6px solid #bfa0ff;
+    border-left: 3px solid #bfa0ff;
     background: #f6f2ff;
     color: #311764;
-    padding: 1rem 0.5rem;
+    padding: 1rem;
     margin: 1rem 0;
 }
 
@@ -242,9 +242,9 @@ pre {
 }
 
 p > code {
-    background: #f2f2f2;
+    background: #0001;
     padding: 2px 4px;
-    // border-radius: 6px;
+    border-radius: 2px;
 }
 
 pre code {

@@ -3,12 +3,6 @@ import { prependBaseUrl, websiteName } from '../../utils'
 
 import Link from '../../components/Link.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-
-const stripPrefix = (s, prefix) => (s.startsWith(prefix) ? s.slice(prefix.length) : s)
-
-const basename = s => s.split('/').pop()
-
-const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate/*.jpg')).map(({ default: p }) => basename(p))
 ---
 
 <BaseLayout
@@ -21,19 +15,20 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <h1>Art</h1>
                 <p class="center large">Cose artistiche che faccio in alcuni momenti in cui voglio spasticare.</p>
                 <p class="center large">
-                    La maggior parte sono di <Link href="https://en.wikipedia.org/wiki/Generative_art">arte generativa</Link>:
-                    alcuni li ho realizzati solo con programmi di grafica (buon vecchio
+                    La maggior parte sono di <Link href="https://en.wikipedia.org/wiki/Generative_art">
+                        arte generativa
+                    </Link>: alcuni li ho realizzati solo con programmi di grafica (buon vecchio
                     <Link href="https://www.getpaint.net/">Paint.NET</Link> e giusto alcuni con
-                    <Link href="https://www.gimp.org/">Gimp</Link>), altri parzialmente realizzati da programmi scritti a mano che
-                    producevano un'immagine che poi processavo in altri programmi.
+                    <Link href="https://www.gimp.org/">Gimp</Link>), altri parzialmente realizzati da programmi scritti
+                    a mano che producevano un'immagine che poi processavo in altri programmi.
                 </p>
                 <p class="center large">
-                    Recentemente invece ho iniziato ad usare <Link href="https://procreate.com/">Procreate</Link> per tutti i miei
-                    ultimi lavori più recenti.
+                    Recentemente invece ho iniziato ad usare <Link href="https://procreate.com/">Procreate</Link> per tutti
+                    i miei ultimi lavori più recenti.
                 </p>
                 <p class="center large">
-                    <strong>Nota.</strong> Sentitevi liberi di scaricare direttamente le immagini ed usarle come sfondi, basta fare
-                    tasto destro sull'immagine e scaricarla.
+                    <strong>Nota.</strong> Sentitevi liberi di scaricare direttamente le immagini ed usarle come sfondi,
+                    basta fare tasto destro sull'immagine e scaricarla.
                 </p>
             </div>
         </div>
@@ -49,25 +44,40 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 src={prependBaseUrl('/data/art/procreate/Fluid_Black_And_White@w1920.jpg')}
                 alt="Fluid_Black_And_White, width 1920, jpg"
             />
-            <img src={prependBaseUrl('/data/art/procreate/Fluid_Black_Blue@w1920.jpg')} alt="Fluid_Black_Blue, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Black_Blue@w1920.jpg')}
+                alt="Fluid_Black_Blue, width 1920, jpg"
+            />
             <img src={prependBaseUrl('/data/art/procreate/Fluid_Blue@w1920.jpg')} alt="Fluid_Blue, width 1920, jpg" />
-            <img src={prependBaseUrl('/data/art/procreate/Fluid_Blue_Lines@w1920.jpg')} alt="Fluid_Blue_Lines, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Blue_Lines@w1920.jpg')}
+                alt="Fluid_Blue_Lines, width 1920, jpg"
+            />
             <img
                 src={prependBaseUrl('/data/art/procreate/Fluid_Fine_Streams_Purple@w1920.jpg')}
                 alt="Fluid_Fine_Streams_Purple, width 1920, jpg"
             />
-            <img src={prependBaseUrl('/data/art/procreate/Fluid_Gray_Bloom@w1920.jpg')} alt="Fluid_Gray_Bloom, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Gray_Bloom@w1920.jpg')}
+                alt="Fluid_Gray_Bloom, width 1920, jpg"
+            />
             <img
                 src={prependBaseUrl('/data/art/procreate/Fluid_Gray_Smooth_2_2@w1920.jpg')}
                 alt="Fluid_Gray_Smooth_2_2, width 1920, jpg"
             />
             <img src={prependBaseUrl('/data/art/procreate/Fluid_Green@w1920.jpg')} alt="Fluid_Green, width 1920, jpg" />
-            <img src={prependBaseUrl('/data/art/procreate/Fluid_Light_Gray@w1920.jpg')} alt="Fluid_Light_Gray, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Light_Gray@w1920.jpg')}
+                alt="Fluid_Light_Gray, width 1920, jpg"
+            />
             <img
                 src={prependBaseUrl('/data/art/procreate/Fluid_Orange_Purple@w1920.jpg')}
                 alt="Fluid_Orange_Purple, width 1920, jpg"
             />
-            <img src={prependBaseUrl('/data/art/procreate/Fluid_Purple@w1920.jpg')} alt="Fluid_Purple, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Fluid_Purple@w1920.jpg')}
+                alt="Fluid_Purple, width 1920, jpg"
+            />
             <img
                 src={prependBaseUrl('/data/art/procreate/Fluid_Purple_Deep@w1920.jpg')}
                 alt="Fluid_Purple_Deep, width 1920, jpg"
@@ -110,7 +120,10 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 src={prependBaseUrl('/data/art/procreate/Two_Color_Horizontal_Fluid@w1920.jpg')}
                 alt="Two_Color_Horizontal_Fluid, width 1920, jpg"
             />
-            <img src={prependBaseUrl('/data/art/procreate/Untitled_Artwork@w1920.jpg')} alt="Untitled_Artwork, width 1920, jpg" />
+            <img
+                src={prependBaseUrl('/data/art/procreate/Untitled_Artwork@w1920.jpg')}
+                alt="Untitled_Artwork, width 1920, jpg"
+            />
             <img
                 src={prependBaseUrl('/data/art/procreate/Untitled_Artwork_2@w1920.jpg')}
                 alt="Untitled_Artwork_2, width 1920, jpg"
@@ -139,12 +152,15 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
         <h2>Vecchi Lavori</h2>
         <div class="art-list">
             <div class="art-item">
-                <img src={prependBaseUrl('/data/art/webp/2020_sky-4-2-1@w1920.webp')} alt="fluid, vortices, sky, stars, purple" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2020_sky-4-2-1@w1920.webp')}
+                    alt="fluid, vortices, sky, stars, purple"
+                />
                 <div class="caption">
                     <div class="date">2020</div>
                     <p>
-                        In questo avevo provato oltre ad aggiungere la turbolenza anche a mettere un po' di rumore prima ed alla
-                        fine ha aggiunto questo effetto molto simile a delle stelle.
+                        In questo avevo provato oltre ad aggiungere la turbolenza anche a mettere un po' di rumore prima
+                        ed alla fine ha aggiunto questo effetto molto simile a delle stelle.
                     </p>
                 </div>
             </div>
@@ -156,8 +172,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">2019</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo invece è viola ed il punto di partenza è una
-                        sola linea orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo invece è viola ed il punto di partenza
+                        è una sola linea orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
@@ -172,7 +188,10 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 </div>
             </div>
             <div class="art-item">
-                <img src={prependBaseUrl('/data/art/webp/2017_triangles_i___red@w1920.webp')} alt="triangles, red, blender" />
+                <img
+                    src={prependBaseUrl('/data/art/webp/2017_triangles_i___red@w1920.webp')}
+                    alt="triangles, red, blender"
+                />
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>Dalla serie di cose triangolose, questo è fatto in un modo troppo complicato con Blender.</p>
@@ -186,8 +205,10 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è rossiccio ed ha come linea di partenza una
-                        spezzata tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è rossiccio ed ha come linea di
+                        partenza una spezzata tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em
+                            >swirl</em
+                        >.
                     </p>
                 </div>
             </div>
@@ -199,8 +220,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">2017</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata
-                        tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza
+                        una spezzata tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
@@ -209,8 +230,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">2017/12</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza una spezzata
-                        tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blue ed ha come linea di partenza
+                        una spezzata tendenzialmente orizzontale da cui l'algoritmo fa crescere i vari <em>swirl</em>.
                     </p>
                 </div>
             </div>
@@ -219,8 +240,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">2017/06</div>
                     <p>
-                        Dalla serie di cose fatte con <code>pygame</code>, questo è blu/viola e basato su delle linee generate
-                        casualmente che vengono man mano sovrapposte alle precedenti.
+                        Dalla serie di cose fatte con <code>pygame</code>, questo è blu/viola e basato su delle linee
+                        generate casualmente che vengono man mano sovrapposte alle precedenti.
                     </p>
                 </div>
             </div>
@@ -232,8 +253,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
-                        Paint.NET e qualche plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo
+                        fatto con Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
@@ -245,8 +266,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        In questo invece ho tentato di partire da una base quadratosa ma senza troppo successo, però boh alla fine
-                        non è male l'effetto.
+                        In questo invece ho tentato di partire da una base quadratosa ma senza troppo successo, però boh
+                        alla fine non è male l'effetto.
                     </p>
                 </div>
             </div>
@@ -258,8 +279,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo è uno dei primissimi lavori che ho fatto ed anche uno dei miei preferiti. La base è sempre la
-                        stessa, turbonenza su una base di linee colorate.
+                        Questo è uno dei primissimi lavori che ho fatto ed anche uno dei miei preferiti. La base è
+                        sempre la stessa, turbonenza su una base di linee colorate.
                     </p>
                 </div>
             </div>
@@ -271,8 +292,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
-                        Paint.NET e qualche plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo
+                        fatto con Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
@@ -284,8 +305,8 @@ const procreateArtImages = (await Astro.glob('../../../public/data/art/procreate
                 <div class="caption">
                     <div class="date">Pre-2017</div>
                     <p>
-                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo fatto con
-                        Paint.NET e qualche plugin.
+                        Questo usa la tecnica della turbolenza partendo da una base rossa e gialla, mi pare di averlo
+                        fatto con Paint.NET e qualche plugin.
                     </p>
                 </div>
             </div>
