@@ -22,6 +22,7 @@
         "katex": "^0.16.4",
         "lodash": "^4.17.21",
         "preact": "^10.6.5",
+        "rehype-katex": "^7.0.1",
         "remark-math": "^5.1.1"
     },
     "devDependencies": {

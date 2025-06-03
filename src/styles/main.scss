@@ -177,19 +177,20 @@ p {
 }
 
 p + p {
-    margin-top: 0.5rem;
+    margin-top: 0.5em;
 }
 
 p.card {
-    margin: 1rem 0;
+    margin: 1em 0;
 }
 
 blockquote {
     border-left: 3px solid #bfa0ff;
     background: #f6f2ff;
     color: #311764;
-    padding: 1rem;
+    padding: 1em;
     margin: 1rem 0;
+    font-size: 90%;
 }
 
 iframe {
@@ -272,16 +273,25 @@ span > span.katex-display {
     padding: 1rem 0;
 }
 
+span.katex,
+span.katex-display {
+    img {
+        display: initial !important;
+        vertical-align: sub !important;
+        margin: 0 !important;
+    }
+}
+
 ul,
 ol {
     display: block;
     list-style-type: disc;
-    padding-inline-start: 1.5rem;
+    padding-inline-start: 1.5em;
 
     line-height: 2;
 
     li {
-        margin: 0.5rem 0;
+        margin: 0.5em 0;
     }
 }
 
@@ -926,6 +936,23 @@ body {
             img {
                 display: block;
                 max-width: 100%;
+                margin: 1rem auto;
+            }
+
+            figure {
+                margin: 1rem auto;
+                text-align: center;
+
+                img {
+                    max-width: 100%;
+                    max-height: 40vh;
+                }
+
+                figcaption {
+                    font-size: 14px;
+                    color: #555;
+                    margin-top: 0.5rem;
+                }
             }
 
             .frame {
