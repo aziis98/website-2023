@@ -10,8 +10,8 @@ publish_date: 2025/06/03
 
 # Implementation of the Kauffman Polynomial in Python
 
-This blog article was converted from the following Typst report and the code is
-stored at the following location
+This blog article was converted from the following Typst report and the source
+code of the project is on my GitHub
 
 > Report:
 > [Latest version of the PDF report](https://raw.githubusercontent.com/aziis98/kauffman-polynomial/refs/heads/main/report/kauffman-polynomial-report.pdf)
@@ -19,54 +19,6 @@ stored at the following location
 > Source Code: https://github.com/aziis98/kauffman-polynomial
 
 ---
-
-<!--
-```latex
-% Suggested LaTeX Preamble (if compiling to PDF via LaTeX)
-\documentclass{amsart} % Or 'article'
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{algorithmicx}
-\usepackage{algpseudocode}
-\usepackage{array} % For tables
-\usepackage{xcolor} % For \todo
-\usepackage{booktabs} % For nicer tables
-\usepackage{caption} % For figure captions outside float
-
-% Custom commands from Typst 'let'
-\newcommand{L}{L}
-\newcommand{\cdots}{\dots} % Or \cdots depending on context
-
-% Theorem-like environments
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}{Proposition}
-% \newenvironment{proof}{\noindent\textbf{Proof.}}{\qed\par} % amsthm provides proof
-
-% Placeholder for Cetz diagrams - replace with actual \includegraphics or TikZ
-\newcommand{\skeinimg}[1]{\includegraphics[height=1.2em]{/public/articles/kauffman-polynomial/#1.png}}
-% Example: \skeinimg{skein_over}
-
-% TODO marker
-\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
-
-% For horizontally flipped images
-\newcommand{\reflectimage}[1]{\reflectbox{\includegraphics{#1}}} % requires graphicx's \reflectbox
-``` -->
-
-<!--
-This YAML frontmatter can be used by tools like Pandoc.
-For direct LaTeX, use:
-\title{Implementation of the Kauffman Polynomial in Python}
-\author{Antonio De Lucreziis \\ Dipartimento di Matematica \\ Pisa, Italia \\ \texttt{antonio.delucreziis@gmail.com} \\ \url{https://poisson.phc.dm.unipi.it/~delucreziis/}}
-\date{}
-\begin{document}
-\maketitle
-\begin{abstract}
-In this project we write implement from scratch the Kauffman polynomial in Python. We start with a brief detour in computational knot theory and describe various representations of knots and links and find a good one to use for the algorithm. We then describe two approaches for computing the Kauffman polynomial and how to implement it in Python. Finally we try the algorithm on various knots and links and compare the results with the ones from the KnotInfo Database, finding an error for the knot $10_{125}$.
-\end{abstract}
--->
 
 # Introduction
 
@@ -817,75 +769,47 @@ idea of the algorithm was already described previously. The code uses the
 globals variables for `a`, `z` using the `sympy` library for working with
 polynomials.
 
-```python
+```py
 a, z = symbols("a z")
-d_expr = (a + 1 / a) / z - 1 # Renamed to d_expr to avoid conflict if d is used as var
+d = (a + 1 / a) / z - 1
 
 def kauffman_polynomial(link: SGCode) -> Poly:
-    if not link.components: # Check for empty list of components
-        return Poly(0, a, z, domain='ZZ') # Kauffman poly of empty link is 0
+    if len(link.components) == 0:
+        return 0
 
     component_groups = link.overlies_decomposition()
 
     if len(component_groups) == 1:
-        # Single effective component (might be linked, or a single unknot)
-        # The text mentions unknot_index and unknot_index_rev.
-        # The Python code snippet here simplifies this. Following the snippet logic:
-        unknot_switch_idx = link.first_switch_to_std_unknot()
+        unknot_index = link.first_switch_to_std_unknot()
 
-        if unknot_switch_idx is False: # It's already a standard unknot/unlink
-            return Poly(a ** link.writhe(), a, z, domain='ZZ')
+        link_rev = link.reverse()
+        unknot_index_rev = link_rev.first_switch_to_std_unknot()
+
+        if unknot_index == False or unknot_index_rev == False:
+            return a ** link.writhe()
         else:
-            # It's not a standard unknot, pick a crossing c (unknot_switch_idx) to resolve
-            # L_K = z (L_{E_c K} + L_{e_c K}) - L_{S_c K}
-            # S_c K is K with crossing c switched. E_c K and e_c K are spliced versions.
-            # The rule is applied to K (original link), not K_switched for splicing.
-            # Original paper defines A_i, B_i from S_{lambda_0} ... S_{lambda_i} K.
-            # The "Second Approach" seems to use:
-            # kL_K = z (kL_{E_c K} + kL_{e_c K}) - kL_{S_c K}
-            # where E_c K and e_c K are splices at crossing c of K, and S_c K is K with c switched.
-            # The provided Python code splices link_switched, which differs slightly from some interpretations.
-            # Let's follow the Python code provided:
-            link_switched = link.switch_crossing(unknot_switch_idx) # S_c K
+            link_switched = link.switch_crossing(unknot_index)
+            link_spliced_h = link_switched.splice_h(unknot_index)
+            link_spliced_v = link_switched.splice_v(unknot_index)
 
-            # According to the "Second Approach" description, splices E_c K and e_c K should be on the original link 'link',
-            # not 'link_switched'. If the Python code is the final logic, then it splices the switched link.
-            # Assuming Python code is the reference:
-            link_spliced_h = link.splice_h(unknot_switch_idx) # E_c K (h-splice on original link at c)
-            link_spliced_v = link.splice_v(unknot_switch_idx) # e_c K (v-splice on original link at c)
-            # The provided snippet in Typst says:
-            # link_spliced_h = link_switched.splice_h(unknot_index)
-            # link_spliced_v = link_switched.splice_v(unknot_index)
-            # This means splicing is done on the switched link. This is an important detail.
-            # Reverting to that:
-            # link_spliced_h = link_switched.splice_h(unknot_switch_idx)
-            # link_spliced_v = link_switched.splice_v(unknot_switch_idx)
-            # This is unusual; typically splices are on the original diagram.
-            # Sticking to the provided snippet literally:
-            # Kauffman's paper usually applies skein at a crossing c: L_c+ = z(L_H + L_V) - L_c-
-            # where L_H, L_V are splices of L_c+ (or L_c-). L_S_c K is L with c flipped.
-            # The formulation kL_K = z (kL_{E_c K} + kL_{e_c K}) - kL_{S_c K}
-            # Implies E_c K and e_c K are derived from K, not S_c K.
-            # Let's assume the text form: splice K, then compute poly of S_c K.
-
-            k_link_spliced_h = kauffman_polynomial(link.splice_h(unknot_switch_idx))
-            k_link_spliced_v = kauffman_polynomial(link.splice_v(unknot_switch_idx))
+            k_link_spliced_h = kauffman_polynomial(link_spliced_h)
+            k_link_spliced_v = kauffman_polynomial(link_spliced_v)
             k_link_switched = kauffman_polynomial(link_switched)
 
-            term1 = z * (k_link_spliced_h + k_link_spliced_v)
-            return Poly(term1 - k_link_switched, a, z, domain='ZZ')
+            return (
+                z * (k_link_spliced_h + k_link_spliced_v)
+                - k_link_switched
+            )
     else:
-        # Disconnected components that "overlie" each other
-        # L(K1 U K2 U ... U Kn) = d^(n-1) L(K1)...L(Kn)
-        result = Poly(1, a, z, domain='ZZ')
-        for i, component_ids_group in enumerate(component_groups):
-            sub_link = link.sublink(component_ids_group)
-            if i > 0:
-                result *= d_expr
+        result = 1
+        for k, component_ids in enumerate(component_groups):
+            new_link = link.sublink(component_ids)
+            if k > 0:
+                result *= d
 
-            result *= kauffman_polynomial(sub_link)
-        return Poly(result, a, z, domain='ZZ')
+            result *= kauffman_polynomial(new_link)
 
+        return result
 ```
 
 Given this we can also write a function for computing the normalized Kauffman
@@ -907,9 +831,9 @@ optimizations.
 
 -   Use the `cache` python decorator to memoize all calls to
     `kauffman_polynomial`.
+
 -   Another decorator called `log_input_output` helps with debug printing the
     traces like the following for the Hopf link
-    <!-- Typst: #set par(leading: 5pt) -->
 
     ```
     ● kauffman_polynomial([[(+1, +1), (-2, +1)], [(+2, +1), (-1, +1)]])
@@ -939,58 +863,55 @@ optimizations.
     └─▶ a * z - a/z + 1 + z/a - 1/(a * z)
     ```
 
-    <!-- Note: The trace shows kauffman_polynomial([[]]) -> 1. This usually means an unknot (1 component, 0 crossings).
-         kauffman_polynomial of an empty link (0 components) is typically 0 for L, or 1/d for F.
-         The recursive definition L(K U O) = d L(K)L(O) with L(O)=1 implies L(empty) should be 1/d for consistency if the product `result *= ...` for `d_expr` is to work.
-         Or, if L(empty)=0, then the product rule is for non-empty components.
-         The `kauffman_polynomial` code returns `Poly(0, ...)` for `len(link.components) == 0`.
-         The trace `kauffman_polynomial([[]])` could mean SGCode(components=[[]]), i.e., an unknot.
-    -->
-
 -   Finally there is another decorator called `polynomial_wrapper` that help
     with applying optimizations to function calls and is defined as follows
 
-```python
-from typing import Literal, Callable, Set # Added Set
-import functools
-import sympy # For sympy.expand
+    ```py
+    OptimizationType = Literal['expand', 'relabel', 'to_minimal']
 
-# Assume SGCode and Poly are defined
-# from .sg_code import SGCode
-# from sympy import Poly
+    def polynomial_wrapper(optimizations: set[OptimizationType] = {'expand'}):
+        def decorator(func: Callable[[SGCode], Poly]) -> Callable[[SGCode], Poly]:
+            @functools.wraps(func)
+            def wrapper(link: SGCode) -> Poly:
+                # First we convert to minimal rotated form and only then we relabel,
+                # this ensures a consistent indexing for the cache.
+                if 'to_minimal' in optimizations:
+                    link = link.to_minimal()
+                if 'relabel' in optimizations:
+                    link = link.relabel()
 
-OptimizationType = Literal['expand', 'relabel', 'to_minimal']
+                result = func(link)
 
-def polynomial_wrapper(optimizations: Set[OptimizationType] = {'expand'}):
-    def decorator(func: Callable[[SGCode], Poly]) -> Callable[[SGCode], Poly]:
-        @functools.wraps(func)
-        def wrapper(link: SGCode) -> Poly:
-            # First we convert to minimal rotated form and only then we relabel,
-            # this ensures a consistent indexing for the cache.
-            if 'to_minimal' in optimizations:
-                link = link.to_minimal()
-            if 'relabel' in optimizations:
-                link = link.relabel()
+                if 'expand' in optimizations:
+                    result = sympy.expand(result)
 
-            result = func(link)
+                return result
+            return wrapper
+        return decorator
+    ```
 
-            if 'expand' in optimizations:
-                result = sympy.expand(result) # type: ignore
+    This applies `sympy.expand(...)` to keep the resulting polynomial simplified
+    and prepends each call with the two following optimizations
 
-            return result
-        return wrapper
-    return decorator
-```
+    -   `to_minimal`: This "rotates" the list of each component in the SG code,
+        brining each list in _minimal lexicographical order_.
 
-    This applies `sympy.expand(...)` to keep the resulting polynomial simplified and prepends each call with the two following optimizations
-    -   `to_minimal`: This "rotates" the list of each component in the SG code, brining each list in _minimal lexicographical order_.
-    -   `relabel`: After minimal rotation we apply a relabelling to increase the chances of hitting the cache decorator.
+    -   `relabel`: After minimal rotation we apply a relabelling to increase the
+        chances of hitting the cache decorator.
 
-    These two optimization decrease the number of calls by almost an order of magnitude, for example for the case of knot `12n_888` we have the following optimizations lattice, the number of total recursive calls for the function `kauffman_polynomial` is in blue and time of execution in green.
+    These two optimization decrease the number of calls by almost an order of
+    magnitude, for example for the case of knot `12n_888` we have the following
+    optimizations lattice, the number of total recursive calls for the function
+    `kauffman_polynomial` is in blue and time of execution in green.
 
-    ![Optimizations Lattice Calls](/public/articles/kauffman-polynomial/optimizations-lattice-calls.jpg)
+    <figure>
+    <img src="/public/articles/kauffman-polynomial/optimizations-lattice-calls.jpg" alt="Optimizations Lattice Calls">
+    <figcaption>Optimizations Lattice Calls</figcaption>
+    </figure>
 
-    As we can see the most important optimization is the `to_minimal` one that by its own reduces the total number of calls from $29k$ to $8k$ but relabelling is still able to help.
+    As we can see the most important optimization is the `to_minimal` one that
+    by its own reduces the total number of calls from 29K to 8K but relabelling
+    is still able to help.
 
 All optimizations are enabled by default in the final program and debugging
 traces are disabled to not impact the speed.
@@ -1031,7 +952,7 @@ results:
 
 ### The knot $10_{125}$
 
-<div style="display: flex; justify-content: center; gap: 3rem; margin: 1rem 0;">
+<div style="display: flex; justify-content: center; margin: 1rem 0;">
   <img src="/public/articles/kauffman-polynomial/10_125-crop.png" alt="Knot 10_125" style="height:5cm;">
   <img src="/public/articles/kauffman-polynomial/10_125-crop.png" alt="Knot 10_125 Mirrored" style="height:5cm; transform: scaleX(-1);">
 </div>
@@ -1083,24 +1004,18 @@ polynomial columns, meaning they are not correctly synchronized.
 ### Performance Analysis
 
 We also checked the performance of our algorithm on all knots and links in the
-database up to 12 crossings (these are the ones with the Kauffman polynomial in
-the database). The results are shown in the following histograms, each bar
+database up to $12$ crossings (these are the ones with the Kauffman polynomial
+in the database). The results are shown in the following histograms, each bar
 counts the number of knots that took the amount of time in the relative bin.
 
-<!-- Typst lilaq plots are complex to convert. Placeholders for images are used. -->
-<!-- Assumed JSON files times-knots.json and times-links.json are used to generate these images. -->
-<div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-  <figure style="text-align: center;">
-    <!-- [TODO: LILAQ_PLOT - Histogram of knots times from /public/articles/kauffman-polynomial/times-knots.json] -->
-    <img src="/public/articles/kauffman-polynomial/histogram_knots_times.png" alt="Histogram of knots computation times" style="max-width: 400px; width: 90%;">
-    <figcaption style="font-size:9pt;">Histogram of knots times</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <!-- [TODO: LILAQ_PLOT - Histogram of links times from /public/articles/kauffman-polynomial/times-links.json] -->
-    <img src="/public/articles/kauffman-polynomial/histogram_links_times.png" alt="Histogram of links computation times" style="max-width: 400px; width: 90%;">
-    <figcaption style="font-size:9pt;">Histogram of links times</figcaption>
-  </figure>
-</div>
+<figure style="padding: 0 2rem;">
+    <img src="/public/articles/kauffman-polynomial/histogram_knots_times.png" alt="Histogram of knots computation times" style="width: 25rem;">
+    <figcaption style="font-size:9pt;">Histogram for knots times</figcaption>
+</figure>
+<figure style="padding: 0 2rem;">
+    <img src="/public/articles/kauffman-polynomial/histogram_links_times.png" alt="Histogram of links computation times" style="width: 25rem;">
+    <figcaption style="font-size:9pt;">Histogram for links times</figcaption>
+</figure>
 
 We can see that the times are just about of a couple of seconds per knot or
 link. This could be improved by using more sophisticated caching techniques but
@@ -1116,25 +1031,9 @@ polynomial of the knot $10_{125}$. We believe that the error is due to a
 mismatch between the PD code stored in the database with the corresponding
 Kauffman polynomial.
 
-<!--
-[COMMENTED_OUT_TYPST_APPENDIX_BEGIN]
-The following Appendix section was commented out in the original Typst document.
+---
 
-// #pagebreak()
-
-// = Appendix
-
-// == Enhancing SGCode rejoining code
-// ... (Python code snippets comparing initial and corrected splice logic) ...
-
-// == Nice Typst Stuff
-// ... (Typst code demonstrating programmatic generation of skein-generic diagrams) ...
-// This part showcases Typst's capabilities and would require manual recreation or scripting for the diagrams if needed.
-// [COMMENTED_OUT_TYPST_APPENDIX_SKEIN_GENERIC_DEMO]
-
-[COMMENTED_OUT_TYPST_APPENDIX_END]
--->
-
-```
-
-```
+This was a very fun project I did for university and with some real outcomes for
+once. I have some more ideas about this and I will probably write at least one
+more post about this and
+[some ideas I want to develop further](https://github.com/aziis98/kauffman-polynomial/blob/ab753c3a192aa5876ec243133e0568e6c8c75f90/generic_skein_algorithm_test.py#L18).

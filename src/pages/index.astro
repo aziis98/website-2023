@@ -1,38 +1,52 @@
 ---
-import ArticleCard from "../components/ArticleCard.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ArticleCard from '../components/ArticleCard.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
 
-import _ from "lodash";
-import Link from "../components/Link.astro";
-import { prependBaseUrl } from "../utils";
+import _ from 'lodash'
+import Link from '../components/Link.astro'
+import { prependBaseUrl } from '../utils'
 
-const articles = await Astro.glob("/src/pages/articles/*.{md,mdx}");
+const articles = await Astro.glob('/src/pages/articles/*.{md,mdx}')
 const sortedArticles = _.orderBy(
     articles.filter(a => !a.frontmatter.draft),
-    ["frontmatter.publish_date"],
-    ["desc"]
-);
+    ['frontmatter.publish_date'],
+    ['desc']
+)
 ---
 
 <BaseLayout>
     <section>
         <div class="principal">
-            <img class="profile" src={prependBaseUrl("/profile.png")} alt="current profile picture" />
+            <img class="profile" src={prependBaseUrl('/profile.png')} alt="current profile picture" />
             <div class="content">
                 <h1 class="left">Antonio De&nbsp;Lucreziis</h1>
                 <p>
-                    Il mio nickname è <Link href="https://aziis98.com">@aziis98</Link>, sono uno studente di Matematica all'Università di Pisa. Sono sempre stato appassionato di informatica (a tutti i livelli) ed ormai già da qualche anno sono un <em>macchinista</em> del PHC, tra le varie cose gestiamo il server con le pagine degli studenti chiamato <Link href="https://poisson.phc.dm.unipi.it">Poisson</Link>.
+                    On the web I go by <Link href="https://aziis98.com">@aziis98</Link>, I am a Mathematics student at
+                    the University of Pisa. I have always been passionate about computer science (at all levels) and for
+                    some years now I have been a <em>macchinista</em> of the PHC, among other things we manage the server
+                    with the students' pages called <Link href="https://poisson.phc.dm.unipi.it">Poisson</Link>.
                 </p>
                 <p>
-                    In questo sito caricherò principalmente <Link href="/articles">articoli</Link> su quello che faccio o altre cose a caso come ad esempio le robe di <em>arte generativa</em> che si trovano nella sezione <Link href="/art">artistica</Link>.
+                    In this site I will mainly upload <Link href="/articles">articles</Link> on what I do or other random
+                    things such as the <em>generative art</em> (procedural art to be precise in this times) stuff found in
+                    the <Link href="/art">artistic</Link> section.
+                </p>
+                <p>
+                    Socials:
+                    <a href="https://github.com/aziis98/">GitHub</a>,
+                    <a href="https://news.ycombinator.com/user?id=aziis98">HackerNews</a>,
+                    <a href="https://lobste.rs/~aziis98">Lobsters</a>,
+                    <a href="https://www.instagram.com/">Instagram</a>.
                 </p>
             </div>
         </div>
-        <div class="label left">Articoli recenti</div>
+        <div class="label left">Recent Articles</div>
         <div class="article-list">
-            { sortedArticles.map( ({ frontmatter: { title, description, tags, publish_date: date, }, url, }) => (
-                <ArticleCard {url} {title} {description} {date} {tags} />
-            ) ) }
+            {
+                sortedArticles.map(({ frontmatter: { title, description, tags, publish_date: date }, url }) => (
+                    <ArticleCard {url} {title} {description} {date} {tags} />
+                ))
+            }
         </div>
     </section>
 </BaseLayout>
