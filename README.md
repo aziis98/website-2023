@@ -1,30 +1,40 @@
 # Website 2023: [aziis98.com](https://aziis98.com)
 
-Finalmente ho scritto il mio sito con <https://astro.build/> che sembra molto promettente.
+I finally wrote my website with <https://astro.build/> which seems very
+promising.
 
-Per ora c'è una sezione articoli che già supporta l'MDX che è penso sarà molto bll da usare ed una sezione con roba artistica che ho fatto nel corso del tempo.
+For now, there is an articles section that already supports MDX, which I think
+will be great to use, and a section with artistic stuff I've done over time.
 
 ## Setup
 
-Recentemente uso sempre <https://pnpm.io/it/>
+I've recently been using <https://pnpm.io/it/>
 
 ```bash shell
-$ pnpm install
+$ bun install
 ```
 
 ## Deploy
 
 ### aziis98.com
 
-Netlify è bello e fa tutto da solo.
+Netlify is nice and does it all by itself.
 
-### Poisson
+### ~~Poisson~~
 
-Per costruire il sito per <https://poisson.phc.dm.unipi.it/~delucreziis/> si bisogna usare i seguenti comandi
+To build the site for <https://poisson.phc.dm.unipi.it/~delucreziis/> you need
+to use the following commands
 
 ```bash shell
 $ pnpm run build:poisson
 $ rsync -cavzP out/ delucreziis@poisson.phc.dm.unipi.it:public_html/
 ```
 
-Forse più avanti automatizzerò anche questo passaggio con delle _GitHub Actions_ ma sembra che sia più complicato del previsto fare un'_Action_ che usi rsync in modo sicuro (bla bla _known hosts_).
+Maybe later I will also automate this step with some _GitHub Actions_ but it
+seems that it is more complicated than expected to make an _Action_ that uses
+rsync in a secure way (bla bla _known hosts_).
+
+### GitHub Action
+
+To deploy the site to Poisson I now use a simple github action, better explained
+[in this PHC guide I wrote](https://phc.dm.unipi.it/guide/deploy-with-github-actions/).

@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
-title: Kauffman Polynomial Lab.Comp. Project
+title: Implementation of the Kauffman Polynomial in Python
 description:
-    Report in web form for the Computational Laboratory Uni project on the
-    Kauffman polynomial
+    Report in web form for the Computational Laboratory university project on
+    the Kauffman polynomial
 tags: ['kauffman', 'python', 'knot-theory', 'lang-en']
 publish_date: 2025/06/03
 ---
